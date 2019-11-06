@@ -10,8 +10,8 @@ import Foundation
 import CouchbaseLiteSwift
 
 protocol Queryable {
-    var expression: ExpressionProtocol { get set}
-    var selectResult: SelectResultAs { get set}
+    var expression: ExpressionProtocol { get}
+    var selectResult: SelectResultAs { get }
 }
 
 // basic column type with only a name
@@ -23,14 +23,12 @@ class BasicProperty: Queryable {
     }
     
     var expression: ExpressionProtocol {
-        set { /* empty */ }
         get {
             return Expression.property(self.key)
         }
     }
     
     var selectResult: SelectResultAs {
-        set { /* Empty */ }
         get {
             SelectResult.expression(self.expression)
         }

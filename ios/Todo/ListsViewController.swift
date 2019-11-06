@@ -221,17 +221,4 @@ class ListsViewController: UITableViewController, UISearchResultsUpdating, UISea
         searchRows = nil
         self.tableView.reloadData()
     }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tabBarController = segue.destination as? UITabBarController {
-            let row = self.data![self.tableView.indexPathForSelectedRow!.row]
-            let docID = row.string(at: 0)!
-            let taskList = database.document(withID: docID)!
-            
-            let tasksController = tabBarController.viewControllers![0] as! TasksViewController
-            tasksController.taskList = taskList
-        }
-    }
 }

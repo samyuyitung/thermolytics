@@ -17,7 +17,7 @@ struct Accelerometer {
 }
 
 class BiometricsFrame: BaseDocument {
-    static let TYPE = "bio-frame"
+    static let TYPE = "bioframe"
     static let heartRate = BasicProperty(key: "heart-rate")
     static let skinTemp = BasicProperty(key: "skin-temp")
     static let accelerometer = BasicProperty(key: "accelerometer")

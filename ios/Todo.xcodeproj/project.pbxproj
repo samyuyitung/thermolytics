@@ -145,12 +145,12 @@
 				93F4B2C21C6940D6005FF4D8 /* AppDelegate.swift */,
 				93F4B2C41C6940D6005FF4D8 /* ListsViewController.swift */,
 				934646BB1C69CF6B002F52C9 /* TasksViewController.swift */,
+				68CD76E523723A9C003D7274 /* TestViewController.swift */,
 				68DEC77F23714377009D7079 /* User.swift */,
 				93F4B2C61C6940D6005FF4D8 /* Main.storyboard */,
 				93F4B2C91C6940D6005FF4D8 /* Assets.xcassets */,
 				93F4B2CE1C6940D6005FF4D8 /* Info.plist */,
 				93BF1ECE2162AEED00666736 /* Todo.entitlements */,
-				68CD76E523723A9C003D7274 /* TestViewController.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -277,11 +277,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Todo/Pods-Todo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${PODS_ROOT}/CouchbaseLite-Swift/iOS/CouchbaseLiteSwift.framework",
 				"${PODS_ROOT}/CouchbaseLite-Swift/iOS/CouchbaseLiteSwift.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CouchbaseLiteSwift.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/CouchbaseLiteSwift.framework.dSYM",
 			);
