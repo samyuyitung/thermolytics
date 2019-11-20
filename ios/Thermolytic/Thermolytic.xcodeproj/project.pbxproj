@@ -7,27 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682844F42384B21F009063EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682844F32384B21F009063EC /* Main.storyboard */; };
+		682844FC2384B2B9009063EC /* DatabaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682844FB2384B2B9009063EC /* DatabaseUtil.swift */; };
+		682844FF2384B307009063EC /* ScannedPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682844FE2384B307009063EC /* ScannedPeripheral.swift */; };
+		682845012384B30E009063EC /* ScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845002384B30E009063EC /* ScannerDelegate.swift */; };
+		682845032384B315009063EC /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845022384B315009063EC /* ScannerViewController.swift */; };
+		682845062384B334009063EC /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845052384B334009063EC /* LogViewController.swift */; };
+		682845082384B33C009063EC /* LogItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845072384B33C009063EC /* LogItemTableViewCell.swift */; };
+		6828450A2384B351009063EC /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845092384B351009063EC /* BluetoothManager.swift */; };
+		6828450C2384B366009063EC /* BleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6828450B2384B366009063EC /* BleMessage.swift */; };
+		6828450E2384B3B8009063EC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6828450D2384B3B8009063EC /* Document.swift */; };
+		682845122384B3F9009063EC /* Data+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845112384B3F9009063EC /* Data+extensions.swift */; };
+		682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845132384B3FD009063EC /* ServiceIdentifiers.swift */; };
+		682845172384B439009063EC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845162384B439009063EC /* Util.swift */; };
+		682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845182384B45C009063EC /* SyncGatewayReplicator.swift */; };
 		6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6881426E2384B0DB0046C667 /* AppDelegate.swift */; };
-		688142712384B0DB0046C667 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688142702384B0DB0046C667 /* SceneDelegate.swift */; };
-		688142732384B0DB0046C667 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688142722384B0DB0046C667 /* ViewController.swift */; };
-		688142762384B0DB0046C667 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688142742384B0DB0046C667 /* Main.storyboard */; };
 		688142782384B0DC0046C667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688142772384B0DC0046C667 /* Assets.xcassets */; };
 		6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688142792384B0DC0046C667 /* LaunchScreen.storyboard */; };
-		9CAB88DC70BBE20B56301D5E /* Pods_Thermolytic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2670565C1E420B0EE045A36 /* Pods_Thermolytic.framework */; };
+		E7700F934534F10691CDDF35 /* Pods_Thermolytic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thermolytic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A2CD706268D41724DB799D /* Pods-Thermolytic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermolytic.release.xcconfig"; path = "Target Support Files/Pods-Thermolytic/Pods-Thermolytic.release.xcconfig"; sourceTree = "<group>"; };
+		682844F32384B21F009063EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		682844FB2384B2B9009063EC /* DatabaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUtil.swift; sourceTree = "<group>"; };
+		682844FE2384B307009063EC /* ScannedPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannedPeripheral.swift; sourceTree = "<group>"; };
+		682845002384B30E009063EC /* ScannerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerDelegate.swift; sourceTree = "<group>"; };
+		682845022384B315009063EC /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		682845052384B334009063EC /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
+		682845072384B33C009063EC /* LogItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogItemTableViewCell.swift; sourceTree = "<group>"; };
+		682845092384B351009063EC /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		6828450B2384B366009063EC /* BleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleMessage.swift; sourceTree = "<group>"; };
+		6828450D2384B3B8009063EC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		682845112384B3F9009063EC /* Data+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+extensions.swift"; sourceTree = "<group>"; };
+		682845132384B3FD009063EC /* ServiceIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceIdentifiers.swift; path = "../../../../../IOS-nRF-Toolbox/nRF Toolbox/Utilities/ServiceIdentifiers.swift"; sourceTree = "<group>"; };
+		682845162384B439009063EC /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		682845182384B45C009063EC /* SyncGatewayReplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncGatewayReplicator.swift; sourceTree = "<group>"; };
 		6881426B2384B0DB0046C667 /* Thermolytic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermolytic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6881426E2384B0DB0046C667 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		688142702384B0DB0046C667 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		688142722384B0DB0046C667 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		688142752384B0DB0046C667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		688142772384B0DC0046C667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6881427A2384B0DC0046C667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6881427C2384B0DC0046C667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAE934C79F2C4799C7F80893 /* Pods-Thermolytic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermolytic.debug.xcconfig"; path = "Target Support Files/Pods-Thermolytic/Pods-Thermolytic.debug.xcconfig"; sourceTree = "<group>"; };
-		B2670565C1E420B0EE045A36 /* Pods_Thermolytic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thermolytic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,20 +57,77 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CAB88DC70BBE20B56301D5E /* Pods_Thermolytic.framework in Frameworks */,
+				E7700F934534F10691CDDF35 /* Pods_Thermolytic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		682844F52384B23B009063EC /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				682844F32384B21F009063EC /* Main.storyboard */,
+				688142792384B0DC0046C667 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		682844F62384B274009063EC /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				682844FB2384B2B9009063EC /* DatabaseUtil.swift */,
+				682845182384B45C009063EC /* SyncGatewayReplicator.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		682844FD2384B2F6009063EC /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				682845092384B351009063EC /* BluetoothManager.swift */,
+				682844FE2384B307009063EC /* ScannedPeripheral.swift */,
+				682845002384B30E009063EC /* ScannerDelegate.swift */,
+				682845022384B315009063EC /* ScannerViewController.swift */,
+			);
+			path = Scanner;
+			sourceTree = "<group>";
+		};
+		682845042384B32C009063EC /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				682845052384B334009063EC /* LogViewController.swift */,
+				682845072384B33C009063EC /* LogItemTableViewCell.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		6828450F2384B3D5009063EC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6828450B2384B366009063EC /* BleMessage.swift */,
+				6828450D2384B3B8009063EC /* Document.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		682845102384B3F0009063EC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				682845112384B3F9009063EC /* Data+extensions.swift */,
+				682845132384B3FD009063EC /* ServiceIdentifiers.swift */,
+				682845162384B439009063EC /* Util.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		688142622384B0DB0046C667 = {
 			isa = PBXGroup;
 			children = (
 				6881426D2384B0DB0046C667 /* Thermolytic */,
 				6881426C2384B0DB0046C667 /* Products */,
 				FE96E1AE7CDE78E587188D81 /* Pods */,
-				CB3A9C4071BF37F7AE8B53F7 /* Frameworks */,
+				DBA105DE48D8ED695CCD2E17 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,21 +142,23 @@
 		6881426D2384B0DB0046C667 /* Thermolytic */ = {
 			isa = PBXGroup;
 			children = (
+				682845102384B3F0009063EC /* Util */,
+				6828450F2384B3D5009063EC /* Model */,
+				682845042384B32C009063EC /* Logger */,
+				682844FD2384B2F6009063EC /* Scanner */,
+				682844F52384B23B009063EC /* Storyboard */,
+				682844F62384B274009063EC /* Database */,
 				6881426E2384B0DB0046C667 /* AppDelegate.swift */,
-				688142702384B0DB0046C667 /* SceneDelegate.swift */,
-				688142722384B0DB0046C667 /* ViewController.swift */,
-				688142742384B0DB0046C667 /* Main.storyboard */,
 				688142772384B0DC0046C667 /* Assets.xcassets */,
-				688142792384B0DC0046C667 /* LaunchScreen.storyboard */,
 				6881427C2384B0DC0046C667 /* Info.plist */,
 			);
 			path = Thermolytic;
 			sourceTree = "<group>";
 		};
-		CB3A9C4071BF37F7AE8B53F7 /* Frameworks */ = {
+		DBA105DE48D8ED695CCD2E17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B2670565C1E420B0EE045A36 /* Pods_Thermolytic.framework */,
+				1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,9 +232,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				682844F42384B21F009063EC /* Main.storyboard in Resources */,
 				6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */,
 				688142782384B0DC0046C667 /* Assets.xcassets in Resources */,
-				688142762384B0DB0046C667 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,23 +287,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				688142732384B0DB0046C667 /* ViewController.swift in Sources */,
+				682845012384B30E009063EC /* ScannerDelegate.swift in Sources */,
+				682845082384B33C009063EC /* LogItemTableViewCell.swift in Sources */,
+				682845032384B315009063EC /* ScannerViewController.swift in Sources */,
+				6828450C2384B366009063EC /* BleMessage.swift in Sources */,
+				6828450E2384B3B8009063EC /* Document.swift in Sources */,
+				682844FC2384B2B9009063EC /* DatabaseUtil.swift in Sources */,
+				682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */,
+				682845172384B439009063EC /* Util.swift in Sources */,
+				682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */,
+				682845122384B3F9009063EC /* Data+extensions.swift in Sources */,
+				682844FF2384B307009063EC /* ScannedPeripheral.swift in Sources */,
+				682845062384B334009063EC /* LogViewController.swift in Sources */,
+				6828450A2384B351009063EC /* BluetoothManager.swift in Sources */,
 				6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */,
-				688142712384B0DB0046C667 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		688142742384B0DB0046C667 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				688142752384B0DB0046C667 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		688142792384B0DC0046C667 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
