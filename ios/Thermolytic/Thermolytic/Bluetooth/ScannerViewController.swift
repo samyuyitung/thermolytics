@@ -9,6 +9,11 @@
 import UIKit
 import CoreBluetooth
 
+
+@objc protocol ScannerDelegate {
+    func centralManagerDidSelectPeripheral(withManager aManager: CBCentralManager, andPeripheral aPeripheral: CBPeripheral)
+}
+
 // TODO: Split into extensions? 
 class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 

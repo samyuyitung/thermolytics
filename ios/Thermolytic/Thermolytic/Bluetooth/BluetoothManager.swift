@@ -22,7 +22,6 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
     
     //MARK: - Delegate Properties
     var delegate : BluetoothManagerDelegate?
-//    var logger   : Logger?
     
     //MARK: - Class Properties
     fileprivate let UARTServiceUUID = CBUUID(string: ServiceIdentifiers.uartServiceUUIDString)

@@ -19,8 +19,9 @@ class BleMessage: BaseDocument {
     
     static let messageType = BasicProperty(key: "message-type")
     static let message = BasicProperty(key: "message")
+    static let uid = BasicProperty(key: "uid")
     
-    static func create(type messageType: MessageType, message: String) -> MutableDocument {
+    static func create(type messageType: MessageType, message: String, uid: Int) -> MutableDocument {
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
         doc.setValue(TYPE, forKey: self.type.key)
@@ -28,6 +29,8 @@ class BleMessage: BaseDocument {
         
         doc.setValue(messageType.rawValue, forKey: self.messageType.key)
         doc.setValue(message, forKey: self.message.key)
+        doc.setValue(uid, forKey: self.uid.key)
+
         return doc
     }
 }
