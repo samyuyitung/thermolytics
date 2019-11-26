@@ -1,0 +1,5 @@
+run: 
+
+python uart_advertisement.py
+
+src: https://scribles.net/creating-ble-gatt-server-uart-service-on-raspberry-pi
