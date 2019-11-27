@@ -1,0 +1,15 @@
+[Unit]
+Description=Thermolytics server
+After=bluetooth.target
+Requires=bluetooth.target
+
+[Service]
+ExecStart=/home/pi/scripts/ble-uart-peripheral/pi/start.sh
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=Thermolytics
+User=pi
+
+[Install]
+WantedBy=multi-user.target
