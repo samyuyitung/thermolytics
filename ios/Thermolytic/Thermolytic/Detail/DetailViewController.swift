@@ -33,18 +33,20 @@ class DetailViewController: UIViewController {
     func setQuery() {
          let query = QueryBuilder
                      .select(
-                         BioFrame.uid.selectResult,
+                        BioFrame.type.selectResult,
                          BioFrame.createdAt.selectResult,
                          BioFrame.heartRate.selectResult,
                          BioFrame.skinTemp.selectResult,
-                         BioFrame.predictedCoreTemp.selectResult
+                         BioFrame.predictedCoreTemp.selectResult,
+                         BioFrame.ambientHumidity.selectResult,
+                         BioFrame.ambientTemp.selectResult
                      )
                      .from(DataSource.database(DatabaseUtil.shared))
                      .where(
                          BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
                          .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
                  ).orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
-                     .limit(Expression.int(1))
+                  
               
           query.addChangeListener({change in
               if let error = change.error {
