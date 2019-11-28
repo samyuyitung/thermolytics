@@ -1,7 +1,3 @@
-import UIKit
-
-var str = "Hello, playground"
-
 /*
  
  AN ANNOTATED FORTRAN PROGRAM FOR A CORE-SHELL MODEL OP HUMAN TEMPERATURE REGULATION
@@ -122,7 +118,7 @@ func get_temp_core(mass_body: Double, temp_skin_avg: Double, heart_rate_rest: Do
     var temp_skin = temp_skin_avg
     
     // Heat balance equations for passive system
-    while (time - 1.00) < 0.0 {
+    while (time - 5.00) < 0.0 {
         
         // Heat flow from core to skin to air in w/sq.m
         heat_storage_core = metabolic_rate - (temp_core - temp_skin)*(conductance_min + 1.163*blood_flow_skin) - heat_evap_res - work

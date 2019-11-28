@@ -26,21 +26,25 @@ class DetailViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        self.topTitle.text = "User \(uid)"
-        
+        self.title = Utils.getName(for: uid)
         setQuery()
     }
     
     func setQuery() {
-          let query = QueryBuilder
-                  .select(
-                        BleMessage.type.selectResult,
-                        BleMessage.createdAt.selectResult,
-                        BleMessage.message.selectResult)
-                  .from(DataSource.database(DatabaseUtil.shared))
-            .where(BaseDocument.type.expression.equalTo(Expression.string(BleMessage.TYPE))
-                .and(BleMessage.uid.expression.equalTo(Expression.int(uid))))
-            .orderBy(Ordering.expression(BleMessage.createdAt.expression).descending())
+         let query = QueryBuilder
+                     .select(
+                         BioFrame.uid.selectResult,
+                         BioFrame.createdAt.selectResult,
+                         BioFrame.heartRate.selectResult,
+                         BioFrame.skinTemp.selectResult,
+                         BioFrame.predictedCoreTemp.selectResult
+                     )
+                     .from(DataSource.database(DatabaseUtil.shared))
+                     .where(
+                         BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
+                         .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
+                 ).orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
+                     .limit(Expression.int(1))
               
           query.addChangeListener({change in
               if let error = change.error {

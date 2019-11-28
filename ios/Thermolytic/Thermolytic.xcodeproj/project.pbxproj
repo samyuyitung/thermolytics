@@ -22,6 +22,8 @@
 		682845172384B439009063EC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845162384B439009063EC /* Util.swift */; };
 		682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845182384B45C009063EC /* SyncGatewayReplicator.swift */; };
 		6849B91C2385872300B00389 /* LogItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6849B91B2385872300B00389 /* LogItemCell.swift */; };
+		685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E41BA238ED2CC0036F457 /* BioFrame.swift */; };
+		685E41BE238EE2340036F457 /* TwoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E41BD238EE2340036F457 /* TwoNode.swift */; };
 		6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6881426E2384B0DB0046C667 /* AppDelegate.swift */; };
 		688142782384B0DC0046C667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688142772384B0DC0046C667 /* Assets.xcassets */; };
 		6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688142792384B0DC0046C667 /* LaunchScreen.storyboard */; };
@@ -46,6 +48,8 @@
 		682845162384B439009063EC /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		682845182384B45C009063EC /* SyncGatewayReplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncGatewayReplicator.swift; sourceTree = "<group>"; };
 		6849B91B2385872300B00389 /* LogItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItemCell.swift; sourceTree = "<group>"; };
+		685E41BA238ED2CC0036F457 /* BioFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioFrame.swift; sourceTree = "<group>"; };
+		685E41BD238EE2340036F457 /* TwoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoNode.swift; sourceTree = "<group>"; };
 		6881426B2384B0DB0046C667 /* Thermolytic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermolytic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6881426E2384B0DB0046C667 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688142772384B0DC0046C667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,13 +116,14 @@
 			path = Overview;
 			sourceTree = "<group>";
 		};
-		6828450F2384B3D5009063EC /* Model */ = {
+		6828450F2384B3D5009063EC /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
 				6828450B2384B366009063EC /* BleMessage.swift */,
 				6828450D2384B3B8009063EC /* Document.swift */,
+				685E41BA238ED2CC0036F457 /* BioFrame.swift */,
 			);
-			path = Model;
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 		682845102384B3F0009063EC /* Util */ = {
@@ -129,6 +134,14 @@
 				682588072386303300C5F13C /* Misc+extensions.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		685E41BC238EE1F20036F457 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				685E41BD238EE2340036F457 /* TwoNode.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		688142622384B0DB0046C667 = {
@@ -152,10 +165,11 @@
 		6881426D2384B0DB0046C667 /* Thermolytic */ = {
 			isa = PBXGroup;
 			children = (
+				685E41BC238EE1F20036F457 /* Model */,
 				6825880223862D4B00C5F13C /* Detail */,
 				682845102384B3F0009063EC /* Util */,
 				682844F62384B274009063EC /* Database */,
-				6828450F2384B3D5009063EC /* Model */,
+				6828450F2384B3D5009063EC /* Data Models */,
 				682845042384B32C009063EC /* Overview */,
 				682844FD2384B2F6009063EC /* Bluetooth */,
 				682844F52384B23B009063EC /* Storyboard */,
@@ -310,8 +324,10 @@
 				682845062384B334009063EC /* LogViewController.swift in Sources */,
 				6825880423862D6700C5F13C /* DetailViewController.swift in Sources */,
 				682588082386303300C5F13C /* Misc+extensions.swift in Sources */,
+				685E41BE238EE2340036F457 /* TwoNode.swift in Sources */,
 				6825880623862E6000C5F13C /* MessageTableViewCell.swift in Sources */,
 				6828450A2384B351009063EC /* BluetoothManager.swift in Sources */,
+				685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */,
 				6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

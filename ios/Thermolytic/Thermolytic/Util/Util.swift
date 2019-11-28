@@ -17,7 +17,16 @@ enum Level: Character {
 
 class Utils {
     static func log(at level: Level = .Debug, msg: String) {
-        print("[\(Date())] [\(level)] - \(msg)")
+        print("[\(Date())] [\(level.rawValue)] - \(msg)")
+    }
+    
+    
+    static func getName(for id: Int) -> String{
+        switch id {
+        case 1: return "Justin Schaper"
+        case 2: return "Heather Chan"
+        default: return "Tara"
+        }
     }
 }
 

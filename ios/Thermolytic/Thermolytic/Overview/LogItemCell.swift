@@ -12,21 +12,20 @@ import CouchbaseLiteSwift
 
 class LogItemCell: UICollectionViewCell {
     
-    @IBOutlet weak var user: UILabel!
-    @IBOutlet weak var timestamp: UILabel!
-    @IBOutlet weak var message: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var number: UILabel!
+    @IBOutlet weak var heartRate: UILabel!
+    @IBOutlet weak var temperature: UILabel!
     
     var uid: Int = -1
     
-    
     func configure(for item: Result) {
+        uid = item.int(forKey: BioFrame.uid.key)
         
-        uid = item.int(forKey: BleMessage.uid.key)
-        
-        self.user.text = "User \(item.int(forKey: BleMessage.uid.key))"
-        self.message.text = item.string(forKey: BleMessage.message.key)
-        let createdAt = item.double(forKey: BleMessage.createdAt.key)
-        self.timestamp.text = Date(timeIntervalSince1970: createdAt).toString()
+        self.number.text = "\(uid)"
+        self.name.text = Utils.getName(for: uid)
+        self.heartRate.text = "\(item.int(forKey: BioFrame.heartRate.key))"
+        self.temperature.text = "\(item.double(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
     }
     
 }

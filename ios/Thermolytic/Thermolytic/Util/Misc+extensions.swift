@@ -24,3 +24,9 @@ extension Data {
         return map { String(format: "%02X", $0) }.joined()
     }
 }
+
+extension Double {
+    func print(to f: Int) -> String {
+        return String(format: "%.\(f)f", self)
+    }
+}
