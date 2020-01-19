@@ -69,9 +69,7 @@ class TwoNode {
         var heat_evap_diff = 5.0            // skin vapor loss by diffusion (W/m^2)
         var heat_evap = heat_evap_res + heat_evap_diff    // total evaporative heat loss (W/m^2)
         var heat_evap_sweat = 0.0            // skin evaporative loss by regulatory sweating (W/m^2)
-        _ = 0.0            // unevaporated sweat from skin surface
-        
-        var wrsw = 0.0                        //
+    
         // rad_exchange_coef = 5.23            // OPTIONAL: linear radiation exchnage coefficient
         // conv_heat_transfer_coef = heat_transfer_coef - rad_exchange_coef        // OPTIONAL: convection heat transfer coefficient
         
@@ -86,6 +84,7 @@ class TwoNode {
         // blood_flow_skin_norm = normal skin blood flow L/(sq.m*hr)
         let blood_flow_skin_norm = 6.3
         var blood_flow_skin = blood_flow_skin_norm
+        
         var time = 0.0
         
         // Initialize variables for below
@@ -121,6 +120,7 @@ class TwoNode {
         var xb = 0.0
         var toh = 0.0
         var temp_skin = temp_skin_avg
+        var wrsw = 0.0
         
         // Heat balance equations for passive system
         while time < 1.00 {

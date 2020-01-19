@@ -27,6 +27,7 @@
 		6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6881426E2384B0DB0046C667 /* AppDelegate.swift */; };
 		688142782384B0DC0046C667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688142772384B0DC0046C667 /* Assets.xcassets */; };
 		6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688142792384B0DC0046C667 /* LaunchScreen.storyboard */; };
+		68BE39B023930787005CAEC4 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE39AF23930787005CAEC4 /* DebugViewController.swift */; };
 		E7700F934534F10691CDDF35 /* Pods_Thermolytic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		688142772384B0DC0046C667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6881427A2384B0DC0046C667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6881427C2384B0DC0046C667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68BE39AF23930787005CAEC4 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		AAE934C79F2C4799C7F80893 /* Pods-Thermolytic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermolytic.debug.xcconfig"; path = "Target Support Files/Pods-Thermolytic/Pods-Thermolytic.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 		6881426D2384B0DB0046C667 /* Thermolytic */ = {
 			isa = PBXGroup;
 			children = (
+				68BE39AE23930770005CAEC4 /* debug */,
 				685E41BC238EE1F20036F457 /* Model */,
 				6825880223862D4B00C5F13C /* Detail */,
 				682845102384B3F0009063EC /* Util */,
@@ -178,6 +181,14 @@
 				6881427C2384B0DC0046C667 /* Info.plist */,
 			);
 			path = Thermolytic;
+			sourceTree = "<group>";
+		};
+		68BE39AE23930770005CAEC4 /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				68BE39AF23930787005CAEC4 /* DebugViewController.swift */,
+			);
+			path = debug;
 			sourceTree = "<group>";
 		};
 		DBA105DE48D8ED695CCD2E17 /* Frameworks */ = {
@@ -312,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68BE39B023930787005CAEC4 /* DebugViewController.swift in Sources */,
 				682845032384B315009063EC /* ScannerViewController.swift in Sources */,
 				6828450C2384B366009063EC /* BleMessage.swift in Sources */,
 				6828450E2384B3B8009063EC /* Document.swift in Sources */,

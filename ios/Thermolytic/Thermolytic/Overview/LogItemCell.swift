@@ -25,7 +25,7 @@ class LogItemCell: UICollectionViewCell {
         self.number.text = "\(uid)"
         self.name.text = Utils.getName(for: uid)
         self.heartRate.text = "\(item.int(forKey: BioFrame.heartRate.key))"
-        self.temperature.text = "\(item.double(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
+        self.temperature.text = "\((item.double(forKey: BioFrame.predictedCoreTemp.key) + 2.0).print(to: 1))℃"
     }
     
 }

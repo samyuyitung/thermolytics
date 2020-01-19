@@ -320,6 +320,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="hi1-Wc-LHq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="rewind" id="bHU-sz-KnI">
+                            <connections>
+                                <segue destination="FmR-Te-QAH" kind="show" identifier="debug" id="Wei-61-1mC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4AS-tU-954">
                             <connections>
                                 <segue destination="Day-ms-bMb" kind="show" identifier="connect" id="F2l-Xf-HgU"/>
@@ -335,6 +340,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr4-ph-sHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1736.71875" y="122.54758418740849"/>
+        </scene>
+        <!--Debug View Controller-->
+        <scene sceneID="AeW-YO-6c4">
+            <objects>
+                <viewController id="FmR-Te-QAH" customClass="DebugViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Z7-fC-nLg" customClass="De">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1264"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-cs-Og0">
+                                <rect key="frame" x="53" y="49" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0Z-KW-nlL">
+                                <rect key="frame" x="53" y="120" width="64" height="30"/>
+                                <state key="normal" title="Add rows"/>
+                                <connections>
+                                    <action selector="didAddRows:" destination="FmR-Te-QAH" eventType="touchUpInside" id="mBZ-dQ-heD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-CG-Zbx">
+                                <rect key="frame" x="53" y="170" width="69" height="30"/>
+                                <state key="normal" title="Delete DB">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didClickDelete:" destination="FmR-Te-QAH" eventType="touchUpInside" id="Ron-ay-gRn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="M0Z-KW-nlL" firstAttribute="leading" secondItem="WhY-cs-Og0" secondAttribute="leading" id="8uw-sN-E8T"/>
+                            <constraint firstItem="WhY-cs-Og0" firstAttribute="leading" secondItem="Cg4-gf-PlS" secondAttribute="leading" constant="53" id="Suk-hd-B3g"/>
+                            <constraint firstItem="M0Z-KW-nlL" firstAttribute="top" secondItem="WhY-cs-Og0" secondAttribute="bottom" constant="50" id="am2-ie-zXn"/>
+                            <constraint firstItem="ZwK-CG-Zbx" firstAttribute="top" secondItem="M0Z-KW-nlL" secondAttribute="bottom" constant="20" id="fg9-WR-1hu"/>
+                            <constraint firstItem="ZwK-CG-Zbx" firstAttribute="leading" secondItem="M0Z-KW-nlL" secondAttribute="leading" id="rV6-lR-JpQ"/>
+                            <constraint firstItem="WhY-cs-Og0" firstAttribute="top" secondItem="Cg4-gf-PlS" secondAttribute="top" constant="49" id="se8-Pc-yoh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Cg4-gf-PlS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wUv-wo-EX7"/>
+                    <connections>
+                        <outlet property="dbSize" destination="WhY-cs-Og0" id="M81-VK-P39"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pA6-yb-hWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1833" y="805"/>
         </scene>
     </scenes>
     <resources>

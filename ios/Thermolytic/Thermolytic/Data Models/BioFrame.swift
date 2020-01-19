@@ -19,7 +19,7 @@ class BioFrame: BaseDocument {
     static let ambientHumidity = BasicProperty(key: "ambient-humidity")
     static let predictedCoreTemp = BasicProperty(key: "predicted-core-temp")
     
-    static func create(uid sUid: String, /* Int */
+    static func createFromMessage(uid sUid: String, /* Int */
                        heartRate sHeartRate: String, /* Int */
                        skinTemp sSkinTemp: String, /* Double */
                        ambientTemp sAmbientTemp: String, /* Double */
@@ -62,4 +62,26 @@ class BioFrame: BaseDocument {
         
         return doc
     }
+    
+    static func create(uid:  Int,
+                          heartRate: Int,
+                          skinTemp: Double,
+                          ambientTemp: Double,
+                          ambientHumidity: Double,
+                          predictedCoreTemp: Double) -> MutableDocument? {
+        
+           let now = Date().timeIntervalSince1970
+           let doc = MutableDocument()
+           doc.setValue(TYPE, forKey: self.type.key)
+           doc.setValue(now, forKey: createdAt.key)
+           
+           doc.setValue(uid, forKey: self.uid.key)
+           doc.setValue(heartRate, forKey: self.heartRate.key)
+           doc.setValue(skinTemp, forKey: self.skinTemp.key)
+           doc.setValue(ambientTemp, forKey: self.ambientTemp.key)
+           doc.setValue(ambientHumidity, forKey: self.ambientHumidity.key)
+           doc.setValue(predictedCoreTemp, forKey: self.predictedCoreTemp.key)
+           
+           return doc
+       }
 }

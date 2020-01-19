@@ -24,7 +24,7 @@ class MessageTableViewCell: UITableViewCell {
         skin temp: \(item.double(forKey: BioFrame.skinTemp.key).print(to: 1))℃
         ambient temp: \(item.double(forKey: BioFrame.ambientTemp.key).print(to: 1))℃
         ambient humidity: \(item.double(forKey: BioFrame.ambientHumidity.key))%
-==> core temp: \(item.double(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃
+        ==> core temp: \((item.double(forKey: BioFrame.predictedCoreTemp.key) + 2.0).print(to: 1))℃
 """
         let createdAt = item.double(forKey: BioFrame.createdAt.key)
         self.timestamp.text = Date(timeIntervalSince1970: createdAt).toString()

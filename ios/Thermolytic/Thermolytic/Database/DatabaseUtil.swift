@@ -13,6 +13,15 @@ class DatabaseUtil {
     
    static var shared: Database!
     
+
+    static func insert(doc: MutableDocument) {
+        do {
+            try shared.saveDocument(doc)
+        } catch {
+            Utils.log(at: .Error, msg: "did not insert")
+        }
+    }
+    
    static func openDatabase(username:String) throws {
         
         let config = DatabaseConfiguration()
@@ -50,6 +59,23 @@ class DatabaseUtil {
     static func deleteDocumentWith(id: String) throws {
         if let doc = shared.document(withID: id) {
             try shared.deleteDocument(doc)
+        }
+    }
+    
+    static func clearAllOf(type: String) {
+        let query = QueryBuilder.select(BaseDocument.id.selectResult)
+            .from(DataSource.database(shared))
+        .where(BaseDocument.type.expression.equalTo(Expression.string(type)))
+        
+        do {
+            let res = try query.execute()
+            for row in res.allResults() {
+                if let id = row.value(at: 0) as? String {
+                    try deleteDocumentWith(id: id)
+                }
+            }
+        } catch {
+            Utils.log(at: .Error, msg: "Error -- \(error)")
         }
     }
 }

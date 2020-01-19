@@ -94,11 +94,12 @@ class LogViewController: UIViewController {
 
 extension LogViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let segues = ["connect", "detail"]
+        let segues = ["connect", "detail", "debug"]
         return segues.contains(identifier)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "connect" {
             let vc = segue.destination as! ScannerViewController
             vc.filterUUID = CBUUID.init(string: ServiceIdentifiers.uartServiceUUIDString)
@@ -213,7 +214,7 @@ extension LogViewController: BluetoothManagerDelegate {
                                            rel_humidity: Double(parts[4])! / 100.0,
                                            temp_air: Double(parts[3])!)
 
-        if let doc = BioFrame.create(uid: parts[0], heartRate: parts[1], skinTemp: parts[2], ambientTemp: parts[3], ambientHumidity: parts[4], predictedCoreTemp: coreTemp) {
+        if let doc = BioFrame.createFromMessage(uid: parts[0], heartRate: parts[1], skinTemp: parts[2], ambientTemp: parts[3], ambientHumidity: parts[4], predictedCoreTemp: coreTemp) {
             addToDatabase(document: doc)
         } else {
             Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
@@ -226,11 +227,7 @@ extension LogViewController: BluetoothManagerDelegate {
     }
     
     func addToDatabase(document: MutableDocument) {
-        do {
-            try DatabaseUtil.shared.saveDocument(document)
-        } catch {
-            Utils.log(at: .Error, msg: "Didnt add doc \(error)")
-        }
+        DatabaseUtil.insert(doc: document)
     }
 
     @objc func applicationDidEnterBackgroundCallback(){
