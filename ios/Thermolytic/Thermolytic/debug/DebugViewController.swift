@@ -19,23 +19,10 @@ class DebugViewController: UIViewController {
     }
     
     @IBAction func didAddRows(_ sender: Any) {
-        let max = 50000
-        for _ in 1...max {
-            if let doc = BioFrame.create(uid: 1000, heartRate: 120, skinTemp: 33.2, ambientTemp: 33.2, ambientHumidity: 33.2, predictedCoreTemp: 33.2) {
-                DatabaseUtil.insert(doc: doc)
-            }
-            
-        }
-        
-
-        let query = QueryBuilder.select(BioFrame.id.selectResult)
-            .from(DataSource.database(DatabaseUtil.shared))
-            .where(BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE)))
-        
-        do {
-            let results = try query.execute()
-            self.dbSize.text = "Num rows: \(results.allResults().count)"
-        } catch {}
+        let a = Athlete.create(uid: 1, name: "Justin Schaper", height: 180, weight: 60)
+        let h = Athlete.create(uid: 2, name: "Heather Chan", height: 180, weight: 60)
+       DatabaseUtil.insert(doc: a)
+        DatabaseUtil.insert(doc: h)
         
     }
     override func viewDidLoad() {

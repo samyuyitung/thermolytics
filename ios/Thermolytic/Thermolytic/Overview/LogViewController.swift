@@ -14,7 +14,8 @@ import UserNotifications
 class LogViewController: UIViewController {
     //MARK: - Properties
     var bluetoothManager : BluetoothManager?
-    var userIds: [Int: Int] = [:]
+    var users: [Int: Int] = [:]
+    
     var logItems: [Int: Result] = [:] {
         didSet {
             self.collectionView.reloadData()
@@ -24,7 +25,6 @@ class LogViewController: UIViewController {
     //MARK: - View Outlets
     @IBOutlet weak var deviceLabel : UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var commandTextField : UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,6 @@ class LogViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-
-        commandTextField.placeholder = "No UART connected"
-        commandTextField.delegate = self
-        
         setDataSource()
     }
     
@@ -66,25 +62,36 @@ class LogViewController: UIViewController {
                 for (index, user) in res.allResults().enumerated() {
                     do {
                         let uid = user.int(forKey: BleMessage.uid.key)
+                        let frameAlias = "frame"
+                        let userAlias = "user"
                         let userQuery = QueryBuilder
                             .select(
-                                BioFrame.uid.selectResult,
-                                BioFrame.createdAt.selectResult,
-                                BioFrame.heartRate.selectResult,
-                                BioFrame.skinTemp.selectResult,
-                                BioFrame.predictedCoreTemp.selectResult
+                                BioFrame.uid.selectResult(from: frameAlias),
+                                BioFrame.createdAt.selectResult(from: frameAlias),
+                                BioFrame.heartRate.selectResult(from: frameAlias),
+                                BioFrame.skinTemp.selectResult(from: frameAlias),
+                                BioFrame.predictedCoreTemp.selectResult(from: frameAlias),
+                                Athlete.name.selectResult(from: userAlias)
                             )
-                            .from(DataSource.database(DatabaseUtil.shared))
+                            .from(DataSource.database(DatabaseUtil.shared).as(frameAlias))
+                            .join(
+                                Join.join(DataSource.database(DatabaseUtil.shared).as(userAlias))
+                                    .on(
+                                        BioFrame.uid.expression(from: frameAlias)
+                                            .equalTo(Athlete.uid.expression(from: userAlias))
+                                )
+                            )
                             .where(
-                                BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
-                                .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
-                        ).orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
+                            BaseDocument.type.expression(from: frameAlias).equalTo(Expression.string(BioFrame.TYPE))
+                                .and(BaseDocument.type.expression(from: userAlias).equalTo(Expression.string(Athlete.TYPE)))
+                                .and(BioFrame.uid.expression(from: frameAlias).equalTo(Expression.int(uid)))
+                        ).orderBy(Ordering.expression(BioFrame.createdAt.expression(from: frameAlias)).descending())
                             .limit(Expression.int(1))
                         let record = try userQuery.execute()
                         self.logItems[uid] = record.allResults().first
-                        self.userIds[index] = uid
+                        self.users[index] = uid
                     } catch {
-                        Utils.log(at: .Error, msg: "Error -- \(error)")
+                        Utils.log(at: .Error, msg: "\(error)")
                     }
                 }
             }
@@ -112,32 +119,6 @@ extension LogViewController {
     }
 }
 
-extension LogViewController: UITextFieldDelegate {
-    
-    func updateTextField() {
-       if self.bluetoothManager != nil {
-           commandTextField.placeholder = "Write command"
-           commandTextField.text = ""
-       } else {
-           commandTextField.placeholder = "No UART service connected"
-           commandTextField.text = ""
-       }
-    }
-
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        // Only shows the keyboard when a UART peripheral is connected
-        return bluetoothManager != nil
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        commandTextField.resignFirstResponder()
-        bluetoothManager?.send(text: self.commandTextField.text!)
-        commandTextField.text = ""
-        return true
-    }
-}
-
-
 extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.logItems.count
@@ -146,8 +127,8 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "overview_cell", for: indexPath) as! LogItemCell
         
-        if let uid = userIds[indexPath.row], let item = logItems[uid] {
-            cell.configure(for: item)
+        if let user = users[indexPath.row], let item = logItems[user] {
+            cell.configure(item: item)
         }
         return cell
     }
@@ -159,8 +140,7 @@ extension LogViewController: ScannerDelegate {
             bluetoothManager = BluetoothManager(withManager: aManager)
             bluetoothManager!.delegate = self
             bluetoothManager!.connectPeripheral(peripheral: aPeripheral)
-            updateTextField()
-        self.deviceLabel.text = aPeripheral.name
+            self.deviceLabel.text = aPeripheral.name
        }
 }
 

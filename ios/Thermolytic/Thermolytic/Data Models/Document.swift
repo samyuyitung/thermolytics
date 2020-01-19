@@ -33,6 +33,14 @@ class BasicProperty: Queryable {
             SelectResult.expression(self.expression)
         }
     }
+    
+    func expression(from alias: String) -> ExpressionProtocol {
+        return Expression.property(self.key).from(alias)
+    }
+
+    func selectResult(from alias: String) -> SelectResultAs {
+        return SelectResult.expression(self.expression(from: alias))
+    }
 }
 
 class BaseDocument {
