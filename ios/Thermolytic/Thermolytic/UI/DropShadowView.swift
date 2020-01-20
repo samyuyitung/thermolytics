@@ -25,10 +25,16 @@ class DropShadowView: UIView {
     }
     
     func didLoad() {
+        self.addShadow()
+    }
+    
+}
+
+extension UIView {
+    func addShadow() {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.25
         self.layer.shadowOffset = CGSize(width: 0, height: 4)
         self.layer.shadowRadius = 8
     }
-    
 }

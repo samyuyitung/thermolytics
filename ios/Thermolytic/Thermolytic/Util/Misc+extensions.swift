@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 // MARK: - Date
 
@@ -30,3 +31,4 @@ extension Double {
         return String(format: "%.\(f)f", self)
     }
 }
+
