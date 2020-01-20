@@ -7,5 +7,6 @@ target 'Thermolytic' do
 
   # Pods for Thermolytic
   pod 'CouchbaseLite-Swift'
+  pod 'Charts'
 
 end

@@ -1,16 +1,22 @@
 PODS:
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
   - CouchbaseLite-Swift (2.6.1)
 
 DEPENDENCIES:
+  - Charts
   - CouchbaseLite-Swift
 
 SPEC REPOS:
   trunk:
+    - Charts
     - CouchbaseLite-Swift
 
 SPEC CHECKSUMS:
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CouchbaseLite-Swift: c9a5cf889da3e7969259f30384bd3cd1b9f2f3e6
 
-PODFILE CHECKSUM: 1a6c687b5711e767eba8eb792d8a81ccc43015d1
+PODFILE CHECKSUM: 6a48b2ba349b9f118a49888e174597b256c20d0c
 
 COCOAPODS: 1.8.4
