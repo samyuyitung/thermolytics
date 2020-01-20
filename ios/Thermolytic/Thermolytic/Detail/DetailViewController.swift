@@ -11,40 +11,44 @@ import UIKit
 import CouchbaseLiteSwift
 
 class DetailViewController: UIViewController {
-    @IBOutlet weak var topTitle: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    // User Card IBOutlets
+    @IBOutlet weak var nameLabel: UITextField!
+    @IBOutlet weak var numberPositionLabel: UITextField!
+    @IBOutlet weak var classificationLabel: UITextField!
+    @IBOutlet weak var weightLabel: UITextField!
+    @IBOutlet weak var ageLabel: UITextField!
     
-    var uid: Int = -10
-    var logItems: [Result] = [] {
+    // Main Stats IBOutlets
+    @IBOutlet weak var coreTempLabel: UILabel!
+    @IBOutlet weak var hrPercentLabel: UILabel!
+    @IBOutlet weak var hrBpmLabel: UILabel!
+    @IBOutlet weak var timeOnCourtLabel: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
+    @IBOutlet weak var avgSpeedLabel: UILabel!
+    @IBOutlet weak var accelerationLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    
+    
+    var athlete: Result? = nil {
         didSet {
-            self.tableView.reloadData()
+            updateUserInfo()
         }
     }
     
+    var data: [Result] = [] {
+        didSet {
+            updateData()
+        }
+    }
+    var uid: Int = -10
+    
     override func viewDidLoad() {
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        
-        setQuery()
+        self.title = "Player"
+        setUserQuery()
+        setDataQuery()
     }
     
-    func setQuery() {
-        let dataQuery = QueryBuilder
-            .select(BioFrame.selectAll)
-            .from(DataSource.database(DatabaseUtil.shared))
-            .where(
-                BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
-                    .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
-        ).orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
-        dataQuery.addChangeListener({change in
-            if let error = change.error {
-                Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
-            }
-            if let res = change.results {
-                self.logItems = res.allResults()
-            }
-        })
-        
+    func setUserQuery() {
         let userQuery = QueryBuilder
             .select(Athlete.selectAll)
             .from(DataSource.database(DatabaseUtil.shared))
@@ -57,27 +61,53 @@ class DetailViewController: UIViewController {
                 Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
             }
             if let res = change.results?.allResults().first {
-                self.updateUserInfo(result: res)
+                self.athlete = res
             }
         })
+    }
+    
+    func setDataQuery() {
+                let dataQuery = QueryBuilder
+                    .select(BioFrame.selectAll)
+                    .from(DataSource.database(DatabaseUtil.shared))
+                    .where(
+                        BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
+                            .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
+                ).orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
+                dataQuery.addChangeListener({change in
+                    if let error = change.error {
+                        Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
+                    }
+                    if let res = change.results {
+                        self.data = res.allResults()
+                    }
+                })
     }
 }
 
 extension DetailViewController {
-    func updateUserInfo(result: Result) {
-        self.title = result.string(forKey: Athlete.name.key)
+    func updateUserInfo() {
+        guard let athlete = self.athlete else {
+            return
+        }
+        self.nameLabel.text = athlete.string(forKey: Athlete.name.key) ?? ""
+        self.numberPositionLabel.text = "\(athlete.int(forKey: Athlete.uid.key))"
+        self.classificationLabel.text = "Classification: <>"
+        self.weightLabel.text = "Weight: \(athlete.float(forKey: Athlete.weight.key))"
+        self.ageLabel.text = "Age: <>"
     }
 }
 
-extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return logItems.count
+
+extension DetailViewController {
+    func updateData() {
+        if let latest = self.data.last {
+            self.upateMainCard(with: latest)
+        }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Message") as! MessageTableViewCell
-        let item = logItems[indexPath.row]
-        cell.configure(for: item)
-        return cell
+    func upateMainCard(with latest: Result) {
+        self.coreTempLabel.text = "\(latest.double(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
+        self.hrBpmLabel.text = "[ \(latest.int(forKey: BioFrame.heartRate.key)) bpm ]"
     }
 }
