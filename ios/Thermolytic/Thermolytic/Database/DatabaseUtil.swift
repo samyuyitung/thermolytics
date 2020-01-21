@@ -79,3 +79,16 @@ class DatabaseUtil {
         }
     }
 }
+
+extension Query {
+    func simpleListener(_ closure: @escaping ([Result]) -> Void) {
+        addChangeListener { (change) in
+            if let error = change.error {
+                Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
+            }
+            if let res = change.results {
+                closure(res.allResults())
+            }
+        }
+    }
+}

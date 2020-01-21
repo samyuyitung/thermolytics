@@ -80,7 +80,7 @@ class LogViewController: UIViewController {
                                 Join.join(DataSource.database(DatabaseUtil.shared).as(userAlias))
                                     .on(
                                         BioFrame.uid.expression(from: frameAlias)
-                                            .equalTo(Athlete.uid.expression(from: userAlias))
+                                            .equalTo(Athlete.number.expression(from: userAlias))
                                 )
                             )
                             .where(
@@ -103,7 +103,7 @@ class LogViewController: UIViewController {
 
 extension LogViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let segues = ["connect", "detail", "debug"]
+        let segues = ["connect", "detail", "addPlayer"]
         return segues.contains(identifier)
     }
     

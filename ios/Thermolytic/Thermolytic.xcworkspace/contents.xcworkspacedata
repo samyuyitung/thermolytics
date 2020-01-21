@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/samyuyitung/Workspace/thermolytics/ios/Thermolytic/Thermolytic/UI/Edit Player/EditPlayerView.swift">
+   </FileRef>
+   <FileRef
       location = "group:Thermolytic.xcodeproj">
    </FileRef>
    <FileRef
