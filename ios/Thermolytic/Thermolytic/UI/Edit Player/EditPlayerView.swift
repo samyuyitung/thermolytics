@@ -69,7 +69,7 @@ class EditPlayerView : UIView {
     func load(with values: EditPlayerFields) {
         nameField.text = values.name
         numberField.text = String(values.number)
-        ageField.text = values.name
+        ageField.text = String(values.age)
         heightField.text = String(values.height)
         weightField.text = String(values.weight)
         

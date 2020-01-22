@@ -39,6 +39,15 @@ class ListPlayerViewController: UIViewController {
             self.users = results
         }
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+         if segue.identifier == "detail" {
+            let vc = segue.destination as! HistoricalDetailViewController
+            let cell = sender as! PlayerTableViewCell
+            vc.uid = cell.uid ?? ""
+        }
+    }
 }
 
 extension ListPlayerViewController: UITableViewDelegate, UITableViewDataSource {
@@ -51,5 +60,9 @@ extension ListPlayerViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableViewCell") as! PlayerTableViewCell
         cell.configure(for: users[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detail", sender: tableView.cellForRow(at: indexPath))
     }
 }

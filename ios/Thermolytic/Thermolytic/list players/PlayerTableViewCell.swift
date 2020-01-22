@@ -13,11 +13,13 @@ class PlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    
+        
+    var uid: String?
+
     func configure(for item: Result) {
+        uid = item.getId()
+
         numberLabel.text = "\(item.int(forKey: Athlete.number.key))"
         nameLabel.text = item.string(forKey: Athlete.name.key)
     }
-    
-    
 }

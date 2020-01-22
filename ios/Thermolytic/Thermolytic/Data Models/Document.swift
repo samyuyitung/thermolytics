@@ -48,3 +48,10 @@ class BaseDocument {
     static let type = BasicProperty(key: "type")
     static let createdAt = BasicProperty(key: "createdAt")
 }
+
+
+extension Result {
+    func getId() -> String? {
+        return self.string(forKey: "id")
+    }
+}

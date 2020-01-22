@@ -52,7 +52,7 @@ class DetailViewController: UIViewController {
     var coreTempPoints: [ChartDataEntry] = []
     var heartRatePoints: [ChartDataEntry] = []
     
-    var uid: Int = -10
+    var uid: String = ""
     
     override func viewDidLoad() {
         self.title = "Player"
@@ -72,14 +72,11 @@ class DetailViewController: UIViewController {
             .from(DataSource.database(DatabaseUtil.shared))
             .where(
                 BaseDocument.type.expression.equalTo(Expression.string(Athlete.TYPE))
-                    .and(Athlete.number.expression.equalTo(Expression.int(uid)))
+                    .and(Athlete.id.expression.equalTo(Expression.string(uid)))
         )
-        userQuery.addChangeListener({change in
-            if let error = change.error {
-                Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
-            }
-            if let res = change.results?.allResults().first {
-                self.athlete = res
+        userQuery.simpleListener({rows in
+            if let first = rows.first {
+                self.athlete = first
             }
         })
     }
@@ -90,16 +87,10 @@ class DetailViewController: UIViewController {
             .from(DataSource.database(DatabaseUtil.shared))
             .where(
                 BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
-                    .and(BioFrame.uid.expression.equalTo(Expression.int(uid)))
-                    .and(BioFrame.createdAt.expression.greaterThanOrEqualTo(Expression.int64(1578507102)))
+                    .and(BioFrame.uid.expression.equalTo(Expression.string(uid)))
         ).orderBy(Ordering.expression(BioFrame.createdAt.expression).ascending())
-        dataQuery.addChangeListener({change in
-            if let error = change.error {
-                Utils.log(at: .Error, msg: "Error fetching data -- \(error)")
-            }
-            if let res = change.results {
-                self.data = res.allResults()
-            }
+        dataQuery.simpleListener({ rows in
+            self.data = rows
         })
     }
 }
@@ -227,7 +218,4 @@ extension DetailViewController: UIPopoverPresentationControllerDelegate {
 
             present(vc, animated: true, completion: nil)
     }
-    
-    
-
 }

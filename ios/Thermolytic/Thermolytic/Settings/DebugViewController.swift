@@ -18,11 +18,13 @@ class DebugViewController: UIViewController {
     }
     
     @IBAction func didAddRows(_ sender: Any) {
-        let a = Athlete.create(number: 1, name: "Justin Schaper", height: 180, weight: 60, age: 12, position: .forward)
-        let h = Athlete.create(number: 2, name: "Heather Chan", height: 180, weight: 60, age: 56, position: .defense)
-        DatabaseUtil.insert(doc: a)
-        DatabaseUtil.insert(doc: h)
-        
+        let baseTime = Date().timeIntervalSince1970
+        for i in 1...500 {
+            let doc = BioFrame.create(now: baseTime.advanced(by: Double(i) * 5.0), uid: "-4sNeT_RRDhPOvoFwJ4q_7U", heartRate: Int.random(in: 80...100), skinTemp: Double.random(in: 35.5...37.5), ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: Double.random(in: 37.6...39.4))!
+            
+            DatabaseUtil.insert(doc: doc)
+            
+        }
     }
     override func viewDidLoad() {
         //        let query = QueryBuilder.select(BioFrame.uid.selectResult) .from(DataSource.database(DatabaseUtil.shared))

@@ -66,18 +66,57 @@ class Athlete : BaseDocument {
         
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
-        doc.setValue(TYPE, forKey: self.type.key)
-        doc.setValue(now, forKey: createdAt.key)
+        doc.setString(TYPE, forKey: self.type.key)
+        doc.setDouble(now, forKey: createdAt.key)
         
-        doc.setValue(name, forKey: self.name.key)
-        doc.setValue(number, forKey: self.number.key)
-        doc.setValue(weight, forKey: self.weight.key)
-        doc.setValue(height, forKey: self.height.key)
-        doc.setValue(age, forKey: self.age.key)
-        doc.setValue(position.rawValue, forKey: self.position.key)
+        doc.setString(name, forKey: self.name.key)
+        doc.setInt(number, forKey: self.number.key)
+        doc.setFloat(weight, forKey: self.weight.key)
+        doc.setFloat(height, forKey: self.height.key)
+        doc.setInt(age, forKey: self.age.key)
+        doc.setString(position.rawValue, forKey: self.position.key)
         
         return doc
     }
     
+    static func toEditFields(from doc: Document) -> EditPlayerFields {
+        return EditPlayerFields(name: doc.string(forKey: name.key) ?? "",
+                                number: doc.int(forKey: number.key),
+                                age:  doc.int(forKey: age.key),
+                                height: doc.float(forKey: height.key),
+                                weight: doc.float(forKey: weight.key),
+                                position: Position(rawValue: doc.string(forKey: position.key) ?? "") ?? .forward)
+    }
     
+    static func update(doc: MutableDocument, with values: EditPlayerFields) {
+        doc.setString(values.name, forKey: self.name.key)
+        doc.setInt(values.number, forKey: self.number.key)
+        doc.setFloat(values.weight, forKey: self.weight.key)
+        doc.setFloat(values.height, forKey: self.height.key)
+        doc.setInt(values.age, forKey: self.age.key)
+        doc.setString(values.position.rawValue, forKey: self.position.key)
+    }
+    
+    static func deleteAllData(for uid: String) {
+        let types = [PlayerNote.TYPE, BioFrame.TYPE, BleMessage.TYPE].map { (type) -> ExpressionProtocol in Expression.string(type) }
+        let uids = [PlayerNote.uid, BioFrame.uid, BleMessage.uid].map { field -> ExpressionProtocol in field.expression }
+    
+        let deleteQuery = QueryBuilder.select(BaseDocument.id.selectResult)
+            .from(DataSource.database(DatabaseUtil.shared))
+            .where(BaseDocument.type.expression.in(types).and(Expression.string(uid).in(uids)))
+        
+        do {
+            let rows = try deleteQuery.execute()
+            
+            try DatabaseUtil.shared.inBatch {
+                for row in rows {
+                    if let id = row.getId() {
+                        try DatabaseUtil.deleteDocumentWith(id: id)
+                    }
+                }
+            }
+        } catch {
+            Utils.log(at: .Error, msg: "oops \(error)")
+        }
+    }
 }

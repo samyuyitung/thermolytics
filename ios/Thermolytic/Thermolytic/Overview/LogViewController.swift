@@ -14,9 +14,9 @@ import UserNotifications
 class LogViewController: UIViewController {
     //MARK: - Properties
     var bluetoothManager : BluetoothManager?
-    var users: [Int: Int] = [:]
+    var users: [Int: String] = [:]
     
-    var logItems: [Int: Result] = [:] {
+    var logItems: [String: Result] = [:] {
         didSet {
             self.collectionView.reloadData()
         }
@@ -63,35 +63,37 @@ class LogViewController: UIViewController {
             if let res = change.results {
                 for (index, user) in res.allResults().enumerated() {
                     do {
-                        let uid = user.int(forKey: BleMessage.uid.key)
-                        let frameAlias = "frame"
-                        let userAlias = "user"
-                        let userQuery = QueryBuilder
-                            .select(
-                                BioFrame.uid.selectResult(from: frameAlias),
-                                BioFrame.createdAt.selectResult(from: frameAlias),
-                                BioFrame.heartRate.selectResult(from: frameAlias),
-                                BioFrame.skinTemp.selectResult(from: frameAlias),
-                                BioFrame.predictedCoreTemp.selectResult(from: frameAlias),
-                                Athlete.name.selectResult(from: userAlias)
-                            )
-                            .from(DataSource.database(DatabaseUtil.shared).as(frameAlias))
-                            .join(
-                                Join.join(DataSource.database(DatabaseUtil.shared).as(userAlias))
-                                    .on(
-                                        BioFrame.uid.expression(from: frameAlias)
-                                            .equalTo(Athlete.number.expression(from: userAlias))
+                        if let uid = user.string(forKey: BioFrame.uid.key) {
+                            let frameAlias = "frame"
+                            let userAlias = "user"
+                            let userQuery = QueryBuilder
+                                .select(
+                                    BioFrame.uid.selectResult(from: frameAlias),
+                                    BioFrame.createdAt.selectResult(from: frameAlias),
+                                    BioFrame.heartRate.selectResult(from: frameAlias),
+                                    BioFrame.skinTemp.selectResult(from: frameAlias),
+                                    BioFrame.predictedCoreTemp.selectResult(from: frameAlias),
+                                    Athlete.name.selectResult(from: userAlias),
+                                    Athlete.number.selectResult(from: userAlias)
                                 )
-                            )
-                            .where(
-                            BaseDocument.type.expression(from: frameAlias).equalTo(Expression.string(BioFrame.TYPE))
-                                .and(BaseDocument.type.expression(from: userAlias).equalTo(Expression.string(Athlete.TYPE)))
-                                .and(BioFrame.uid.expression(from: frameAlias).equalTo(Expression.int(uid)))
-                        ).orderBy(Ordering.expression(BioFrame.createdAt.expression(from: frameAlias)).descending())
-                            .limit(Expression.int(1))
-                        let record = try userQuery.execute()
-                        self.logItems[uid] = record.allResults().first
-                        self.users[index] = uid
+                                .from(DataSource.database(DatabaseUtil.shared).as(frameAlias))
+                                .join(
+                                    Join.join(DataSource.database(DatabaseUtil.shared).as(userAlias))
+                                        .on(
+                                            BioFrame.uid.expression(from: frameAlias)
+                                                .equalTo(Athlete.id.expression(from: userAlias))
+                                    )
+                                )
+                                .where(
+                                BaseDocument.type.expression(from: frameAlias).equalTo(Expression.string(BioFrame.TYPE))
+                                    .and(BaseDocument.type.expression(from: userAlias).equalTo(Expression.string(Athlete.TYPE)))
+                                    .and(BioFrame.uid.expression(from: frameAlias).equalTo(Expression.string(uid)))
+                            ).orderBy(Ordering.expression(BioFrame.createdAt.expression(from: frameAlias)).descending())
+                                .limit(Expression.int(1))
+                            let record = try userQuery.execute()
+                            self.logItems[uid] = record.allResults().first
+                            self.users[index] = uid
+                        }
                     } catch {
                         Utils.log(at: .Error, msg: "\(error)")
                     }
@@ -116,7 +118,7 @@ extension LogViewController {
         } else if segue.identifier == "detail" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! LogItemCell
-            vc.uid = cell.uid
+            vc.uid = cell.uid!
         }
     }
 }

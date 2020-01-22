@@ -31,7 +31,6 @@ class BioFrame: BaseDocument {
         predictedCoreTemp.selectResult
     ]
     
-    
     static func selectAll(from alias: String) -> [SelectResultAs] {
         return [
             type.selectResult(from: alias),
@@ -47,7 +46,7 @@ class BioFrame: BaseDocument {
     }
     
     
-    static func createFromMessage(uid sUid: String, /* Int */
+    static func createFromMessage(uid sUid: String, /* String */
         heartRate sHeartRate: String, /* Int */
         skinTemp sSkinTemp: String, /* Double */
         ambientTemp sAmbientTemp: String, /* Double */
@@ -55,10 +54,7 @@ class BioFrame: BaseDocument {
         predictedCoreTemp: Double) -> MutableDocument? {
         
         // TODO - Add more checks
-        guard let uid = Int(sUid) else {
-            Utils.log(at: .Error, msg: "Could not parse uid as Int -- {\(sUid)}")
-            return nil
-        }
+        
         guard let heartRate = Int(sHeartRate) else {
             Utils.log(at: .Error, msg: "Could not parse hr as Int -- {\(sHeartRate)}")
             return nil
@@ -91,7 +87,7 @@ class BioFrame: BaseDocument {
         return doc
     }
     
-    static func create(uid:  Int,
+    static func create(uid: String,
                        heartRate: Int,
                        skinTemp: Double,
                        ambientTemp: Double,
@@ -99,6 +95,30 @@ class BioFrame: BaseDocument {
                        predictedCoreTemp: Double) -> MutableDocument? {
         
         let now = Date().timeIntervalSince1970
+        let doc = MutableDocument()
+        doc.setValue(TYPE, forKey: self.type.key)
+        doc.setValue(now, forKey: createdAt.key)
+        
+        doc.setValue(uid, forKey: self.uid.key)
+        doc.setValue(heartRate, forKey: self.heartRate.key)
+        doc.setValue(skinTemp, forKey: self.skinTemp.key)
+        doc.setValue(ambientTemp, forKey: self.ambientTemp.key)
+        doc.setValue(ambientHumidity, forKey: self.ambientHumidity.key)
+        doc.setValue(predictedCoreTemp, forKey: self.predictedCoreTemp.key)
+        
+        return doc
+    }
+    
+    
+    static func create(now: TimeInterval,
+                       uid: String,
+                       heartRate: Int,
+                       skinTemp: Double,
+                       ambientTemp: Double,
+                       ambientHumidity: Double,
+                       predictedCoreTemp: Double) -> MutableDocument? {
+        
+        //        let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
         doc.setValue(TYPE, forKey: self.type.key)
         doc.setValue(now, forKey: createdAt.key)
