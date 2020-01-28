@@ -20,6 +20,8 @@
 		682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845132384B3FD009063EC /* ServiceIdentifiers.swift */; };
 		682845172384B439009063EC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845162384B439009063EC /* Util.swift */; };
 		682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845182384B45C009063EC /* SyncGatewayReplicator.swift */; };
+		683F8D4523DF853600E89FFA /* AuthenticationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */; };
+		683F8D4723DF864700E89FFA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F8D4623DF864700E89FFA /* User.swift */; };
 		6849B91C2385872300B00389 /* LogItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6849B91B2385872300B00389 /* LogItemCell.swift */; };
 		684C2A5523D7F3B50001A0C1 /* HistoricalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C2A5423D7F3B50001A0C1 /* HistoricalDetailViewController.swift */; };
 		684C2A5723D804940001A0C1 /* EditPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C2A5623D804940001A0C1 /* EditPlayerViewController.swift */; };
@@ -59,6 +61,8 @@
 		682845132384B3FD009063EC /* ServiceIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceIdentifiers.swift; path = "../../../../../IOS-nRF-Toolbox/nRF Toolbox/Utilities/ServiceIdentifiers.swift"; sourceTree = "<group>"; };
 		682845162384B439009063EC /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		682845182384B45C009063EC /* SyncGatewayReplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncGatewayReplicator.swift; sourceTree = "<group>"; };
+		683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUtil.swift; sourceTree = "<group>"; };
+		683F8D4623DF864700E89FFA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6849B91B2385872300B00389 /* LogItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogItemCell.swift; sourceTree = "<group>"; };
 		684C2A5423D7F3B50001A0C1 /* HistoricalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDetailViewController.swift; sourceTree = "<group>"; };
 		684C2A5623D804940001A0C1 /* EditPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerViewController.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				685E41BA238ED2CC0036F457 /* BioFrame.swift */,
 				68EE090B23D40418005DBF35 /* Athlete.swift */,
 				68AB5E8D23D69F98007C5E93 /* PlayerNote.swift */,
+				683F8D4623DF864700E89FFA /* User.swift */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 				682845132384B3FD009063EC /* ServiceIdentifiers.swift */,
 				682845162384B439009063EC /* Util.swift */,
 				682588072386303300C5F13C /* Misc+extensions.swift */,
+				683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				682844FC2384B2B9009063EC /* DatabaseUtil.swift in Sources */,
 				686371B623D78E0700AFF87E /* PlayerTableViewCell.swift in Sources */,
 				68B0CC7A23D50AF500883677 /* DropShadowView.swift in Sources */,
+				683F8D4723DF864700E89FFA /* User.swift in Sources */,
 				682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */,
 				682845172384B439009063EC /* Util.swift in Sources */,
 				686819BE23D77B5C00F9F97F /* AddPlayerViewController.swift in Sources */,
@@ -423,6 +430,7 @@
 				685E41BE238EE2340036F457 /* TwoNode.swift in Sources */,
 				68AB5E8E23D69F98007C5E93 /* PlayerNote.swift in Sources */,
 				6828450A2384B351009063EC /* BluetoothManager.swift in Sources */,
+				683F8D4523DF853600E89FFA /* AuthenticationUtil.swift in Sources */,
 				685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */,
 				686371B323D78B0C00AFF87E /* ListPlayersViewController.swift in Sources */,
 				684C2A5723D804940001A0C1 /* EditPlayerViewController.swift in Sources */,
