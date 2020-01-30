@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Session
     
     func startSession(username:String, withPassword password:String? = nil) throws {
-        try DatabaseUtil.openDatabase(username: username)
+        try App.openDatabase(username: username)
         
         SyncGatewayReplicator.startReplication(for: username, database: DatabaseUtil.shared)
         showApp()

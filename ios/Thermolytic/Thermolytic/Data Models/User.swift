@@ -19,6 +19,16 @@ class User : BaseDocument {
     
     static let athleteId = BasicProperty(key: "athlete-id") // nullable
     
+    static let selectAll = [
+        type.selectResult,
+        createdAt.selectResult,
+        username.selectResult,
+        salt.selectResult,
+        password.selectResult,
+        athleteId.selectResult
+    ]
+    
+    
     
     static func create(username: String, rawPassword: String) -> MutableDocument {
         let now = Date().timeIntervalSince1970
