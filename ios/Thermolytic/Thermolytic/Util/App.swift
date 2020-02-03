@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import CouchbaseLiteSwift
 
 
 class App {
     
-    static var user: User? = nil
-    
+    static var user: Result? = nil
+    static var shared: Database!
+
 }

@@ -39,14 +39,14 @@
                                         <rect key="frame" x="35.5" y="319.5" width="38" height="30"/>
                                         <state key="normal" title="Login"/>
                                         <connections>
-                                            <segue destination="2dJ-5d-Udh" kind="show" identifier="login" id="fe7-jz-foe"/>
+                                            <segue destination="2dJ-5d-Udh" kind="showDetail" identifier="login" id="fe7-jz-foe"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eJ6-eD-Qaf">
                                         <rect key="frame" x="1" y="426.5" width="107" height="30"/>
                                         <state key="normal" title="Create Account"/>
                                         <connections>
-                                            <segue destination="jvV-gu-pdL" kind="showDetail" id="ALl-2o-c5o"/>
+                                            <segue destination="jvV-gu-pdL" kind="show" id="ALl-2o-c5o"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -165,7 +165,7 @@
             <objects>
                 <viewController id="jvV-gu-pdL" customClass="CreateNewUserViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZGz-ir-bux">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="7AM-uB-LKv">
@@ -196,7 +196,7 @@
                                         <rect key="frame" x="49.5" y="430.5" width="46" height="30"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
-                                            <segue destination="2dJ-5d-Udh" kind="show" identifier="login" id="25I-aX-sJb"/>
+                                            <segue destination="2dJ-5d-Udh" kind="showDetail" identifier="login" id="25I-aX-sJb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -209,6 +209,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Se6-6C-3UO"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mNT-lH-eUv"/>
                     <connections>
                         <outlet property="confirmPasswordField" destination="H0c-i1-dQV" id="Rv7-un-PAj"/>
                         <outlet property="passwordField" destination="9M1-My-71L" id="sDR-AV-WGo"/>

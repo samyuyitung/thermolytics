@@ -11,54 +11,34 @@ import CouchbaseLiteSwift
 
 class DatabaseUtil {
     
-   static var shared: Database!
-    
+    static var shared: Database {
+        return App.shared
+    }
 
-    static func insert(doc: MutableDocument) {
+    static func insert(doc: MutableDocument) -> Bool {
         do {
             try shared.saveDocument(doc)
+            return true
         } catch {
             Utils.log(at: .Error, msg: "did not insert")
+            return false
         }
     }
     
    static func openDatabase(username:String) throws {
-        
         let config = DatabaseConfiguration()
-        DatabaseUtil.shared = try Database(name: username, config: config)
-        createDatabaseIndex()
+        App.shared = try Database(name: username, config: config)
     }
 
     static func closeDatabase() throws {
-        try DatabaseUtil.shared.close()
+        try shared.close()
     }
  
-    private static func createDatabaseIndex() {
-        // For task list query:
-        let type = ValueIndexItem.expression(Expression.property("type"))
-        let name = ValueIndexItem.expression(Expression.property("name"))
-        let taskListId = ValueIndexItem.expression(Expression.property("taskList.id"))
-        let task = ValueIndexItem.expression(Expression.property("task"))
-        
-        do {
-            let index = IndexBuilder.valueIndex(items: type, name)
-            try DatabaseUtil.shared.createIndex(index, withName: "task-list")
-        } catch let error as NSError {
-            NSLog("Couldn't create index (type, name): %@", error);
-        }
-        
-        // For tasks query:
-        do {
-            let index = IndexBuilder.valueIndex(items: type, taskListId, task)
-            try DatabaseUtil.shared.createIndex(index, withName: "tasks")
-        } catch let error as NSError {
-            NSLog("Couldn't create index (type, taskList.id, task): %@", error);
-        }
-    }
+    
     
     static func deleteDocumentWith(id: String) throws {
-        if let doc = shared.document(withID: id) {
-            try shared.deleteDocument(doc)
+        if let doc = App.shared.document(withID: id) {
+            try App.shared.deleteDocument(doc)
         }
     }
     

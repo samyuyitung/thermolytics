@@ -48,4 +48,18 @@ class User : BaseDocument {
         
     }
     
+    
+    static func getUserBy(username: String) -> Result? {
+        do {
+            let rows = try QueryBuilder
+                .select(User.selectAll)
+                .from(DataSource.database(DatabaseUtil.shared))
+                .where(User.username.expression.equalTo(Expression.string(username)))
+                .execute()
+            return rows.next()
+        } catch {
+            return nil
+        }
+    }
+    
 }

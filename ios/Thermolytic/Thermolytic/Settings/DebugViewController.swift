@@ -26,12 +26,4 @@ class DebugViewController: UIViewController {
             
         }
     }
-    override func viewDidLoad() {
-        //        let query = QueryBuilder.select(BioFrame.uid.selectResult) .from(DataSource.database(DatabaseUtil.shared))
-        //            .where(BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE)))
-        //
-        //        query.addChangeListener { (change) in
-        //            self.dbSize.text = "Num rows: \(change.results?.allResults().count)"
-        //        }
-    }
 }

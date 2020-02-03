@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
         do {
             let rows = try query.execute()
             if let user = rows.next(), let salt = user.string(forKey: User.salt.key),
-                let hashedPassword = user.string(forKey: User.salt.key) {
+                let hashedPassword = user.string(forKey: User.password.key) {
                 
                 if AuthenticationUtil.isAuthorized(rawPassword: password, salt: salt, hashedPassword: hashedPassword) {
                     return true

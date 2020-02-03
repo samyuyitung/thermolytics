@@ -138,7 +138,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         // Call delegate method
         let peripheral = peripherals[indexPath.row].peripheral
         self.delegate?.centralManagerDidSelectPeripheral(withManager: bluetoothManager!, andPeripheral: peripheral)
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - CBCentralManagerDelgate
