@@ -138,7 +138,6 @@
 		682844FD2384B2F6009063EC /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				682845092384B351009063EC /* BluetoothManager.swift */,
 				682844FE2384B307009063EC /* ScannedPeripheral.swift */,
 				682845022384B315009063EC /* ScannerViewController.swift */,
 			);
@@ -170,6 +169,7 @@
 		682845102384B3F0009063EC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				682845092384B351009063EC /* BluetoothManager.swift */,
 				682845132384B3FD009063EC /* ServiceIdentifiers.swift */,
 				682845162384B439009063EC /* Util.swift */,
 				682588072386303300C5F13C /* Misc+extensions.swift */,
@@ -202,6 +202,20 @@
 				685E41BD238EE2340036F457 /* TwoNode.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		686197FF23E8A18500BCCA9B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				682845042384B32C009063EC /* Overview */,
+				687B6DE023D8C5E6000C234C /* Edit Players */,
+				683F8D4823DFD10900E89FFA /* Login */,
+				68BE39AE23930770005CAEC4 /* Settings */,
+				686371B423D78DD400AFF87E /* list players */,
+				6825880223862D4B00C5F13C /* Detail */,
+				682844FD2384B2F6009063EC /* Bluetooth */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		686371B423D78DD400AFF87E /* list players */ = {
@@ -244,18 +258,12 @@
 		6881426D2384B0DB0046C667 /* Thermolytic */ = {
 			isa = PBXGroup;
 			children = (
-				683F8D4823DFD10900E89FFA /* Login */,
-				687B6DE023D8C5E6000C234C /* Edit Players */,
-				686371B423D78DD400AFF87E /* list players */,
+				686197FF23E8A18500BCCA9B /* View Controllers */,
 				68B0CC7823D50AE200883677 /* UI */,
-				68BE39AE23930770005CAEC4 /* Settings */,
 				685E41BC238EE1F20036F457 /* Model */,
-				6825880223862D4B00C5F13C /* Detail */,
 				682845102384B3F0009063EC /* Util */,
 				682844F62384B274009063EC /* Database */,
 				6828450F2384B3D5009063EC /* Data Models */,
-				682845042384B32C009063EC /* Overview */,
-				682844FD2384B2F6009063EC /* Bluetooth */,
 				682844F52384B23B009063EC /* Storyboard */,
 				6881426E2384B0DB0046C667 /* AppDelegate.swift */,
 				688142772384B0DC0046C667 /* Assets.xcassets */,
