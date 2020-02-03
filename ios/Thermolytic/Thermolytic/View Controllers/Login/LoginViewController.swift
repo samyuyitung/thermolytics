@@ -16,9 +16,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "login" {
-           return shouldLogin()
-        }
+        
+//        if identifier == "login" {
+//           return shouldLogin()
+//        }
         return true
     }
     

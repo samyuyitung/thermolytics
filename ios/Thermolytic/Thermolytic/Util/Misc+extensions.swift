@@ -62,9 +62,16 @@ extension Data {
     }
 }
 
-extension Double {
+extension Float {
     func print(to f: Int) -> String {
         return String(format: "%.\(f)f", self)
     }
 }
 
+extension UITextField {
+  var borderColor : UIColor? {
+    get {
+        return .red
+    }
+  }
+}

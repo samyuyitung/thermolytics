@@ -117,7 +117,7 @@ extension DetailViewController {
     }
     
     func upateMainCard(with latest: Result) {
-        self.coreTempLabel.text = "\(latest.double(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
+        self.coreTempLabel.text = "\(latest.float(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
         self.hrBpmLabel.text = "[ \(latest.int(forKey: BioFrame.heartRate.key)) bpm ]"
     }
 }

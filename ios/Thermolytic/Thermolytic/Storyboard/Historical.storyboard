@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ADc-rt-LQF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QLm-ky-nrd">
     <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,11 +13,20 @@
             <objects>
                 <viewController id="QLm-ky-nrd" customClass="ListPlayerViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1D0-os-l4b">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1316"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search by name" translatesAutoresizingMaskIntoConstraints="NO" id="l5x-xO-t5Y">
+                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="96P-FH-NE1"/>
+                                    <constraint firstAttribute="width" constant="400" id="eIZ-VK-Yok"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eC6-gl-YD2">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1316"/>
+                                <rect key="frame" x="0.0" y="90" width="1024" height="1276"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerTableViewCell" rowHeight="141" id="7tQ-2A-BYy" customClass="PlayerTableViewCell" customModule="Thermolytic" customModuleProvider="target">
@@ -76,24 +85,38 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-3q-846">
+                                <rect key="frame" x="885" y="25" width="119" height="40"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="eKv-bu-y6y"/>
+                                    <constraint firstAttribute="width" constant="119" id="fwf-ua-GhA"/>
+                                </constraints>
+                                <color key="tintColor" red="0.91231516450000005" green="0.91231516450000005" blue="0.91231516450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Add Player">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="5hM-0u-DpD" kind="presentation" id="cf5-Ee-pmO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="vAu-3q-846" firstAttribute="centerY" secondItem="l5x-xO-t5Y" secondAttribute="centerY" id="Dzh-Vo-RpO"/>
                             <constraint firstItem="eC6-gl-YD2" firstAttribute="leading" secondItem="q5S-u4-YDo" secondAttribute="leading" id="F7E-Aq-LPj"/>
+                            <constraint firstItem="l5x-xO-t5Y" firstAttribute="top" secondItem="q5S-u4-YDo" secondAttribute="top" constant="30" id="PXq-cb-USE"/>
+                            <constraint firstItem="eC6-gl-YD2" firstAttribute="top" secondItem="l5x-xO-t5Y" secondAttribute="bottom" constant="30" id="R8L-Jq-5kO"/>
                             <constraint firstItem="q5S-u4-YDo" firstAttribute="bottom" secondItem="eC6-gl-YD2" secondAttribute="bottom" id="U0X-Xq-smH"/>
+                            <constraint firstItem="l5x-xO-t5Y" firstAttribute="leading" secondItem="q5S-u4-YDo" secondAttribute="leading" id="VHz-WH-9W9"/>
                             <constraint firstItem="q5S-u4-YDo" firstAttribute="trailing" secondItem="eC6-gl-YD2" secondAttribute="trailing" id="VZp-XD-Pr1"/>
-                            <constraint firstItem="eC6-gl-YD2" firstAttribute="top" secondItem="q5S-u4-YDo" secondAttribute="top" id="s8R-65-bQz"/>
+                            <constraint firstItem="q5S-u4-YDo" firstAttribute="trailing" secondItem="vAu-3q-846" secondAttribute="trailing" constant="20" id="hWW-mt-Lz5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="q5S-u4-YDo"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bG9-jB-q7d">
-                        <barButtonItem key="rightBarButtonItem" title="Add Player" id="tSK-Mh-lvo">
-                            <connections>
-                                <segue destination="5hM-0u-DpD" kind="show" id="4mG-xG-wXC"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="bG9-jB-q7d"/>
                     <connections>
+                        <outlet property="searchbar" destination="l5x-xO-t5Y" id="knD-bY-fSH"/>
                         <outlet property="tableView" destination="eC6-gl-YD2" id="pD0-78-BqI"/>
                         <segue destination="UZ8-hc-dX9" kind="show" identifier="detail" id="qMH-f4-qbh"/>
                     </connections>
@@ -106,33 +129,34 @@
         <scene sceneID="4JZ-92-fPW">
             <objects>
                 <viewController id="5hM-0u-DpD" customClass="AddPlayerViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Yc9-oC-JNS">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1264"/>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="Yc9-oC-JNS">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-Bi-Dqj">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-WI-ViE" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
-                                <rect key="frame" x="331" y="30" width="362" height="568"/>
+                                <rect key="frame" x="86" y="323.5" width="540" height="360"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="568" id="R55-hT-bfh"/>
-                                    <constraint firstAttribute="width" constant="362" id="qkR-nC-PfU"/>
+                                    <constraint firstAttribute="width" constant="540" id="UWY-4I-qP8"/>
+                                    <constraint firstAttribute="height" constant="360" id="eVW-Bf-IYN"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="fgm-Bi-Dqj" firstAttribute="top" secondItem="WcC-bQ-rBY" secondAttribute="top" id="Bg6-nh-byf"/>
+                            <constraint firstItem="IvC-WI-ViE" firstAttribute="centerY" secondItem="WcC-bQ-rBY" secondAttribute="centerY" id="EqM-bN-jch"/>
+                            <constraint firstItem="fgm-Bi-Dqj" firstAttribute="leading" secondItem="WcC-bQ-rBY" secondAttribute="leading" id="Wmq-cl-pSi"/>
                             <constraint firstItem="IvC-WI-ViE" firstAttribute="centerX" secondItem="WcC-bQ-rBY" secondAttribute="centerX" id="ZxI-ap-BjO"/>
-                            <constraint firstItem="IvC-WI-ViE" firstAttribute="top" secondItem="WcC-bQ-rBY" secondAttribute="top" constant="30" id="sNq-wl-JKP"/>
+                            <constraint firstItem="WcC-bQ-rBY" firstAttribute="trailing" secondItem="fgm-Bi-Dqj" secondAttribute="trailing" id="gSC-7H-6sU"/>
+                            <constraint firstItem="WcC-bQ-rBY" firstAttribute="bottom" secondItem="fgm-Bi-Dqj" secondAttribute="bottom" id="qyR-UF-ZgB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WcC-bQ-rBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KL1-CW-Siv">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="YF6-Yg-AAo">
-                            <connections>
-                                <action selector="pressedSubmit:" destination="5hM-0u-DpD" id="TMo-uS-Wde"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="KL1-CW-Siv"/>
                     <connections>
                         <outlet property="editPlayerView" destination="IvC-WI-ViE" id="uJZ-ti-Apv"/>
                     </connections>
@@ -146,11 +170,11 @@
             <objects>
                 <viewController id="UZ8-hc-dX9" customClass="HistoricalDetailViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG1-6x-utZ">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1264"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9TT-Vy-lKi">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="204"/>
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="204"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="QSs-CV-hOc">
                                         <rect key="frame" x="60" y="42" width="120" height="120"/>
@@ -160,7 +184,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Gxt-em-UO9">
-                                        <rect key="frame" x="210" y="112" width="784" height="50"/>
+                                        <rect key="frame" x="210" y="112" width="472" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1W2-Dd-61b">
                                                 <rect key="frame" x="0.0" y="0.0" width="95.5" height="50"/>
@@ -180,7 +204,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uV8-0S-ZtH">
-                                                <rect key="frame" x="338.5" y="0.0" width="49.5" height="50"/>
+                                                <rect key="frame" x="182.5" y="0.0" width="49.5" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvl-j8-tuu">
                                                         <rect key="frame" x="0.0" y="0.0" width="49.5" height="19"/>
@@ -197,7 +221,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QfY-6m-rcH">
-                                                <rect key="frame" x="630.5" y="0.0" width="153.5" height="50"/>
+                                                <rect key="frame" x="318.5" y="0.0" width="153.5" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max HR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwr-Id-Use">
                                                         <rect key="frame" x="0.0" y="0.0" width="58" height="19"/>
@@ -267,56 +291,25 @@
             </objects>
             <point key="canvasLocation" x="2243.5546875" y="-1310.2489019033674"/>
         </scene>
-        <!--Players-->
-        <scene sceneID="MLu-lT-pWB">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ADc-rt-LQF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Players" image="play.circle.fill" catalog="system" id="M5s-a4-vVQ"/>
-                    <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="2Ui-I8-XNV">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="102"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                        <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="agZ-yh-rGk">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="QLm-ky-nrd" kind="relationship" relationship="rootViewController" id="rEv-VZ-K28"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q4e-fV-Iaw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="442" y="-704"/>
-        </scene>
         <!--Edit Player View Controller-->
         <scene sceneID="DrV-Dx-DVz">
             <objects>
                 <viewController id="3mE-Ch-JBL" customClass="EditPlayerViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xZd-fI-iB7">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1264"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvP-K6-S7A" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
-                                <rect key="frame" x="331" y="30" width="362" height="1049"/>
+                                <rect key="frame" x="175" y="30" width="362" height="792"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="362" id="vCH-US-Fx0"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNS-Zb-qox">
-                                <rect key="frame" x="466.5" y="1134" width="91" height="30"/>
+                                <rect key="frame" x="310.5" y="877" width="91" height="30"/>
                                 <state key="normal" title="Delete Player">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="pressedDelete:" destination="3mE-Ch-JBL" eventType="touchUpInside" id="wqk-9j-Yvs"/>
@@ -695,7 +688,6 @@ PHk8hDyNPJI8mjydPKI8sTy1PMA8yDzVPOI89zz8PQA9Aj0EPQY9Dz0UPRo9Ij0kPSY9KD0qTpZOm06o
 TqtOuE69TsVOyE7NTtUAAAAAAAACAQAAAAAAAABVAAAAAAAAAAAAAAAAAABO2A
 </mutableData>
         </image>
-        <image name="play.circle.fill" catalog="system" width="64" height="62"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.60392159219999997" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

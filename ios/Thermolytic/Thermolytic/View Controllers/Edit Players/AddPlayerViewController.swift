@@ -10,21 +10,22 @@ import UIKit
 
 
 class AddPlayerViewController : UIViewController {
-    
     @IBOutlet weak var editPlayerView: EditPlayerView!
-    
-    @IBAction func pressedSubmit(_ sender: Any) {
-        
-        if let fields = editPlayerView.getValues() {
-            let athlete = Athlete.create(from: fields)
-            
-            DatabaseUtil.insert(doc: athlete)
-            
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-    }
     override func viewDidLoad() {
-        self.title = "Add Player"
+        editPlayerView.delegate = self
+    }
+}
+
+extension AddPlayerViewController : EditPlayerViewDelegate {
+    func onClosePressed() {
+        self.dismiss(animated: true)
+    }
+    
+    func onAddPlayerPressed(with fields: EditPlayerFields?) {
+        if let fields = fields {
+            let athlete = Athlete.create(from: fields)
+            let _ = DatabaseUtil.insert(doc: athlete)
+            self.dismiss(animated: true)
+        }
     }
 }

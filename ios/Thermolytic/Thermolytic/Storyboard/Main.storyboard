@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="O5d-Tj-oq9">
-    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="O5d-Tj-oq9" customClass="LoginViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mkJ-v2-fQn">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="6DB-He-q43">
-                                <rect key="frame" x="362.5" y="121" width="109.5" height="456.5"/>
+                                <rect key="frame" x="329.5" y="121" width="109.5" height="456.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thermolytics!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97n-pl-HbY">
                                         <rect key="frame" x="0.0" y="0.0" width="109.5" height="20.5"/>
@@ -76,12 +76,12 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4xj-cf-luD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="aOp-z6-gi9" kind="relationship" relationship="viewControllers" id="b4v-n9-Idk"/>
-                        <segue destination="FmR-Te-QAH" kind="relationship" relationship="viewControllers" id="hiP-kA-ZUu"/>
-                        <segue destination="grf-aZ-rAe" kind="relationship" relationship="viewControllers" id="jpa-zr-lzn"/>
+                        <segue destination="XuZ-Nv-yyf" kind="relationship" relationship="viewControllers" id="kyz-fe-k4L"/>
+                        <segue destination="rMm-db-C3l" kind="relationship" relationship="viewControllers" id="Oft-oX-ktW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csy-nv-yve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -93,7 +93,7 @@
             <objects>
                 <viewController id="FmR-Te-QAH" customClass="DebugViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Z7-fC-nLg" customClass="De">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-cs-Og0">
@@ -138,34 +138,76 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pA6-yb-hWT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471" y="1084"/>
+            <point key="canvasLocation" x="-51" y="1058"/>
         </scene>
         <!--Historical-->
         <scene sceneID="QA2-Hu-ZKW">
             <objects>
                 <viewControllerPlaceholder storyboardName="Historical" id="grf-aZ-rAe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="G0Y-qe-UEY"/>
+                    <navigationItem key="navigationItem" id="QXn-7G-H8L"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWU-cp-6dJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="-704"/>
+            <point key="canvasLocation" x="580" y="-397"/>
         </scene>
         <!--RealTime-->
         <scene sceneID="tnI-F9-z7p">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KtB-U1-f5O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="RealTime" id="aOp-z6-gi9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="mZu-Tg-naz"/>
+                    <navigationItem key="navigationItem" id="80h-mn-igK"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KtB-U1-f5O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442.5" y="123.59154929577464"/>
+            <point key="canvasLocation" x="620" y="186"/>
+        </scene>
+        <!--All Players-->
+        <scene sceneID="8P2-f1-4hg">
+            <objects>
+                <navigationController id="rMm-db-C3l" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="All Players" image="players" selectedImage="players" id="iJ8-QJ-Izg">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="LuT-qY-hhq">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="aOp-z6-gi9" kind="relationship" relationship="rootViewController" id="jNX-X1-yJc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yoN-LM-j8d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-69" y="258"/>
+        </scene>
+        <!-- -->
+        <scene sceneID="eND-wV-HwG">
+            <objects>
+                <navigationController id="XuZ-Nv-yyf" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title=" " image="realtime" selectedImage="realtime" id="n8S-dN-rOV">
+                        <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="gKj-sq-NnA">
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="grf-aZ-rAe" kind="relationship" relationship="rootViewController" id="Rmh-IT-gM9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ai8-9u-gcW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-127" y="-397"/>
         </scene>
         <!--Create New User View Controller-->
         <scene sceneID="ie1-tb-kPc">
             <objects>
                 <viewController id="jvV-gu-pdL" customClass="CreateNewUserViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZGz-ir-bux">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="7AM-uB-LKv">
@@ -223,6 +265,8 @@
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="64" height="60"/>
+        <image name="players" width="30" height="19.5"/>
+        <image name="realtime" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="25I-aX-sJb"/>
