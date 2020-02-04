@@ -17,13 +17,11 @@ class LoginViewController: UIViewController {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
-//        if identifier == "login" {
-//           return shouldLogin()
-//        }
+        if identifier == "login" {
+           return shouldLogin()
+        }
         return true
     }
-    
-    
     
     func shouldLogin() -> Bool {
         guard let username = usernameField.validateString() else {
@@ -33,10 +31,8 @@ class LoginViewController: UIViewController {
             return false
         }
         
-        if username == "s" { return true}
-        
         let query = QueryBuilder.select(User.selectAll)
-            .from(DataSource.database(DatabaseUtil.shared))
+            .from(DataSource.database(App.userDB))
             .where(User.username.expression.equalTo(Expression.string(username)))
             .limit(Expression.int(1))
         do {
@@ -45,12 +41,18 @@ class LoginViewController: UIViewController {
                 let hashedPassword = user.string(forKey: User.password.key) {
                 
                 if AuthenticationUtil.isAuthorized(rawPassword: password, salt: salt, hashedPassword: hashedPassword) {
+                    App.user = user
+                    do {
+                        App.shared = try DatabaseUtil.openDatabase(name: App.user!.string(forKey: User.team.key)!)
+                    } catch {
+                        Utils.log(at: .Error, msg: error.localizedDescription)
+                    }
                     return true
                 } else {
-                    Utils.log(at: .Debug, msg: "Bad password")
+                    Utils.log(at: .Warning, msg: "Bad password")
                 }
             } else {
-                Utils.log(at: .Debug, msg: "No user")
+                Utils.log(at: .Warning, msg: "No user")
                 
             }
         } catch {

@@ -36,63 +36,47 @@ class Athlete : BaseDocument {
         case three_five = 3.5
         
         init?(id : Int) {
-            switch id {
-            case 0: self = .zero_five
-            case 1: self = .one
-            case 2: self = .one_five
-            case 3: self = .two
-            case 4: self = .two_five
-            case 5: self = .three
-            case 6: self = .three_five
-            default: return nil
+            if let classification = Classification(rawValue: (Float(id + 1) * 0.5)) {
+                self = classification
             }
+            return nil
         }
     }
     
-    
     static let TYPE = "athlete"
-    
     static let number = BasicProperty(key: "number")
     static let name = BasicProperty(key: "name")
     static let classification = BasicProperty(key: "classification")
     static let weight = BasicProperty(key: "weight")
     static let dob = BasicProperty(key: "dob")
     static let position = BasicProperty(key: "position")
+    static let team = BasicProperty(key: "team")
     
+    static let allProps = [
+         id,
+         type,
+         createdAt,
+         number,
+         name,
+         classification,
+         weight,
+         dob,
+         position,
+         team]
     
-    static let selectAll = [
-        id.selectResult,
-        type.selectResult,
-        createdAt.selectResult,
-        number.selectResult,
-        name.selectResult,
-        classification.selectResult,
-        weight.selectResult,
-        dob.selectResult,
-        position.selectResult
-    ]
+    static let selectAll = allProps.map { it in it.selectResult }
     
     static func selectAll(from alias: String) -> [SelectResultAs] {
-        return [
-            id.selectResult(from: alias),
-            type.selectResult(from: alias),
-            createdAt.selectResult(from: alias),
-            number.selectResult(from: alias),
-            name.selectResult(from: alias),
-            classification.selectResult(from: alias),
-            weight.selectResult(from: alias),
-            dob.selectResult(from: alias),
-            position.selectResult(from: alias)
-        ]
+        return allProps.map { it in it.selectResult(from: alias) }
     }
     
     static func create(from values: EditPlayerFields) -> MutableDocument {
-        return create(number: values.number, name: values.name, classification: 1.0, weight: values.weight, dob: values.dob, position: values.position)
+        return create(number: values.number, name: values.name, classification: values.classification, weight: values.weight, dob: values.dob, position: values.position)
     }
     
     static func create(number: Int,
                        name: String,
-                       classification: Float,
+                       classification: Classification,
                        weight: Float,
                        dob: Date,
                        position: Athlete.Position) -> MutableDocument {
@@ -105,7 +89,7 @@ class Athlete : BaseDocument {
         doc.setString(name, forKey: self.name.key)
         doc.setInt(number, forKey: self.number.key)
         doc.setFloat(weight, forKey: self.weight.key)
-        doc.setFloat(classification, forKey: self.classification.key)
+        doc.setFloat(classification.rawValue, forKey: self.classification.key)
         doc.setDouble(dob.timeIntervalSince1970, forKey: self.dob.key)
         doc.setString(position.rawValue, forKey: self.position.key)
         

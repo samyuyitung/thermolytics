@@ -13,6 +13,7 @@ import CouchbaseLiteSwift
 class App {
     
     static var user: Result? = nil
+    static var userDB: Database!
     static var shared: Database!
 
 }

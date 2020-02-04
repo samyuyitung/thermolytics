@@ -11,13 +11,15 @@ import CouchbaseLiteSwift
 
 class DatabaseUtil {
     
+    static let USER_DB = "users"
+    
     static var shared: Database {
         return App.shared
     }
 
-    static func insert(doc: MutableDocument) -> Bool {
+    static func insert(doc: MutableDocument, into database: Database = shared) -> Bool {
         do {
-            try shared.saveDocument(doc)
+            try database.saveDocument(doc)
             return true
         } catch {
             Utils.log(at: .Error, msg: "did not insert")
@@ -25,16 +27,13 @@ class DatabaseUtil {
         }
     }
     
-   static func openDatabase(username:String) throws {
-        let config = DatabaseConfiguration()
-        App.shared = try Database(name: username, config: config)
+   static func openDatabase(name: String) throws -> Database {
+        return try Database(name: name, config: DatabaseConfiguration())
     }
 
     static func closeDatabase() throws {
         try shared.close()
     }
- 
-    
     
     static func deleteDocumentWith(id: String) throws {
         if let doc = App.shared.document(withID: id) {
