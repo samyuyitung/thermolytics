@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6818113923E92E540018EEFC /* MaxHeartRateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6818113823E92E540018EEFC /* MaxHeartRateUtil.swift */; };
 		6825880423862D6700C5F13C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6825880323862D6700C5F13C /* DetailViewController.swift */; };
 		682588082386303300C5F13C /* Misc+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682588072386303300C5F13C /* Misc+extensions.swift */; };
 		682844F42384B21F009063EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682844F32384B21F009063EC /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		688142782384B0DC0046C667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 688142772384B0DC0046C667 /* Assets.xcassets */; };
 		6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688142792384B0DC0046C667 /* LaunchScreen.storyboard */; };
 		688CDE2323E2648C00378119 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CDE2223E2648C00378119 /* App.swift */; };
+		6895D8E923E905F000A9C4D8 /* AddNoteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895D8E823E905F000A9C4D8 /* AddNoteModalViewController.swift */; };
 		68AADABF23D768DB0091BC27 /* EditPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68AADABE23D768DB0091BC27 /* EditPlayerView.xib */; };
 		68AADAC123D768EE0091BC27 /* EditPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AADAC023D768EE0091BC27 /* EditPlayerView.swift */; };
 		68AB5E8E23D69F98007C5E93 /* PlayerNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5E8D23D69F98007C5E93 /* PlayerNote.swift */; };
@@ -51,6 +53,7 @@
 /* Begin PBXFileReference section */
 		1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thermolytic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A2CD706268D41724DB799D /* Pods-Thermolytic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermolytic.release.xcconfig"; path = "Target Support Files/Pods-Thermolytic/Pods-Thermolytic.release.xcconfig"; sourceTree = "<group>"; };
+		6818113823E92E540018EEFC /* MaxHeartRateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxHeartRateUtil.swift; sourceTree = "<group>"; };
 		6825880323862D6700C5F13C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		682588072386303300C5F13C /* Misc+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Misc+extensions.swift"; sourceTree = "<group>"; };
 		682844F32384B21F009063EC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		6881427A2384B0DC0046C667 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6881427C2384B0DC0046C667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		688CDE2223E2648C00378119 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		6895D8E823E905F000A9C4D8 /* AddNoteModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteModalViewController.swift; sourceTree = "<group>"; };
 		68AADABE23D768DB0091BC27 /* EditPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPlayerView.xib; sourceTree = "<group>"; };
 		68AADAC023D768EE0091BC27 /* EditPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditPlayerView.swift; path = "/Users/samyuyitung/Workspace/thermolytics/ios/Thermolytic/Thermolytic/UI/Edit Player/EditPlayerView.swift"; sourceTree = "<absolute>"; };
 		68AB5E8D23D69F98007C5E93 /* PlayerNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNote.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			children = (
 				6825880323862D6700C5F13C /* DetailViewController.swift */,
 				68AB5E8F23D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift */,
+				6895D8E823E905F000A9C4D8 /* AddNoteModalViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				682588072386303300C5F13C /* Misc+extensions.swift */,
 				683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */,
 				688CDE2223E2648C00378119 /* App.swift */,
+				6818113823E92E540018EEFC /* MaxHeartRateUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				68B0CC7A23D50AF500883677 /* DropShadowView.swift in Sources */,
 				683F8D4723DF864700E89FFA /* User.swift in Sources */,
 				682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */,
+				6895D8E923E905F000A9C4D8 /* AddNoteModalViewController.swift in Sources */,
 				682845172384B439009063EC /* Util.swift in Sources */,
 				686819BE23D77B5C00F9F97F /* AddPlayerViewController.swift in Sources */,
 				682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */,
@@ -455,6 +462,7 @@
 				6825880423862D6700C5F13C /* DetailViewController.swift in Sources */,
 				683F8D4A23DFD11E00E89FFA /* LoginViewController.swift in Sources */,
 				682588082386303300C5F13C /* Misc+extensions.swift in Sources */,
+				6818113923E92E540018EEFC /* MaxHeartRateUtil.swift in Sources */,
 				685E41BE238EE2340036F457 /* TwoNode.swift in Sources */,
 				68AB5E8E23D69F98007C5E93 /* PlayerNote.swift in Sources */,
 				6828450A2384B351009063EC /* BluetoothManager.swift in Sources */,

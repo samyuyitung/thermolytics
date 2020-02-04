@@ -13,7 +13,7 @@ class PlayerNote: BaseDocument {
     static let TYPE = "player-note"
     
     static let uid = BasicProperty(key: "uid")
-    static let note = BasicProperty(key: "uid")
+    static let note = BasicProperty(key: "note")
 
     static let selectAll = [
         id.selectResult,
@@ -23,15 +23,15 @@ class PlayerNote: BaseDocument {
         note.selectResult
     ]
     
-    static func create(uid: Int, note: String) -> MutableDocument  {
+    static func create(uid: String, note: String) -> MutableDocument  {
         
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
-        doc.setValue(TYPE, forKey: self.type.key)
-        doc.setValue(now, forKey: createdAt.key)
+        doc.setString(TYPE, forKey: self.type.key)
+        doc.setDouble(now, forKey: createdAt.key)
         
-        doc.setValue(uid, forKey: self.uid.key)
-        doc.setValue(note, forKey: self.note.key)
+        doc.setString(uid, forKey: self.uid.key)
+        doc.setString(note, forKey: self.note.key)
         
         return doc
     }

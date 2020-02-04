@@ -112,7 +112,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-CG-Zbx">
                                 <rect key="frame" x="53" y="170" width="69" height="30"/>
                                 <state key="normal" title="Delete DB">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="didClickDelete:" destination="FmR-Te-QAH" eventType="touchUpInside" id="Ron-ay-gRn"/>
@@ -154,11 +154,11 @@
         <!--RealTime-->
         <scene sceneID="tnI-F9-z7p">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KtB-U1-f5O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="RealTime" id="aOp-z6-gi9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="mZu-Tg-naz"/>
                     <navigationItem key="navigationItem" id="80h-mn-igK"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KtB-U1-f5O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="620" y="186"/>
         </scene>
@@ -172,6 +172,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="LuT-qY-hhq">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
@@ -192,6 +193,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="gKj-sq-NnA">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>

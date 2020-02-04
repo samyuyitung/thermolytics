@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search by name" translatesAutoresizingMaskIntoConstraints="NO" id="l5x-xO-t5Y">
-                                <rect key="frame" x="0.0" y="30" width="400" height="30"/>
+                                <rect key="frame" x="30" y="30" width="300" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="96P-FH-NE1"/>
-                                    <constraint firstAttribute="width" constant="400" id="eIZ-VK-Yok"/>
+                                    <constraint firstAttribute="width" constant="300" id="eIZ-VK-Yok"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -97,7 +97,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="5hM-0u-DpD" kind="presentation" id="cf5-Ee-pmO"/>
+                                    <segue destination="5hM-0u-DpD" kind="presentation" modalPresentationStyle="overFullScreen" id="cf5-Ee-pmO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -108,7 +108,7 @@
                             <constraint firstItem="l5x-xO-t5Y" firstAttribute="top" secondItem="q5S-u4-YDo" secondAttribute="top" constant="30" id="PXq-cb-USE"/>
                             <constraint firstItem="eC6-gl-YD2" firstAttribute="top" secondItem="l5x-xO-t5Y" secondAttribute="bottom" constant="30" id="R8L-Jq-5kO"/>
                             <constraint firstItem="q5S-u4-YDo" firstAttribute="bottom" secondItem="eC6-gl-YD2" secondAttribute="bottom" id="U0X-Xq-smH"/>
-                            <constraint firstItem="l5x-xO-t5Y" firstAttribute="leading" secondItem="q5S-u4-YDo" secondAttribute="leading" id="VHz-WH-9W9"/>
+                            <constraint firstItem="l5x-xO-t5Y" firstAttribute="leading" secondItem="q5S-u4-YDo" secondAttribute="leading" constant="30" id="VHz-WH-9W9"/>
                             <constraint firstItem="q5S-u4-YDo" firstAttribute="trailing" secondItem="eC6-gl-YD2" secondAttribute="trailing" id="VZp-XD-Pr1"/>
                             <constraint firstItem="q5S-u4-YDo" firstAttribute="trailing" secondItem="vAu-3q-846" secondAttribute="trailing" constant="20" id="hWW-mt-Lz5"/>
                         </constraints>
@@ -130,15 +130,15 @@
             <objects>
                 <viewController id="5hM-0u-DpD" customClass="AddPlayerViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Yc9-oC-JNS">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgm-Bi-Dqj">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-WI-ViE" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
-                                <rect key="frame" x="86" y="323.5" width="540" height="360"/>
+                                <rect key="frame" x="242" y="503" width="540" height="360"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="540" id="UWY-4I-qP8"/>

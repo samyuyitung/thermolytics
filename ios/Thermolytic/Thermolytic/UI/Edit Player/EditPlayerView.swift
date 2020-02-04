@@ -10,7 +10,7 @@ import UIKit
 struct EditPlayerFields {
     var name: String = ""
     var number: Int = -1
-    var age: Int = -1
+    var dob: Date = Date()
     var classification: Athlete.Classification = .one
     var weight: Float = -1
     var position: Athlete.Position = .forward
@@ -152,7 +152,7 @@ class EditPlayerView : UIView {
             hasError = true
         }
         if let dob = dobField.validateString(), let date = dateFormatter.date(from: dob) {
-            values.age = date.yearsFromNow
+            values.dob = date
         } else {
             hasError = true
         }

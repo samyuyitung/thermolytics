@@ -34,7 +34,7 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var notesTableView: UITableView!
-    
+    @IBOutlet weak var contentView: UIView!
     
     var athlete: Result? = nil {
         didSet {
@@ -49,6 +49,12 @@ class DetailViewController: UIViewController {
         }
     }
     
+    var notes: [Result] = [] {
+        didSet {
+            notesTableView.reloadData()
+        }
+    }
+    
     var coreTempPoints: [ChartDataEntry] = []
     var heartRatePoints: [ChartDataEntry] = []
     
@@ -56,14 +62,17 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         self.title = "Player"
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
 
         notesTableView.delegate = self
         notesTableView.dataSource = self
         
         setUserQuery()
         setDataQuery()
-        
+        setNotesQuery()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.contentView.frame.height)
     }
     
     func setUserQuery() {
@@ -93,6 +102,26 @@ class DetailViewController: UIViewController {
             self.data = rows
         })
     }
+    
+    func setNotesQuery() {
+        let query = QueryBuilder
+                   .select(PlayerNote.selectAll)
+                   .from(DataSource.database(DatabaseUtil.shared))
+                   .where(
+                       BaseDocument.type.expression.equalTo(Expression.string(PlayerNote.TYPE))
+                           .and(PlayerNote.uid.expression.equalTo(Expression.string(uid)))
+               ).orderBy(Ordering.expression(PlayerNote.createdAt.expression).descending())
+        query.simpleListener({ rows in
+            self.notes = rows
+        })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "add" {
+            let vc = segue.destination as! AddNoteModalViewController
+            vc.uid = self.uid
+        }
+    }
 }
 
 extension DetailViewController {
@@ -104,7 +133,7 @@ extension DetailViewController {
         self.numberPositionLabel.text = "#\(athlete.int(forKey: Athlete.number.key))"
         self.classificationLabel.text = "Classification: <>"
         self.weightLabel.text = "Weight: \(athlete.float(forKey: Athlete.weight.key))"
-        self.ageLabel.text = "Age: <>"
+        self.ageLabel.text = "Age: \(Date(timeIntervalSince1970: athlete.double(forKey: Athlete.dob.key)).yearsFromNow)"
     }
 }
 
@@ -173,49 +202,13 @@ extension DetailViewController {
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        
-        let frame: CGRect = tableView.frame
-        let button = UIButton(frame: CGRect(x: frame.size.width - 34, y: 10, width: 24, height: 24))
-        button.setImage(UIImage(named: "add"), for: .normal)
-
-        button.addTarget(self, action: #selector(addNewNote(_:)), for: .touchUpInside)
-
-        let headerView: UIView = UIView(frame: CGRect(x: 0,y: 0, width: frame.size.width, height: frame.size.height))
-        headerView.addSubview(button)
-        return headerView
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
-    }
-
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-}
-
-extension DetailViewController: UIPopoverPresentationControllerDelegate {
-    @objc func addNewNote(_ sender: Any) {
-
-            let vc = UIViewController()
-        
-            
-            vc.modalPresentationStyle = .popover
-
-            vc.preferredContentSize = CGSize(width: 500, height: 200)
-
-            let ppc = vc.popoverPresentationController
-            ppc?.permittedArrowDirections = .any
-            ppc?.delegate = self
-            ppc?.barButtonItem = navigationItem.rightBarButtonItem
-            ppc?.sourceView = sender as? UIView
-
-            present(vc, animated: true, completion: nil)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerNoteTabelViewCell") as! PlayerNoteTabelViewCell
+        cell.configure(for: notes[indexPath.row])
+        return cell
     }
 }

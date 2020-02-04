@@ -56,7 +56,7 @@ class Athlete : BaseDocument {
     static let name = BasicProperty(key: "name")
     static let classification = BasicProperty(key: "classification")
     static let weight = BasicProperty(key: "weight")
-    static let age = BasicProperty(key: "age")
+    static let dob = BasicProperty(key: "dob")
     static let position = BasicProperty(key: "position")
     
     
@@ -68,7 +68,7 @@ class Athlete : BaseDocument {
         name.selectResult,
         classification.selectResult,
         weight.selectResult,
-        age.selectResult,
+        dob.selectResult,
         position.selectResult
     ]
     
@@ -81,20 +81,20 @@ class Athlete : BaseDocument {
             name.selectResult(from: alias),
             classification.selectResult(from: alias),
             weight.selectResult(from: alias),
-            age.selectResult(from: alias),
+            dob.selectResult(from: alias),
             position.selectResult(from: alias)
         ]
     }
     
     static func create(from values: EditPlayerFields) -> MutableDocument {
-        return create(number: values.number, name: values.name, classification: 1.0, weight: values.weight, age: values.age, position: values.position)
+        return create(number: values.number, name: values.name, classification: 1.0, weight: values.weight, dob: values.dob, position: values.position)
     }
     
     static func create(number: Int,
                        name: String,
                        classification: Float,
                        weight: Float,
-                       age: Int,
+                       dob: Date,
                        position: Athlete.Position) -> MutableDocument {
         
         let now = Date().timeIntervalSince1970
@@ -106,7 +106,7 @@ class Athlete : BaseDocument {
         doc.setInt(number, forKey: self.number.key)
         doc.setFloat(weight, forKey: self.weight.key)
         doc.setFloat(classification, forKey: self.classification.key)
-        doc.setInt(age, forKey: self.age.key)
+        doc.setDouble(dob.timeIntervalSince1970, forKey: self.dob.key)
         doc.setString(position.rawValue, forKey: self.position.key)
         
         return doc
@@ -115,7 +115,7 @@ class Athlete : BaseDocument {
     static func toEditFields(from doc: Document) -> EditPlayerFields {
         return EditPlayerFields(name: doc.string(forKey: name.key) ?? "",
                                 number: doc.int(forKey: number.key),
-                                age: doc.int(forKey: age.key),
+                                dob: Date(timeIntervalSince1970: doc.double(forKey: dob.key)),
                                 classification: Classification(rawValue: doc.float(forKey: classification.key)) ?? .zero_five,
                                 weight: doc.float(forKey: weight.key),
                                 position: Position(rawValue: doc.string(forKey: position.key) ?? "") ?? .forward)
@@ -126,7 +126,7 @@ class Athlete : BaseDocument {
         doc.setInt(values.number, forKey: self.number.key)
         doc.setFloat(values.weight, forKey: self.weight.key)
         doc.setFloat(values.classification.rawValue, forKey: self.classification.key)
-        doc.setInt(values.age, forKey: self.age.key)
+        doc.setDouble(values.dob.timeIntervalSince1970, forKey: self.dob.key)
         doc.setString(values.position.rawValue, forKey: self.position.key)
     }
     

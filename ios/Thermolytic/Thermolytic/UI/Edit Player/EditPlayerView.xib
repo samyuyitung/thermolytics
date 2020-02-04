@@ -26,7 +26,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-Zj-JsJ">
                     <rect key="frame" x="167" y="300.5" width="500" height="40"/>
-                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="500" id="F8j-xV-IIo"/>
                         <constraint firstAttribute="height" constant="40" id="pYD-oP-eDm"/>
@@ -95,9 +95,13 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-Ps-t3m">
-                    <rect key="frame" x="637" y="15.5" width="30" height="30"/>
-                    <state key="normal" title="X">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNy-Ps-t3m">
+                    <rect key="frame" x="635" y="14.5" width="32" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="VAz-Qa-eVd"/>
+                        <constraint firstAttribute="width" constant="32" id="bLU-qH-2M5"/>
+                    </constraints>
+                    <state key="normal" image="close">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -125,6 +129,7 @@
         </view>
     </objects>
     <resources>
-        <image name="add" width="32" height="32"/>
+        <image name="add" width="19" height="19"/>
+        <image name="close" width="40.5" height="41"/>
     </resources>
 </document>
