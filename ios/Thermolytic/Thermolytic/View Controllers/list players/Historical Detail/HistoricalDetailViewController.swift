@@ -44,10 +44,10 @@ class HistoricalDetailViewController: TLViewController {
     var uid: String = ""
     
     override func viewDidLoad() {
-        
-        permissions.append(
-            Permissioned(view: editPlayerButton as! UIView, effect: .hide, minLevel: .physiologist)
-        )
+//
+//        permissions.append(
+//            Permissioned(view: editPlayerButton as! UIView, effect: .hide, minLevel: .physiologist)
+//        )
         self.title = "Historical Player Data"
         
         self.tabBarController?.toolbarItems

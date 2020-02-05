@@ -19,11 +19,10 @@ class DebugViewController: UIViewController {
     
     @IBAction func didAddRows(_ sender: Any) {
         let baseTime = Date().timeIntervalSince1970
-        for i in 1...500 {
-            let doc = BioFrame.create(now: baseTime.advanced(by: Double(i) * 5.0), uid: "-4sNeT_RRDhPOvoFwJ4q_7U", heartRate: Int.random(in: 80...100), skinTemp: Double.random(in: 35.5...37.5), ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: Double.random(in: 37.6...39.4))!
+        
+            let doc = BioFrame.create(now: baseTime, uid: "--DL2Z5ZBvoStzHDd6tQAhR", heartRate: 100, skinTemp: 35, ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: 36)!
             
             DatabaseUtil.insert(doc: doc)
             
-        }
     }
 }

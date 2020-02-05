@@ -64,7 +64,9 @@ class Athlete : BaseDocument {
          position,
          team]
     
-    static let selectAll = allProps.map { it in it.selectResult }
+    static let selectAll: [SelectResultAs] = {
+        return allProps.map { it in it.selectResult }
+    }()
     
     static func selectAll(from alias: String) -> [SelectResultAs] {
         return allProps.map { it in it.selectResult(from: alias) }

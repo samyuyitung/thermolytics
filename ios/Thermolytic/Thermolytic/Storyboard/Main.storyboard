@@ -82,6 +82,7 @@
                     <connections>
                         <segue destination="XuZ-Nv-yyf" kind="relationship" relationship="viewControllers" id="kyz-fe-k4L"/>
                         <segue destination="rMm-db-C3l" kind="relationship" relationship="viewControllers" id="Oft-oX-ktW"/>
+                        <segue destination="FmR-Te-QAH" kind="relationship" relationship="viewControllers" id="tY4-8E-upk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Csy-nv-yve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -93,7 +94,7 @@
             <objects>
                 <viewController id="FmR-Te-QAH" customClass="DebugViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Z7-fC-nLg" customClass="De">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-cs-Og0">

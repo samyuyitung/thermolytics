@@ -66,6 +66,6 @@ extension PolarHrUtil: PolarBleApiObserver {
 extension PolarHrUtil: PolarBleApiDeviceHrObserver {
     func hrValueReceived(_ identifier: String, data: PolarHrData) {
         lastHr = Int(data.hr)
-        Utils.log(msg: "last HR \(lastHr)")
+//        Utils.log(msg: "last HR \(lastHr)")
     }
 }

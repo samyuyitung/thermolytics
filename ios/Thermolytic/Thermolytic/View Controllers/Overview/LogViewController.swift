@@ -19,6 +19,7 @@ class LogViewController: UIViewController {
     var bluetoothManager : BluetoothManager?
     var hrManager : PolarHrUtil = PolarHrUtil()
     var users: [Int: String] = [:]
+    var devices: [String: String] = ["1": "--DL2Z5ZBvoStzHDd6tQAhR"]
     
     var logItems: [String: Result] = [:] {
         didSet {
@@ -77,10 +78,12 @@ class LogViewController: UIViewController {
                                     BioFrame.uid.selectResult(from: frameAlias),
                                     BioFrame.createdAt.selectResult(from: frameAlias),
                                     BioFrame.heartRate.selectResult(from: frameAlias),
-                                    BioFrame.skinTemp.selectResult(from: frameAlias),
+                                    BioFrame.avgSkinTemp.selectResult(from: frameAlias),
                                     BioFrame.predictedCoreTemp.selectResult(from: frameAlias),
+                                    Athlete.id.selectResult(from: userAlias),
                                     Athlete.name.selectResult(from: userAlias),
-                                    Athlete.number.selectResult(from: userAlias)
+                                    Athlete.number.selectResult(from: userAlias),
+                                    Athlete.weight.selectResult(from: userAlias)
                             )
                                 .from(DataSource.database(DatabaseUtil.shared).as(frameAlias))
                                 .join(
@@ -206,12 +209,11 @@ extension LogViewController: BluetoothManagerDelegate {
         let ambientTemperature = Double(parts[3])!
         let ambientHumidity = Double(parts[4])! / 100.0
         
-        let averageSkinTemp = (armTemperature + legTemperature / 2)
+        let averageSkinTemp = (armTemperature + legTemperature) / 2
         
-        let user = getUser(at: 0) // update with device id
-        let weight = user!.double(forKey: Athlete.weight.key)
-        
-        if let heartRate = hrManager.getLastHr() {
+        if let user = getUser(at: 0), let heartRate = hrManager.getLastHr() {
+            Utils.log(msg: "\(user.toDictionary() as AnyObject)")
+            let weight = user.double(forKey: Athlete.weight.key)
             let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
                                                temp_skin_avg: averageSkinTemp,
                                                heart_rate_rest: 60,
@@ -219,7 +221,14 @@ extension LogViewController: BluetoothManagerDelegate {
                                                rel_humidity: ambientHumidity,
                                                temp_air: ambientTemperature)
             
-            if let doc = BioFrame.createFromMessage(uid: parts[0], heartRate: parts[1], skinTemp: parts[2], ambientTemp: parts[3], ambientHumidity: parts[4], predictedCoreTemp: coreTemp) {
+            if let doc = BioFrame.create(uid: user.string(forKey: BioFrame.uid.key)!,
+                                         heartRate: Int(heartRate),
+                                         armSkinTemp: armTemperature,
+                                         legSkinTemp: legTemperature,
+                                         avgSkinTemp: averageSkinTemp,
+                                         ambientTemp: ambientTemperature,
+                                         ambientHumidity: ambientHumidity,
+                                         predictedCoreTemp: coreTemp) {
                 addToDatabase(document: doc)
             } else {
                 Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
