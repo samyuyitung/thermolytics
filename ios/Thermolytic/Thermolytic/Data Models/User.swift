@@ -24,6 +24,14 @@ class User : BaseDocument {
             default: return nil
             }
         }
+        
+        func isAtLeast(role: Role) -> Bool {
+            switch self {
+            case .admin: return role == self || role == .physiologist || role == .player
+            case .physiologist: return role == self || role == .player
+            case .player: return role == self
+            }
+        }
     }
     
     static let TYPE = "user"

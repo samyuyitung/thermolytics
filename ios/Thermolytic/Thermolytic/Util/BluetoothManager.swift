@@ -28,10 +28,10 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
     fileprivate let UARTTXCharacteristicUUID = CBUUID(string: ServiceIdentifiers.uartTXCharacteristicUUIDString)
     fileprivate let UARTRXCharacteristicUUID = CBUUID(string: ServiceIdentifiers.uartRXCharacteristicUUIDString)
     
-    fileprivate var centralManager              : CBCentralManager
-    fileprivate var bluetoothPeripheral         : CBPeripheral?
-    fileprivate var uartRXCharacteristic        : CBCharacteristic?
-    fileprivate var uartTXCharacteristic        : CBCharacteristic?
+    fileprivate var centralManager: CBCentralManager
+    fileprivate var bluetoothPeripheral: CBPeripheral?
+    fileprivate var uartRXCharacteristic: CBCharacteristic?
+    fileprivate var uartTXCharacteristic: CBCharacteristic?
     
     var connected = false
     
@@ -121,17 +121,17 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
     //MARK: - Logger API
     
     func logError(error anError : Error) {
-//        if let e = anError as? CBError {
-//            logger?.log(level: .errorLogLevel, message: "Error \(e.code): \(e.localizedDescription)")
-//        } else {
-//            logger?.log(level: .errorLogLevel, message: "Error \(anError.localizedDescription)")
-//        }
+        //        if let e = anError as? CBError {
+        //            logger?.log(level: .errorLogLevel, message: "Error \(e.code): \(e.localizedDescription)")
+        //        } else {
+        //            logger?.log(level: .errorLogLevel, message: "Error \(anError.localizedDescription)")
+        //        }
     }
     
     //MARK: - CBCentralManagerDelegate
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-
+        
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

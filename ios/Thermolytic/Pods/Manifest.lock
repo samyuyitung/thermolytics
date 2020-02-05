@@ -3,20 +3,28 @@ PODS:
     - Charts/Core (= 3.4.0)
   - Charts/Core (3.4.0)
   - CouchbaseLite-Swift (2.6.1)
+  - RxAtomic (4.4.2)
+  - RxSwift (5.0.1)
 
 DEPENDENCIES:
   - Charts
   - CouchbaseLite-Swift
+  - RxAtomic
+  - RxSwift (~> 5)
 
 SPEC REPOS:
   trunk:
     - Charts
     - CouchbaseLite-Swift
+    - RxAtomic
+    - RxSwift
 
 SPEC CHECKSUMS:
   Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CouchbaseLite-Swift: c9a5cf889da3e7969259f30384bd3cd1b9f2f3e6
+  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: 6a48b2ba349b9f118a49888e174597b256c20d0c
+PODFILE CHECKSUM: d1cef390b33af05a3b9e890abba3a2e2d38dcdab
 
 COCOAPODS: 1.8.4

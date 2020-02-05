@@ -45,6 +45,17 @@ import Foundation
 //var temp_air = 25.0         // air temperature (C)
 
 class TwoNode {
+    
+    struct Fields {
+        var bodyMass: Double
+        var averageSkinTemp: Double
+        var restingHeartRate: Double
+        var heartRate: Double
+        var ambientHumidity: Double
+        var ambientTemperature: Double
+    }
+
+    
     static func get_sat_vap_pressure(temp: Double) -> Double {     // saturated vapor pressure (mmHg)
         let p = 0.61121*pow(M_E,(18.678 - temp/234.5)*(temp/(257.14 + temp)))
         return p*760/101.325                              // conversion from kPa to mmHg

@@ -10,7 +10,7 @@ import UIKit
 import CouchbaseLiteSwift
 import Charts
 
-class HistoricalDetailViewController: UIViewController {
+class HistoricalDetailViewController: TLViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -22,6 +22,8 @@ class HistoricalDetailViewController: UIViewController {
     
     @IBOutlet weak var maxHrLabel: UILabel!
     @IBOutlet weak var coreTempThresholdLabel: UILabel!
+    
+    @IBOutlet weak var editPlayerButton: UIBarButtonItem!
     
     var athlete: Result? = nil {
         didSet {
@@ -42,7 +44,13 @@ class HistoricalDetailViewController: UIViewController {
     var uid: String = ""
     
     override func viewDidLoad() {
+        
+        permissions.append(
+            Permissioned(view: editPlayerButton as! UIView, effect: .hide, minLevel: .physiologist)
+        )
         self.title = "Historical Player Data"
+        
+        self.tabBarController?.toolbarItems
 //        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+100)
         
         setUserQuery()
@@ -101,9 +109,10 @@ extension HistoricalDetailViewController {
 
         self.nameLabel.text = athlete.string(forKey: Athlete.name.key) ?? ""
         self.positionLabel.text = athlete.string(forKey: Athlete.position.key) ?? "unknown"
-        self.classificationLabel.text = "Classification: <>"
+        self.classificationLabel.text = "Classification: \(athlete.float(forKey: Athlete.classification.key))"
         self.weightLabel.text = "Weight: \(athlete.float(forKey: Athlete.weight.key))"
-        self.ageLabel.text = "Age: <>"
+        let dob = Date(timeIntervalSince1970: athlete.double(forKey: Athlete.dob.key))
+        self.ageLabel.text = "Age: \(dob.yearsFromNow)"
     }
 }
 

@@ -9,11 +9,13 @@
 import UIKit
 import CouchbaseLiteSwift
 
-class ListPlayerViewController: UIViewController {
+class ListPlayerViewController: TLViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchbar: UISearchBar!
 
+    @IBOutlet weak var addPlayerButton: UIButton!
+    
     var users: [Result] = [] {
         didSet {
             tableView.reloadData()
@@ -31,11 +33,16 @@ class ListPlayerViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        permissions.append(
+            Permissioned(view: self.addPlayerButton, effect: .hide, minLevel: .physiologist)
+        )
+        
+        super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         configureSearchBar()
-        
         self.title = "All Players"
+        
         setQuery()
     }
     

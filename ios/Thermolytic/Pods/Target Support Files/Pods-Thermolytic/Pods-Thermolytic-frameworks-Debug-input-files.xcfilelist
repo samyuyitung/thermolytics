@@ -2,3 +2,5 @@ ${PODS_ROOT}/Target Support Files/Pods-Thermolytic/Pods-Thermolytic-frameworks.s
 ${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
 ${PODS_ROOT}/CouchbaseLite-Swift/iOS/CouchbaseLiteSwift.framework
 ${PODS_ROOT}/CouchbaseLite-Swift/iOS/CouchbaseLiteSwift.framework.dSYM
+${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework

@@ -8,5 +8,7 @@ target 'Thermolytic' do
   # Pods for Thermolytic
   pod 'CouchbaseLite-Swift'
   pod 'Charts'
+  pod 'RxSwift', '~> 5'
+  pod 'RxAtomic'
 
 end

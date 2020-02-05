@@ -1,3 +1,5 @@
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CouchbaseLiteSwift.framework
 ${DWARF_DSYM_FOLDER_PATH}/CouchbaseLiteSwift.framework.dSYM
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework

@@ -85,8 +85,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-3q-846">
-                                <rect key="frame" x="885" y="25" width="119" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-3q-846">
+                                <rect key="frame" x="884" y="25" width="119" height="40"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eKv-bu-y6y"/>
@@ -116,6 +116,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bG9-jB-q7d"/>
                     <connections>
+                        <outlet property="addPlayerButton" destination="vAu-3q-846" id="bxW-NF-u1s"/>
                         <outlet property="searchbar" destination="l5x-xO-t5Y" id="knD-bY-fSH"/>
                         <outlet property="tableView" destination="eC6-gl-YD2" id="pD0-78-BqI"/>
                         <segue destination="UZ8-hc-dX9" kind="show" identifier="detail" id="qMH-f4-qbh"/>
@@ -170,7 +171,7 @@
             <objects>
                 <viewController id="UZ8-hc-dX9" customClass="HistoricalDetailViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bG1-6x-utZ">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="1006.9200564096436"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9TT-Vy-lKi">
@@ -280,7 +281,7 @@
                     <connections>
                         <outlet property="ageLabel" destination="YGc-Ih-Shg" id="F4R-rR-ls3"/>
                         <outlet property="classificationLabel" destination="06G-Ma-kGN" id="xud-ZC-x1C"/>
-                        <outlet property="coreTempThresholdLabel" destination="wvc-CG-ooY" id="ZlA-ef-hzE"/>
+                        <outlet property="editPlayerButton" destination="DQC-dp-y3W" id="tVb-G7-mbb"/>
                         <outlet property="maxHrLabel" destination="Iwr-Id-Use" id="lHq-ps-IFb"/>
                         <outlet property="nameLabel" destination="b6E-VB-2BR" id="MLD-ee-ZnY"/>
                         <outlet property="positionLabel" destination="ZZq-d7-GgS" id="zX4-oT-ess"/>
