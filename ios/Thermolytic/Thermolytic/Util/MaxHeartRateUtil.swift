@@ -14,7 +14,7 @@ class HeartRateUtil {
         return 200 - ((age - 20) / 5) * 5
     }
     
-    static func getPercentHeartRate(hr: Int, age: Int) -> Double {
+    static  func getPercentHeartRate(hr: Int, age: Int) -> Double {
         return Double(hr) / Double(getMaxHeartRate(age: age))
     }
 }

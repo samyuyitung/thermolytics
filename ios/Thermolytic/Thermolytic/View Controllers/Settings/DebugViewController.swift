@@ -10,8 +10,7 @@ import UIKit
 import CouchbaseLiteSwift
 
 class DebugViewController: UIViewController {
-    
-    @IBOutlet weak var dbSize: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     @IBAction func didClickDelete(_ sender: Any) {
         DatabaseUtil.clearAllOf(type: BioFrame.TYPE)
@@ -19,10 +18,39 @@ class DebugViewController: UIViewController {
     
     @IBAction func didAddRows(_ sender: Any) {
         let baseTime = Date().timeIntervalSince1970
+        let doc = BioFrame.create(now: baseTime, uid: "--DL2Z5ZBvoStzHDd6tQAhR", heartRate: 100, skinTemp: 35, ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: 36)!
+        let _ = DatabaseUtil.insert(doc: doc)
+    }
+    
+    var rows: [Result] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    override func viewDidLoad() {
+        tableView.delegate = self
+        tableView.dataSource = self
         
-            let doc = BioFrame.create(now: baseTime, uid: "--DL2Z5ZBvoStzHDd6tQAhR", heartRate: 100, skinTemp: 35, ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: 36)!
-            
-            DatabaseUtil.insert(doc: doc)
-            
+        QueryBuilder
+            .select(BioFrame.selectAll)
+            .from(DataSource.database(DatabaseUtil.shared))
+            .where(BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE)))
+            .orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
+            .limit(Expression.int(50))
+            .simpleListener { res in
+                self.rows = res
+            }
+    }
+}
+
+extension DebugViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BioFrameDebuggerCell") as! BioFrameDebuggerCell
+        cell.configure(with: rows[indexPath.row])
+        return cell
     }
 }

@@ -104,16 +104,15 @@ class DetailViewController: UIViewController {
     }
     
     func setNotesQuery() {
-        let query = QueryBuilder
-                   .select(PlayerNote.selectAll)
-                   .from(DataSource.database(DatabaseUtil.shared))
-                   .where(
-                       BaseDocument.type.expression.equalTo(Expression.string(PlayerNote.TYPE))
-                           .and(PlayerNote.uid.expression.equalTo(Expression.string(uid)))
-               ).orderBy(Ordering.expression(PlayerNote.createdAt.expression).descending())
-        query.simpleListener({ rows in
-            self.notes = rows
-        })
+        QueryBuilder
+            .select(PlayerNote.selectAll)
+            .from(DataSource.database(DatabaseUtil.shared))
+            .where(BaseDocument.type.expression.equalTo(Expression.string(PlayerNote.TYPE))
+                .and(PlayerNote.uid.expression.equalTo(Expression.string(uid))))
+            .orderBy(Ordering.expression(PlayerNote.createdAt.expression).descending())
+            .simpleListener { rows in
+                self.notes = rows
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

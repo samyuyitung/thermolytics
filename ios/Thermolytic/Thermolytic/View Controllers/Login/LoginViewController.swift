@@ -49,9 +49,11 @@ class LoginViewController: UIViewController {
                     }
                     return true
                 } else {
+                    passwordField.setError()
                     Utils.log(at: .Warning, msg: "Bad password")
                 }
             } else {
+                usernameField.setError()
                 Utils.log(at: .Warning, msg: "No user")
                 
             }

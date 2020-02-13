@@ -157,7 +157,6 @@ extension LogViewController: ScannerDelegate {
         bluetoothManager = BluetoothManager(withManager: aManager)
         bluetoothManager!.delegate = self
         bluetoothManager!.connectPeripheral(peripheral: aPeripheral)
-        self.deviceLabel.text = aPeripheral.name
     }
 }
 
