@@ -38,6 +38,7 @@
 		686371B323D78B0C00AFF87E /* ListPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686371B223D78B0C00AFF87E /* ListPlayersViewController.swift */; };
 		686371B623D78E0700AFF87E /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686371B523D78E0700AFF87E /* PlayerTableViewCell.swift */; };
 		686819BE23D77B5C00F9F97F /* AddPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686819BD23D77B5C00F9F97F /* AddPlayerViewController.swift */; };
+		686B6C1F23F4EE5A00D2FB6E /* RecordingSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686B6C1E23F4EE5A00D2FB6E /* RecordingSessionManager.swift */; };
 		687119D923E9F0720038F5DC /* TLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687119D823E9F0720038F5DC /* TLViewController.swift */; };
 		687B6DDD23D8C2BA000C234C /* Historical.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 687B6DDC23D8C2BA000C234C /* Historical.storyboard */; };
 		687B6DDF23D8C2D3000C234C /* RealTime.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 687B6DDE23D8C2D3000C234C /* RealTime.storyboard */; };
@@ -103,6 +104,7 @@
 		686371B223D78B0C00AFF87E /* ListPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlayersViewController.swift; sourceTree = "<group>"; };
 		686371B523D78E0700AFF87E /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		686819BD23D77B5C00F9F97F /* AddPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerViewController.swift; sourceTree = "<group>"; };
+		686B6C1E23F4EE5A00D2FB6E /* RecordingSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingSessionManager.swift; sourceTree = "<group>"; };
 		687119D823E9F0720038F5DC /* TLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLViewController.swift; sourceTree = "<group>"; };
 		687B6DDC23D8C2BA000C234C /* Historical.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Historical.storyboard; sourceTree = "<group>"; };
 		687B6DDE23D8C2D3000C234C /* RealTime.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RealTime.storyboard; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				688CDE2223E2648C00378119 /* App.swift */,
 				6818113823E92E540018EEFC /* MaxHeartRateUtil.swift */,
 				6807810723EA62480046D620 /* PolarHrUtil.swift */,
+				686B6C1E23F4EE5A00D2FB6E /* RecordingSessionManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				685E41BE238EE2340036F457 /* TwoNode.swift in Sources */,
 				68AB5E8E23D69F98007C5E93 /* PlayerNote.swift in Sources */,
 				6828450A2384B351009063EC /* BluetoothManager.swift in Sources */,
+				686B6C1F23F4EE5A00D2FB6E /* RecordingSessionManager.swift in Sources */,
 				683F8D4523DF853600E89FFA /* AuthenticationUtil.swift in Sources */,
 				685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */,
 				6850E6FC23EC651F00F7D51A /* BioFrameDebuggerCell.swift in Sources */,

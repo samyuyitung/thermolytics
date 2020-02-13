@@ -12,8 +12,6 @@ import CoreBluetooth
 protocol BluetoothManagerDelegate {
     func didConnectPeripheral(deviceName aName : String?)
     func didDisconnectPeripheral()
-    func peripheralReady()
-    func peripheralNotSupported()
     func didReceive(message: String)
     func didSend(message: String)
 }
@@ -121,11 +119,6 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
     //MARK: - Logger API
     
     func logError(error anError : Error) {
-        //        if let e = anError as? CBError {
-        //            logger?.log(level: .errorLogLevel, message: "Error \(e.code): \(e.localizedDescription)")
-        //        } else {
-        //            logger?.log(level: .errorLogLevel, message: "Error \(anError.localizedDescription)")
-        //        }
     }
     
     //MARK: - CBCentralManagerDelegate
@@ -178,7 +171,6 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
                     return
                 }
             }
-            delegate?.peripheralNotSupported()
             cancelPeripheralConnection()
         }
     }
@@ -200,7 +192,6 @@ class BluetoothManager: NSObject, CBPeripheralDelegate, CBCentralManagerDelegate
             if (uartTXCharacteristic != nil && uartRXCharacteristic != nil) {
                 bluetoothPeripheral!.setNotifyValue(true, for: uartTXCharacteristic!)
             } else {
-                delegate?.peripheralNotSupported()
                 cancelPeripheralConnection()
             }
         }

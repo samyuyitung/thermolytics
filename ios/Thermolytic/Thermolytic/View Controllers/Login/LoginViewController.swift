@@ -24,6 +24,9 @@ class LoginViewController: UIViewController {
     }
     
     func shouldLogin() -> Bool {
+        
+        usernameField.text = "sam"
+        passwordField.text = "q"
         guard let username = usernameField.validateString() else {
             return false
         }

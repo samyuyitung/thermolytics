@@ -11,13 +11,11 @@ import CoreBluetooth
 import CouchbaseLiteSwift
 import UserNotifications
 
-import PolarBleSdk
-import RxSwift
-
 class LogViewController: UIViewController {
     //MARK: - Properties
-    var bluetoothManager : BluetoothManager?
-    var hrManager : PolarHrUtil = PolarHrUtil()
+//    var bluetoothManager : BluetoothManager?
+    var sessionManager = RecordingSessionManager.shared
+//    var hrManager : PolarHrUtil = PolarHrUtil()
     var users: [Int: String] = [:]
     var devices: [String: String] = ["1": "--DL2Z5ZBvoStzHDd6tQAhR"]
     
@@ -110,10 +108,6 @@ class LogViewController: UIViewController {
             }
         })
     }
-    
-    func getUser(at index: Int) -> Result? {
-        return logItems[users[index] ?? ""]
-    }
 }
 
 extension LogViewController {
@@ -127,7 +121,6 @@ extension LogViewController {
         if segue.identifier == "connect" {
             let vc = segue.destination as! ScannerViewController
             vc.filterUUID = CBUUID.init(string: ServiceIdentifiers.uartServiceUUIDString)
-            vc.delegate = self
         } else if segue.identifier == "detail" {
             let vc = segue.destination as! DetailViewController
             let cell = sender as! LogItemCell
@@ -148,104 +141,5 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             cell.configure(item: item)
         }
         return cell
-    }
-}
-// MARK: - Scanner Delegate
-extension LogViewController: ScannerDelegate {
-    func centralManagerDidSelectPeripheral(withManager aManager: CBCentralManager, andPeripheral aPeripheral: CBPeripheral) {
-        // We may not use more than one Central Manager instance. Let's just take the one returned from Scanner View Controller
-        bluetoothManager = BluetoothManager(withManager: aManager)
-        bluetoothManager!.delegate = self
-        bluetoothManager!.connectPeripheral(peripheral: aPeripheral)
-    }
-}
-
-// MARK: - BluetoothManagerDelegate
-extension LogViewController: BluetoothManagerDelegate {
-    //MARK: - BluetoothManagerDelegate
-    func peripheralReady() {  }
-    
-    func peripheralNotSupported() { }
-    
-    func didConnectPeripheral(deviceName aName: String?) {
-        // Scanner uses other queue to send events. We must edit UI in the main queue
-        DispatchQueue.main.async {
-            
-            //Following if condition display user permission alert for background notification
-            if UIApplication.instancesRespond(to: #selector(UIApplication.registerUserNotificationSettings(_:))){
-                UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert], categories: nil))
-            }
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidEnterBackgroundCallback), name: UIApplication.didEnterBackgroundNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActiveCallback), name: UIApplication.didBecomeActiveNotification, object: nil)
-        }
-    }
-    
-    func didDisconnectPeripheral() {
-        // Scanner uses other queue to send events. We must edit UI in the main queue
-        DispatchQueue.main.async {
-            self.bluetoothManager = nil
-            
-            NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-            NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
-        }
-        bluetoothManager = nil
-    }
-    
-    func didReceive(message: String) {
-        let parts = message.components(separatedBy: ",")
-        
-        // <d_id>,<arm_t>,<leg_t>,<am_t>,<am_h>
-        
-        guard parts.count == 5 else {
-            Utils.log(at: .Error, msg: "Bad transmission, Not opening")
-            return
-        }
-        
-        let deviceId = parts[0]
-        let armTemperature = Double(parts[1])!
-        let legTemperature = Double(parts[2])!
-        let ambientTemperature = Double(parts[3])!
-        let ambientHumidity = Double(parts[4])! / 100.0
-        
-        let averageSkinTemp = (armTemperature + legTemperature) / 2
-        
-        if let user = getUser(at: 0), let heartRate = hrManager.getLastHr() {
-            Utils.log(msg: "\(user.toDictionary() as AnyObject)")
-            let weight = user.double(forKey: Athlete.weight.key)
-            let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
-                                               temp_skin_avg: averageSkinTemp,
-                                               heart_rate_rest: 60,
-                                               heart_rate: heartRate,
-                                               rel_humidity: ambientHumidity,
-                                               temp_air: ambientTemperature)
-            
-            if let doc = BioFrame.create(uid: user.string(forKey: BioFrame.uid.key)!,
-                                         heartRate: Int(heartRate),
-                                         armSkinTemp: armTemperature,
-                                         legSkinTemp: legTemperature,
-                                         avgSkinTemp: averageSkinTemp,
-                                         ambientTemp: ambientTemperature,
-                                         ambientHumidity: ambientHumidity,
-                                         predictedCoreTemp: coreTemp) {
-                addToDatabase(document: doc)
-            } else {
-                Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
-            }
-        }
-    }
-    
-    func didSend(message: String) {
-    }
-    
-    func addToDatabase(document: MutableDocument) {
-        let _ = DatabaseUtil.insert(doc: document)
-    }
-    
-    @objc func applicationDidEnterBackgroundCallback(){
-    }
-    
-    @objc func applicationDidBecomeActiveCallback(){
-        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
 }

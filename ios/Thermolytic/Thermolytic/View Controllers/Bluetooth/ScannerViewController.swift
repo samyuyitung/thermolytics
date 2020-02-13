@@ -9,11 +9,6 @@
 import UIKit
 import CoreBluetooth
 
-
-@objc protocol ScannerDelegate {
-    func centralManagerDidSelectPeripheral(withManager aManager: CBCentralManager, andPeripheral aPeripheral: CBPeripheral)
-}
-
 // TODO: Split into extensions? 
 class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,22 +17,17 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
 
     //MARK: - ViewController Properties
     var bluetoothManager : CBCentralManager?
-    var delegate         : ScannerDelegate?
     var filterUUID       : CBUUID?
     var peripherals      : [ScannedPeripheral]
     var timer            : Timer?
     
     @IBOutlet weak var devicesTable: UITableView!
-    @IBOutlet weak var emptyView: UIView!
     @IBAction func cancelButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
 
     @objc func timerFire() {
-        if peripherals.count > 0 {
-            emptyView.isHidden = true
-            devicesTable.reloadData()
-        }
+        devicesTable.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -137,8 +127,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         bluetoothManager!.stopScan()
         // Call delegate method
         let peripheral = peripherals[indexPath.row].peripheral
-        self.delegate?.centralManagerDidSelectPeripheral(withManager: bluetoothManager!, andPeripheral: peripheral)
-        self.navigationController?.popViewController(animated: true)
+        RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
     }
     
     //MARK: - CBCentralManagerDelgate
