@@ -39,7 +39,14 @@ class SelectPlayerViewController: UIViewController {
             .orderBy(Ordering.expression(Athlete.number.expression).ascending())
         
         query.simpleListener { (results) in
-            self.athletes = results
+            let alreadySelected = Array(RecordingSessionManager.shared.participants.keys)
+            
+            self.athletes = results.filter { doc -> Bool in
+                guard let id = doc.getId() else {
+                    return false
+                }
+                return !alreadySelected.contains(id)
+            }
         }
 
     }
@@ -62,9 +69,10 @@ extension SelectPlayerViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let athlete = athletes[indexPath.row]
-        RecordingSessionManager.shared.addParticipant(uid: athlete.getId()!, deviceId: deviceId!)
+        if RecordingSessionManager.shared.addParticipant(uid: athlete.getId()!, deviceId: deviceId!) {
+            self.dismiss(animated: true)
+        }
         
-        self.dismiss(animated: true)
     }
     
     

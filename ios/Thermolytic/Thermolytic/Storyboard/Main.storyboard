@@ -76,9 +76,9 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4xj-cf-luD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="XuZ-Nv-yyf" kind="relationship" relationship="viewControllers" id="kyz-fe-k4L"/>
@@ -207,11 +207,16 @@
         <scene sceneID="HJ2-yu-2HI">
             <objects>
                 <navigationController id="TMg-v1-Qex" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="All Players" image="players" id="9mX-D0-CC7"/>
+                    <tabBarItem key="tabBarItem" title="All Players" image="players" id="9mX-D0-CC7">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ttr-h9-VvY">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="grf-aZ-rAe" kind="relationship" relationship="rootViewController" id="QO9-CX-zCK"/>
@@ -225,12 +230,17 @@
         <scene sceneID="eND-wV-HwG">
             <objects>
                 <navigationController id="XuZ-Nv-yyf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title=" Dashboard" image="realtime" selectedImage="realtime" id="n8S-dN-rOV"/>
+                    <tabBarItem key="tabBarItem" title=" Dashboard" image="realtime" selectedImage="realtime" id="n8S-dN-rOV">
+                        <color key="badgeColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="gKj-sq-NnA">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="aOp-z6-gi9" kind="relationship" relationship="rootViewController" id="brg-wg-dSd"/>

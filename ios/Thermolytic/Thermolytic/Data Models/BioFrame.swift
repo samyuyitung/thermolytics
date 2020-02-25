@@ -12,6 +12,7 @@ import CouchbaseLiteSwift
 class BioFrame: BaseDocument {
     static let TYPE = "bio-frame"
     
+    static let deviceId = BasicProperty(key: "device-id")
     static let uid = BasicProperty(key: "uid")
     static let session = BasicProperty(key: "session")
     static let heartRate = BasicProperty(key: "heart-rate")
@@ -46,7 +47,8 @@ class BioFrame: BaseDocument {
         return all.map { it in it.selectResult(from: alias) }
     }
     
-    static func create(uid: String,
+    static func create(deviceId: String,
+                       uid: String,
                        heartRate: Int,
                        armSkinTemp: Double,
                        legSkinTemp: Double,
@@ -61,34 +63,9 @@ class BioFrame: BaseDocument {
         doc.setValue(TYPE, forKey: self.type.key)
         doc.setValue(now, forKey: createdAt.key)
         
+        doc.setValue(deviceId, forKey: self.deviceId.key)
         doc.setValue(uid, forKey: self.uid.key)
         doc.setValue(session, forKey: self.session.key)
-        doc.setValue(heartRate, forKey: self.heartRate.key)
-        doc.setValue(armSkinTemp, forKey: self.armSkinTemp.key)
-        doc.setValue(legSkinTemp, forKey: self.legSkinTemp.key)
-        doc.setValue(avgSkinTemp, forKey: self.avgSkinTemp.key)
-        doc.setValue(ambientTemp, forKey: self.ambientTemp.key)
-        doc.setValue(ambientHumidity, forKey: self.ambientHumidity.key)
-        doc.setValue(predictedCoreTemp, forKey: self.predictedCoreTemp.key)
-        
-        return doc
-    }
-    
-    // For debugger
-    static func create(now: TimeInterval,
-                       uid: String,
-                       heartRate: Int,
-                       skinTemp: Double,
-                       ambientTemp: Double,
-                       ambientHumidity: Double,
-                       predictedCoreTemp: Double) -> MutableDocument? {
-        
-        //        let now = Date().timeIntervalSince1970
-        let doc = MutableDocument()
-        doc.setValue(TYPE, forKey: self.type.key)
-        doc.setValue(now, forKey: createdAt.key)
-        
-        doc.setValue(uid, forKey: self.uid.key)
         doc.setValue(heartRate, forKey: self.heartRate.key)
         doc.setValue(armSkinTemp, forKey: self.armSkinTemp.key)
         doc.setValue(legSkinTemp, forKey: self.legSkinTemp.key)

@@ -11,9 +11,14 @@ import UIKit
 class AddNoteModalViewController: UIViewController {
     @IBOutlet weak var noteView: UITextView!
     
+    @IBAction func backgroundPressed(_ sender: Any) {
+        self.dismiss(animated: true)
+
+    }
     @IBAction func closeButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
     
     @IBAction func addNotePressed(_ sender: Any) {
         if let uid = uid, let note = noteView.text, !note.isEmpty {

@@ -13,6 +13,11 @@ protocol RecordingSessionDeviceDelegate {
     func didUpdateDevices()
 }
 
+protocol RecordingSessionDelegate {
+    func didStartSession(named: String)
+    func didStopSession()
+}
+
 class RecordingSessionManager {
     let DEVICE_FILTER_TIME = 30.0
     
@@ -28,7 +33,8 @@ class RecordingSessionManager {
         self.timer = Timer.scheduledTimer(timeInterval  : 30.0, target: self, selector: #selector(self.purge), userInfo: nil, repeats: true)
     }
     
-    var devicesDelegate:RecordingSessionDeviceDelegate? = nil
+    var devicesDelegate: RecordingSessionDeviceDelegate? = nil
+    var delegate: RecordingSessionDelegate? = nil
     
     static let shared = RecordingSessionManager()
     
@@ -40,16 +46,41 @@ class RecordingSessionManager {
             devicesDelegate?.didUpdateDevices()
         }
     }
-    var participants: [String:String] = [:]
+    var participants: [String:String] = [:] { // UID, device id
+        didSet {
+            devicesDelegate?.didUpdateDevices() // Cheat to update Devices table
+        }
+    }
+    
+    var isRecording = false
+    var sessionName: String? = nil
+    
+    func startSession(named name: String) {
+        guard !isRecording else {
+            return
+        }
+        isRecording = true
+        sessionName = name
+        delegate?.didStartSession(named: name)
+    }
+    
+    func stopSession() {
+        guard isRecording else {
+            return
+        }
+        isRecording = false
+        sessionName = nil
+        delegate?.didStopSession()
+    }
     
     func getAllDevices() -> [String] {
         return Array(devices.keys)
     }
     
     func configure(manager: CBCentralManager, peripheral: CBPeripheral) {
-       bluetoothManager = BluetoothManager(withManager: manager)
-       bluetoothManager!.connectPeripheral(peripheral: peripheral)
-       bluetoothManager!.delegate = self
+        bluetoothManager = BluetoothManager(withManager: manager)
+        bluetoothManager!.connectPeripheral(peripheral: peripheral)
+        bluetoothManager!.delegate = self
     }
     
     func addParticipant(uid: String, deviceId: String) -> Bool {
@@ -81,12 +112,11 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
     
     func didReceive(message: String) {
         let parts = message.components(separatedBy: ",")
-
-        let deviceId = parts[0]
+        
+        let deviceId = parts[1]
         devices[deviceId] = Date().timeIntervalSinceReferenceDate
         
-        Utils.log(msg: message)
-        
+        saveDocument(with: message)
     }
     
     func didSend(message: String) {
@@ -105,52 +135,58 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
         bluetoothManager = nil
     }
     
-    func saveDocument() {
-//        let parts = message.components(separatedBy: ",")
-//        
-//        // <d_id>,<arm_t>,<leg_t>,<am_t>,<am_h>
-//        Utils.log(at: .Debug, msg: "\(message)")
-//
-//        guard parts.count == 5 else {
-//            Utils.log(at: .Error, msg: "Bad transmission, Not opening")
-//            return
-//        }
-//        
-//        let deviceId = parts[0]
-//        
-//        let uid = RecordingSessionManager.shared.participants[deviceId]
-//        
-//        let armTemperature = Double(parts[1])!
-//        let legTemperature = Double(parts[2])!
-//        let ambientTemperature = 1.2 // Double(parts[3])!
-//        let ambientHumidity = 1.2 //Double(parts[4])! / 100.0
-//        
-//        let averageSkinTemp = (armTemperature + legTemperature) / 2
-//        
-//        if let heartRate = hrManager.getLastHr() {
-//            Utils.log(msg: "\(user.toDictionary() as AnyObject)")
-//            let weight = user.double(forKey: Athlete.weight.key)
-//            let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
-//                                               temp_skin_avg: averageSkinTemp,
-//                                               heart_rate_rest: 60,
-//                                               heart_rate: heartRate,
-//                                               rel_humidity: ambientHumidity,
-//                                               temp_air: ambientTemperature)
-//            
-//            if let doc = BioFrame.create(uid: user.string(forKey: BioFrame.uid.key)!,
-//                                         heartRate: Int(heartRate),
-//                                         armSkinTemp: armTemperature,
-//                                         legSkinTemp: legTemperature,
-//                                         avgSkinTemp: averageSkinTemp,
-//                                         ambientTemp: ambientTemperature,
-//                                         ambientHumidity: ambientHumidity,
-//                                         predictedCoreTemp: coreTemp) {
-//                addToDatabase(document: doc)
-//            } else {
-//                Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
-//            }
-//            DatabaseUtil.insert(doc: document)
-//        }
+    func saveDocument(with message: String) {
+        guard isRecording else {
+            return
+        }
+        
+        let parts = message.components(separatedBy: ",")
+        
+        Utils.log(at: .Debug, msg: "\(message)")
+        //1,<d_id>,<arm>,<leg>,<amb_t>,<amb_h>
+        guard parts.count == 6 else {
+            Utils.log(at: .Error, msg: "Bad transmission, Not opening")
+            return
+        }
+        
+        let deviceId = parts[1]
+        let armTemperature = Double(parts[2])!
+        let legTemperature = Double(parts[3])!
+        let ambientTemperature = Double(parts[4])! != 0 ? Double(parts[5])! : 20.0
+        let ambientHumidity = Double(parts[5])! != 0 ? Double(parts[5])! / 100.0 : 0.2
+        
+        let averageSkinTemp = (armTemperature + legTemperature) / 2
+        
+        
+        if let heartRate = Double("80") /* hrManager.getLastHr() */,
+            let uid = getAthleteBy(deviceId: deviceId),
+            let user = DatabaseUtil.shared.document(withID: uid) {
+            
+            let weight = user.double(forKey: Athlete.weight.key)
+            let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
+                                               temp_skin_avg: averageSkinTemp,
+                                               heart_rate_rest: 60,
+                                               heart_rate: heartRate,
+                                               rel_humidity: ambientHumidity,
+                                               temp_air: ambientTemperature)
+            
+            if let doc = BioFrame.create(deviceId: deviceId,
+                                         uid: uid,
+                                         heartRate: Int(heartRate),
+                                         armSkinTemp: armTemperature,
+                                         legSkinTemp: legTemperature,
+                                         avgSkinTemp: averageSkinTemp,
+                                         ambientTemp: ambientTemperature,
+                                         ambientHumidity: ambientHumidity,
+                                         predictedCoreTemp: coreTemp,
+                                         session: sessionName!) {
+                let _ = DatabaseUtil.insert(doc: doc)
+            } else {
+                Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
+            }
+        } else {
+            Utils.log(msg: "Did not log for message \(message)")
+        }
     }
 }
 

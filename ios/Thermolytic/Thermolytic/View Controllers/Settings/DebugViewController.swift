@@ -17,9 +17,6 @@ class DebugViewController: UIViewController {
     }
     
     @IBAction func didAddRows(_ sender: Any) {
-        let baseTime = Date().timeIntervalSince1970
-        let doc = BioFrame.create(now: baseTime, uid: "--DL2Z5ZBvoStzHDd6tQAhR", heartRate: 100, skinTemp: 35, ambientTemp: 20.2, ambientHumidity: 0.2, predictedCoreTemp: 36)!
-        let _ = DatabaseUtil.insert(doc: doc)
     }
     
     var rows: [Result] = [] {
