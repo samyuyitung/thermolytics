@@ -9,16 +9,42 @@
 import UIKit
 import CoreBluetooth
 
+protocol RecordingSessionDeviceDelegate {
+    func didUpdateDevices()
+}
 
 class RecordingSessionManager {
+    let DEVICE_FILTER_TIME = 30.0
+    
+    @objc func purge() {
+        devices = devices.filter { (key: String, time: TimeInterval) -> Bool in
+            let old = Date(timeIntervalSinceReferenceDate: time)
+            return Date().timeIntervalSince(old) < DEVICE_FILTER_TIME
+        }
+    }
+    
+    var timer: Timer?
+    init() {
+        self.timer = Timer.scheduledTimer(timeInterval  : 30.0, target: self, selector: #selector(self.purge), userInfo: nil, repeats: true)
+    }
+    
+    var devicesDelegate:RecordingSessionDeviceDelegate? = nil
     
     static let shared = RecordingSessionManager()
     
     var bluetoothManager: BluetoothManager? = nil
     var hrManager : PolarHrUtil = PolarHrUtil()
     
-    var devices: [String : TimeInterval] = [:]
+    var devices: [String : TimeInterval] = [:] {
+        didSet {
+            devicesDelegate?.didUpdateDevices()
+        }
+    }
     var participants: [String:String] = [:]
+    
+    func getAllDevices() -> [String] {
+        return Array(devices.keys)
+    }
     
     func configure(manager: CBCentralManager, peripheral: CBPeripheral) {
        bluetoothManager = BluetoothManager(withManager: manager)
@@ -34,6 +60,20 @@ class RecordingSessionManager {
         }
         participants[uid] = deviceId
         return true
+    }
+    
+    func getAthleteBy(deviceId: String) -> String? {
+        let entry = participants.first { (key: String, value: String) -> Bool in
+            return value == deviceId
+        }
+        return entry?.key
+    }
+    
+    func getDeviceBy(uid: String) -> String? {
+        let entry = participants.first { (key: String, value: String) -> Bool in
+            return key == uid
+        }
+        return entry?.value
     }
 }
 

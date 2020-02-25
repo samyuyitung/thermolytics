@@ -11,28 +11,23 @@ import CoreBluetooth
 
 // TODO: Split into extensions? 
 class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITableViewDelegate, UITableViewDataSource {
-
+    
     let dfuServiceUUIDString  = "00001530-1212-EFDE-1523-785FEABCD123"
     let ANCSServiceUUIDString = "7905F431-B5CE-4E99-A40F-4B1E122D00D0"
-
+    
     //MARK: - ViewController Properties
     var bluetoothManager : CBCentralManager?
-    var filterUUID       : CBUUID?
-    var peripherals      : [ScannedPeripheral]
-    var timer            : Timer?
-    
+    var filterUUID : CBUUID?
+    var peripherals : [ScannedPeripheral] = [] {
+        didSet {
+            devicesTable.reloadData()
+        }
+    }
     @IBOutlet weak var devicesTable: UITableView!
+    @IBOutlet weak var sensorsTable: UITableView!
+    
     @IBAction func cancelButtonTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
-    }
-
-    @objc func timerFire() {
-        devicesTable.reloadData()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        peripherals = []
-        super.init(coder: aDecoder)
     }
     
     func getConnectedPeripherals() -> [CBPeripheral] {
@@ -41,15 +36,15 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         }
         
         var retreivedPeripherals : [CBPeripheral]
-
+        
         if filterUUID == nil {
-            let dfuServiceUUID       = CBUUID(string: dfuServiceUUIDString)
-            let ancsServiceUUID      = CBUUID(string: ANCSServiceUUIDString)
-            retreivedPeripherals     = bluetoothManager.retrieveConnectedPeripherals(withServices: [dfuServiceUUID, ancsServiceUUID])
+            let dfuServiceUUID = CBUUID(string: dfuServiceUUIDString)
+            let ancsServiceUUID = CBUUID(string: ANCSServiceUUIDString)
+            retreivedPeripherals = bluetoothManager.retrieveConnectedPeripherals(withServices: [dfuServiceUUID, ancsServiceUUID])
         } else {
-            retreivedPeripherals     = bluetoothManager.retrieveConnectedPeripherals(withServices: [filterUUID!])
+            retreivedPeripherals = bluetoothManager.retrieveConnectedPeripherals(withServices: [filterUUID!])
         }
-
+        
         return retreivedPeripherals
     }
     
@@ -71,10 +66,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
                 } else {
                     self.bluetoothManager?.scanForPeripherals(withServices: nil, options: options as? [String : AnyObject])
                 }
-                self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerFire), userInfo: nil, repeats: true)
             } else {
-                self.timer?.invalidate()
-                self.timer = nil
                 self.bluetoothManager?.stopScan()
             }
         }
@@ -85,8 +77,12 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        devicesTable.delegate = self
-        devicesTable.dataSource = self
+        for tableView in [devicesTable, sensorsTable] {
+            tableView?.delegate = self
+            tableView?.dataSource = self
+        }
+        
+        RecordingSessionManager.shared.devicesDelegate = self
         
         let activityIndicatorView              = UIActivityIndicatorView(style: .gray)
         activityIndicatorView.hidesWhenStopped = true
@@ -98,36 +94,69 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         bluetoothManager = CBCentralManager(delegate: self, queue: centralQueue)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPlayers" {
+            let cell = sender as! UITableViewCell
+            let device = cell.textLabel?.text?.components(separatedBy: " ")[0]
+            
+            let vc = segue.destination as! SelectPlayerViewController
+            vc.deviceId = device
+        }
+    }
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         let success = self.scanForPeripherals(false)
         if !success {
             print("Bluetooth is powered off!")
         }
-
+        
         super.viewWillDisappear(animated)
     }
-
+    
     //MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return peripherals.count
+        if tableView == devicesTable {
+            return peripherals.count
+        } else if tableView == sensorsTable {
+            return RecordingSessionManager.shared.devices.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let aCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        //Update cell content
-        let scannedPeripheral = peripherals[indexPath.row]
-        aCell.textLabel?.text = scannedPeripheral.name()
-        
+        if tableView == devicesTable {
+            let scannedPeripheral = peripherals[indexPath.row]
+            aCell.textLabel?.text = scannedPeripheral.name()
+        } else if tableView == sensorsTable {
+            let device = RecordingSessionManager.shared.getAllDevices()[indexPath.row]
+            
+            if let uid = RecordingSessionManager.shared.getAthleteBy(deviceId: device),
+                let userDoc = DatabaseUtil.shared.document(withID: uid) {
+                aCell.textLabel?.text = "\(device) -- \(userDoc.string(forKey: Athlete.name.key) ?? "no name?")"
+            } else {
+                aCell.textLabel?.text = "\(device) -- unclaimed"
+            }
+            
+            
+            
+        }
         return aCell
     }
-
+    
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        bluetoothManager!.stopScan()
+        
         // Call delegate method
-        let peripheral = peripherals[indexPath.row].peripheral
-        RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
+        if tableView == devicesTable {
+            bluetoothManager!.stopScan()
+            let peripheral = peripherals[indexPath.row].peripheral
+            RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
+        } else if tableView == sensorsTable {
+            performSegue(withIdentifier: "showPlayers", sender: tableView.cellForRow(at: indexPath))
+        }
     }
     
     //MARK: - CBCentralManagerDelgate
@@ -136,7 +165,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
             print("Bluetooth is porewed off")
             return
         }
-
+        
         let connectedPeripherals = self.getConnectedPeripherals()
         var newScannedPeripherals: [ScannedPeripheral] = []
         connectedPeripherals.forEach { (connectedPeripheral) in
@@ -160,7 +189,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         // Scanner uses other queue to send events. We must edit UI in the main queue
         DispatchQueue.main.async {
             var sensor = ScannedPeripheral(peripheral: peripheral, RSSI: RSSI.int32Value, isConnected: false)
-            if let index = self.peripherals.firstIndex(where: { (existing) -> Bool in
+            if let index = self.peripherals.firstIndex(where: { existing -> Bool in
                 return existing.peripheral == sensor.peripheral
             }) {
                 sensor = self.peripherals[index]
@@ -168,6 +197,14 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
             } else {
                 self.peripherals.append(sensor)
             }
+        }
+    }
+}
+
+extension ScannerViewController: RecordingSessionDeviceDelegate {
+    func didUpdateDevices() {
+        DispatchQueue.main.async {
+            self.sensorsTable.reloadData()
         }
     }
 }

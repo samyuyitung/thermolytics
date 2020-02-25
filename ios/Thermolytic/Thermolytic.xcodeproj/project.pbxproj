@@ -33,6 +33,7 @@
 		684C2A5523D7F3B50001A0C1 /* HistoricalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C2A5423D7F3B50001A0C1 /* HistoricalDetailViewController.swift */; };
 		684C2A5723D804940001A0C1 /* EditPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C2A5623D804940001A0C1 /* EditPlayerViewController.swift */; };
 		6850E6FC23EC651F00F7D51A /* BioFrameDebuggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850E6FB23EC651F00F7D51A /* BioFrameDebuggerCell.swift */; };
+		685AB13224038D4800B987DF /* SelectPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685AB13124038D4800B987DF /* SelectPlayerViewController.swift */; };
 		685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E41BA238ED2CC0036F457 /* BioFrame.swift */; };
 		685E41BE238EE2340036F457 /* TwoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685E41BD238EE2340036F457 /* TwoNode.swift */; };
 		686371B323D78B0C00AFF87E /* ListPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686371B223D78B0C00AFF87E /* ListPlayersViewController.swift */; };
@@ -99,6 +100,7 @@
 		684C2A5423D7F3B50001A0C1 /* HistoricalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDetailViewController.swift; sourceTree = "<group>"; };
 		684C2A5623D804940001A0C1 /* EditPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayerViewController.swift; sourceTree = "<group>"; };
 		6850E6FB23EC651F00F7D51A /* BioFrameDebuggerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioFrameDebuggerCell.swift; sourceTree = "<group>"; };
+		685AB13124038D4800B987DF /* SelectPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlayerViewController.swift; sourceTree = "<group>"; };
 		685E41BA238ED2CC0036F457 /* BioFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioFrame.swift; sourceTree = "<group>"; };
 		685E41BD238EE2340036F457 /* TwoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoNode.swift; sourceTree = "<group>"; };
 		686371B223D78B0C00AFF87E /* ListPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlayersViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			children = (
 				682844FE2384B307009063EC /* ScannedPeripheral.swift */,
 				682845022384B315009063EC /* ScannerViewController.swift */,
+				685AB13124038D4800B987DF /* SelectPlayerViewController.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				684C2A5523D7F3B50001A0C1 /* HistoricalDetailViewController.swift in Sources */,
 				6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */,
 				6807810823EA62480046D620 /* PolarHrUtil.swift in Sources */,
+				685AB13224038D4800B987DF /* SelectPlayerViewController.swift in Sources */,
 				68EE090C23D40418005DBF35 /* Athlete.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
