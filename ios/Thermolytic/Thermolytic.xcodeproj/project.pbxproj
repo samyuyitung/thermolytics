@@ -26,6 +26,7 @@
 		682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845132384B3FD009063EC /* ServiceIdentifiers.swift */; };
 		682845172384B439009063EC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845162384B439009063EC /* Util.swift */; };
 		682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845182384B45C009063EC /* SyncGatewayReplicator.swift */; };
+		683AE5002406C7570024907A /* DataExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683AE4FF2406C7570024907A /* DataExporter.swift */; };
 		683F8D4523DF853600E89FFA /* AuthenticationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */; };
 		683F8D4723DF864700E89FFA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F8D4623DF864700E89FFA /* User.swift */; };
 		683F8D4A23DFD11E00E89FFA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 683F8D4923DFD11E00E89FFA /* LoginViewController.swift */; };
@@ -94,6 +95,7 @@
 		682845132384B3FD009063EC /* ServiceIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceIdentifiers.swift; path = "../../../../../IOS-nRF-Toolbox/nRF Toolbox/Utilities/ServiceIdentifiers.swift"; sourceTree = "<group>"; };
 		682845162384B439009063EC /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		682845182384B45C009063EC /* SyncGatewayReplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncGatewayReplicator.swift; sourceTree = "<group>"; };
+		683AE4FF2406C7570024907A /* DataExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExporter.swift; sourceTree = "<group>"; };
 		683F8D4423DF853600E89FFA /* AuthenticationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUtil.swift; sourceTree = "<group>"; };
 		683F8D4623DF864700E89FFA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		683F8D4923DFD11E00E89FFA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				6818113823E92E540018EEFC /* MaxHeartRateUtil.swift */,
 				6807810723EA62480046D620 /* PolarHrUtil.swift */,
 				686B6C1E23F4EE5A00D2FB6E /* RecordingSessionManager.swift */,
+				683AE4FF2406C7570024907A /* DataExporter.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				6807810A23EA7F030046D620 /* BioUtil.swift in Sources */,
 				683F8D4723DF864700E89FFA /* User.swift in Sources */,
 				682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */,
+				683AE5002406C7570024907A /* DataExporter.swift in Sources */,
 				6895D8E923E905F000A9C4D8 /* AddNoteModalViewController.swift in Sources */,
 				682845172384B439009063EC /* Util.swift in Sources */,
 				686819BE23D77B5C00F9F97F /* AddPlayerViewController.swift in Sources */,

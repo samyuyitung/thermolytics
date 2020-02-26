@@ -99,16 +99,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0Z-KW-nlL">
-                                <rect key="frame" x="53" y="20" width="64" height="30"/>
-                                <state key="normal" title="Add rows"/>
+                                <rect key="frame" x="53" y="20" width="102" height="30"/>
+                                <state key="normal" title="Export All Data"/>
                                 <connections>
                                     <action selector="didAddRows:" destination="FmR-Te-QAH" eventType="touchUpInside" id="mBZ-dQ-heD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-CG-Zbx">
-                                <rect key="frame" x="161" y="20" width="69" height="30"/>
+                                <rect key="frame" x="199" y="20" width="69" height="30"/>
                                 <state key="normal" title="Delete DB">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="didClickDelete:" destination="FmR-Te-QAH" eventType="touchUpInside" id="Ron-ay-gRn"/>

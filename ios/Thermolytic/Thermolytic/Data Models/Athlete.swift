@@ -52,7 +52,7 @@ class Athlete : BaseDocument {
     static let position = BasicProperty(key: "position")
     static let team = BasicProperty(key: "team")
     
-    static let allProps = [
+    static let all = [
          id,
          type,
          createdAt,
@@ -65,11 +65,11 @@ class Athlete : BaseDocument {
          team]
     
     static let selectAll: [SelectResultAs] = {
-        return allProps.map { it in it.selectResult }
+        return all.map { it in it.selectResult }
     }()
     
     static func selectAll(from alias: String) -> [SelectResultAs] {
-        return allProps.map { it in it.selectResult(from: alias) }
+        return all.map { it in it.selectResult(from: alias) }
     }
     
     static func create(from values: EditPlayerFields) -> MutableDocument {

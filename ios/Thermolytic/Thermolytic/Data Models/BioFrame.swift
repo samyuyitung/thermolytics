@@ -23,7 +23,7 @@ class BioFrame: BaseDocument {
     static let ambientHumidity = BasicProperty(key: "ambient-humidity")
     static let predictedCoreTemp = BasicProperty(key: "predicted-core-temp")
     
-    static private let all = [
+    static let all = [
         type,
         createdAt,
         id,
