@@ -16,6 +16,7 @@ protocol RecordingSessionDeviceDelegate {
 protocol RecordingSessionDelegate {
     func didStartSession(named: String)
     func didStopSession()
+    func didUpdateParticipants()
 }
 
 class RecordingSessionManager {
@@ -49,8 +50,12 @@ class RecordingSessionManager {
     var participants: [String:String] = [:] { // UID, device id
         didSet {
             devicesDelegate?.didUpdateDevices() // Cheat to update Devices table
+            delegate?.didUpdateParticipants()
         }
     }
+    
+    var activePlayers: [String] = [] // UID
+    var benchPlayers: [String] = [] // UID
     
     var isRecording = false
     var sessionName: String? = nil
@@ -90,6 +95,7 @@ class RecordingSessionManager {
             return false
         }
         participants[uid] = deviceId
+        benchPlayers.append(uid)
         return true
     }
     
@@ -136,29 +142,35 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
     }
     
     func saveDocument(with message: String) {
+        Utils.log(at: .Debug, msg: "\(message)")
         guard isRecording else {
             return
         }
         
         let parts = message.components(separatedBy: ",")
         
-        Utils.log(at: .Debug, msg: "\(message)")
-        //1,<d_id>,<arm>,<leg>,<amb_t>,<amb_h>
-        guard parts.count == 6 else {
+        //1,<d_id>,<arm>,<leg>,imu_x,imu_y,<amb_t>,<amb_h>
+        guard parts.count == 8 else {
             Utils.log(at: .Error, msg: "Bad transmission, Not opening")
             return
         }
         
         let deviceId = parts[1]
-        let armTemperature = Double(parts[2])!
-        let legTemperature = Double(parts[3])!
-        let ambientTemperature = Double(parts[4])! != 0 ? Double(parts[5])! : 20.0
-        let ambientHumidity = Double(parts[5])! != 0 ? Double(parts[5])! / 100.0 : 0.2
+        let armTemperature = Double(parts[2]) ?? BioFrame.missingDefault
+        let legTemperature = Double(parts[3]) ?? BioFrame.missingDefault
+        let imuX = Double(parts[4]) ?? BioFrame.missingDefault
+        let imuY = Double(parts[5]) ?? BioFrame.missingDefault
+        let ambientTemperature = Double(parts[6])!
+        let ambientHumidity = Double(parts[7])!
         
         let averageSkinTemp = (armTemperature + legTemperature) / 2
         
+        guard averageSkinTemp >     0 else {
+            Utils.log(at: .Error, msg: "Negative temperature for message \(message)")
+            return
+        }
         
-        if let heartRate = Double("80") /* hrManager.getLastHr() */,
+        if let heartRate = hrManager.getLastHr(),
             let uid = getAthleteBy(deviceId: deviceId),
             let user = DatabaseUtil.shared.document(withID: uid) {
             
@@ -176,6 +188,8 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          armSkinTemp: armTemperature,
                                          legSkinTemp: legTemperature,
                                          avgSkinTemp: averageSkinTemp,
+                                         xAcceleration: imuX,
+                                         yAcceleration: imuY,
                                          ambientTemp: ambientTemperature,
                                          ambientHumidity: ambientHumidity,
                                          predictedCoreTemp: coreTemp,

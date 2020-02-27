@@ -11,7 +11,7 @@ import CoreBluetooth
 import CouchbaseLiteSwift
 import UserNotifications
 
-class LogViewController: UIViewController {
+class LogCollectionViewController: UICollectionViewController {
     
     enum Section: Int {
         case active = 0
@@ -36,8 +36,9 @@ class LogViewController: UIViewController {
     var tokens: [ListenerToken]? = nil
     var userQuery: Query? = nil
     var userTokens: ListenerToken? = nil
+    
+    let headerIdentifier = "header"
 
-    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +47,7 @@ class LogViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionView.register(UINib(nibName: "LogCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:headerIdentifier)
         configureRecordButton()
         sessionManager.delegate = self
         
@@ -85,10 +87,10 @@ class LogViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
-        }
+//
+//        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+//        }
     }
     
     
@@ -124,8 +126,7 @@ class LogViewController: UIViewController {
                 .select(BioFrame.selectAll)
                 .from(DataSource.database(DatabaseUtil.shared))
                 .where(BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
-                    .and(BioFrame.uid.expression.equalTo(Expression.string(uid)))
-                    .and(BioFrame.session.expression.equalTo(Expression.string(sessionManager.sessionName))))
+                    .and(BioFrame.uid.expression.equalTo(Expression.string(uid))))
                 .orderBy(Ordering.expression(BioFrame.createdAt.expression).descending())
                 .limit(Expression.int(1))
         }
@@ -140,7 +141,7 @@ class LogViewController: UIViewController {
     }
 }
 
-extension LogViewController {
+extension LogCollectionViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let segues = ["connect", "detail", "addPlayer"]
         return segues.contains(identifier)
@@ -159,12 +160,17 @@ extension LogViewController {
     }
 }
 
-extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension LogCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 300, height: 300) // Return any non-zero size here
+    }
+}
+extension LogCollectionViewController {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let section = Section(rawValue: section)
         switch section {
         case .active: return sessionManager.activePlayers.count
@@ -173,7 +179,8 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "overview_cell", for: indexPath) as! LogItemCell
         let section = Section(rawValue: indexPath.section)
@@ -194,17 +201,35 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
         return cell
     }
+    
+     override func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+
+        switch kind {
+
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! LogCollectionViewHeader
+            let section = Section(rawValue: indexPath.section)
+
+            headerView.title.text = section == .active ? "Active" : "Bench"
+
+            return headerView
+
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
 
 }
 
-extension LogViewController: RecordingSessionDelegate {
+extension LogCollectionViewController: RecordingSessionDelegate {
     func didUpdateParticipants() {
        setDataSource()
     }
     
     
     func didStartSession(named: String) {
-        setDataSource()
         setButtonState(to: true)
     }
     

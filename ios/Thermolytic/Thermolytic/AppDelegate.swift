@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         if kLoggingEnabled {
-            Database.log.console.level = .verbose
+            Database.log.console.level = .error
         }
         
         do {

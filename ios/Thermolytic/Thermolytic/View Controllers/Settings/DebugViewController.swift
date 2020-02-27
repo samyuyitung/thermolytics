@@ -49,6 +49,8 @@ class DebugViewController: UIViewController, MFMailComposeViewControllerDelegate
                 BioFrame.armSkinTemp,
                 BioFrame.legSkinTemp,
                 BioFrame.avgSkinTemp,
+                BioFrame.xAcceleration,
+                BioFrame.yAcceleration,
                 BioFrame.ambientTemp,
                 BioFrame.ambientHumidity,
                 BioFrame.predictedCoreTemp,

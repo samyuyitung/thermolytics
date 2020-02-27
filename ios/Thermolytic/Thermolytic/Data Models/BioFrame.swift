@@ -10,6 +10,10 @@ import Foundation
 import CouchbaseLiteSwift
 
 class BioFrame: BaseDocument {
+    
+    static let missingDefault = -100.0
+    
+    
     static let TYPE = "bio-frame"
     
     static let deviceId = BasicProperty(key: "device-id")
@@ -19,6 +23,8 @@ class BioFrame: BaseDocument {
     static let armSkinTemp = BasicProperty(key: "arm-skin-temp")
     static let legSkinTemp = BasicProperty(key: "leg-skin-temp")
     static let avgSkinTemp = BasicProperty(key: "avg-skin-temp")
+    static let xAcceleration = BasicProperty(key: "accelerationX")
+    static let yAcceleration = BasicProperty(key: "accelerationY")
     static let ambientTemp = BasicProperty(key: "ambient-temp")
     static let ambientHumidity = BasicProperty(key: "ambient-humidity")
     static let predictedCoreTemp = BasicProperty(key: "predicted-core-temp")
@@ -33,6 +39,8 @@ class BioFrame: BaseDocument {
         armSkinTemp,
         legSkinTemp,
         avgSkinTemp,
+        xAcceleration,
+        yAcceleration,
         ambientTemp,
         ambientHumidity,
         predictedCoreTemp
@@ -53,10 +61,12 @@ class BioFrame: BaseDocument {
                        armSkinTemp: Double,
                        legSkinTemp: Double,
                        avgSkinTemp: Double,
+                       xAcceleration: Double?,
+                       yAcceleration: Double?,
                        ambientTemp: Double,
                        ambientHumidity: Double,
                        predictedCoreTemp: Double,
-                       session: String = "now") -> MutableDocument? {
+                       session: String) -> MutableDocument? {
         
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
@@ -70,6 +80,8 @@ class BioFrame: BaseDocument {
         doc.setValue(armSkinTemp, forKey: self.armSkinTemp.key)
         doc.setValue(legSkinTemp, forKey: self.legSkinTemp.key)
         doc.setValue(avgSkinTemp, forKey: self.avgSkinTemp.key)
+        doc.setValue(xAcceleration, forKey: self.xAcceleration.key)
+        doc.setValue(yAcceleration, forKey: self.yAcceleration.key)
         doc.setValue(ambientTemp, forKey: self.ambientTemp.key)
         doc.setValue(ambientHumidity, forKey: self.ambientHumidity.key)
         doc.setValue(predictedCoreTemp, forKey: self.predictedCoreTemp.key)

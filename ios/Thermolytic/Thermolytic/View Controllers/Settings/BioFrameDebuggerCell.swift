@@ -22,10 +22,12 @@ class BioFrameDebuggerCell: UITableViewCell {
         arm temp: \(result.float(forKey: BioFrame.armSkinTemp.key))
         leg temp: \(result.float(forKey: BioFrame.legSkinTemp.key))
         avg temp: \(result.float(forKey: BioFrame.avgSkinTemp.key))
-        heart rate: \(result.int(forKey: BioFrame.heartRate.key))
-        ambient temp: \(result.int(forKey: BioFrame.ambientTemp.key))
-        ambient humidity: \(result.int(forKey: BioFrame.ambientHumidity.key))
+        heart rate: \(result.float(forKey: BioFrame.heartRate.key))
+        ambient temp: \(result.float(forKey: BioFrame.ambientTemp.key))
+        ambient humidity: \(result.float(forKey: BioFrame.ambientHumidity.key))
         core temp: \(result.float(forKey: BioFrame.predictedCoreTemp.key))
+        Acceleration X: \(result.float(forKey: BioFrame.xAcceleration.key))
+        Acceleration y: \(result.float(forKey: BioFrame.yAcceleration.key))
         """
     }
 }

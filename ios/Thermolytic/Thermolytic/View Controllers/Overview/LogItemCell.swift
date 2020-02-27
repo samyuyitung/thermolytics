@@ -19,13 +19,15 @@ class LogItemCell: UICollectionViewCell {
     
     var uid: String? = nil
     
-    func configure(item: Result) {
-        uid = item.string(forKey: BioFrame.uid.key)
+    func configure(user: Result, frame: Result?) {
+        uid = user.getId()
         
-        self.number.text = "\(item.int(forKey: Athlete.number.key))"
-        self.name.text = "\(item.string(forKey: Athlete.name.key) ?? "")"
-        self.heartRate.text = "\(item.int(forKey: BioFrame.heartRate.key))"
-        self.temperature.text = "\((item.float(forKey: BioFrame.predictedCoreTemp.key) + 2.0).print(to: 1))℃"
+        self.number.text = "\(user.int(forKey: Athlete.number.key))"
+        self.name.text = "\(user.string(forKey: Athlete.name.key) ?? "")"
+        if let frame = frame {
+            self.heartRate.text = "\(frame.int(forKey: BioFrame.heartRate.key))"
+            self.temperature.text = "\((frame.float(forKey: BioFrame.predictedCoreTemp.key)).print(to: 1))℃"
+        }
     }
     
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		680190F32406F2F300B9AF91 /* LogCollectionViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 680190F22406F2F300B9AF91 /* LogCollectionViewHeader.xib */; };
+		680190F52406F33900B9AF91 /* LogCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680190F42406F33900B9AF91 /* LogCollectionViewHeader.swift */; };
+		680190F72406FBFE00B9AF91 /* LogCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680190F62406FBFE00B9AF91 /* LogCollectionViewController.swift */; };
 		6807810823EA62480046D620 /* PolarHrUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6807810723EA62480046D620 /* PolarHrUtil.swift */; };
 		6807810A23EA7F030046D620 /* BioUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6807810923EA7F030046D620 /* BioUtil.swift */; };
 		6807811023EA83CF0046D620 /* PolarBleSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6807810E23EA83C90046D620 /* PolarBleSdk.framework */; };
@@ -77,6 +80,9 @@
 /* Begin PBXFileReference section */
 		1ED2444572E3152BAE0F929B /* Pods_Thermolytic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Thermolytic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52A2CD706268D41724DB799D /* Pods-Thermolytic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermolytic.release.xcconfig"; path = "Target Support Files/Pods-Thermolytic/Pods-Thermolytic.release.xcconfig"; sourceTree = "<group>"; };
+		680190F22406F2F300B9AF91 /* LogCollectionViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogCollectionViewHeader.xib; sourceTree = "<group>"; };
+		680190F42406F33900B9AF91 /* LogCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCollectionViewHeader.swift; sourceTree = "<group>"; };
+		680190F62406FBFE00B9AF91 /* LogCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCollectionViewController.swift; sourceTree = "<group>"; };
 		6807810723EA62480046D620 /* PolarHrUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarHrUtil.swift; sourceTree = "<group>"; };
 		6807810923EA7F030046D620 /* BioUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioUtil.swift; sourceTree = "<group>"; };
 		6807810E23EA83C90046D620 /* PolarBleSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PolarBleSdk.framework; sourceTree = "<group>"; };
@@ -190,6 +196,9 @@
 				682845052384B334009063EC /* LogViewController.swift */,
 				6849B91B2385872300B00389 /* LogItemCell.swift */,
 				6820AE3B2406038A00809B28 /* NameSessionModalViewController.swift */,
+				680190F22406F2F300B9AF91 /* LogCollectionViewHeader.xib */,
+				680190F42406F33900B9AF91 /* LogCollectionViewHeader.swift */,
+				680190F62406FBFE00B9AF91 /* LogCollectionViewController.swift */,
 			);
 			path = Overview;
 			sourceTree = "<group>";
@@ -431,6 +440,7 @@
 				687B6DDF23D8C2D3000C234C /* RealTime.storyboard in Resources */,
 				6881427B2384B0DC0046C667 /* LaunchScreen.storyboard in Resources */,
 				688142782384B0DC0046C667 /* Assets.xcassets in Resources */,
+				680190F32406F2F300B9AF91 /* LogCollectionViewHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +498,7 @@
 				68AB5E9023D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift in Sources */,
 				68AADAC123D768EE0091BC27 /* EditPlayerView.swift in Sources */,
 				683F8D4C23DFEED000E89FFA /* CreateNewUserViewController.swift in Sources */,
+				680190F52406F33900B9AF91 /* LogCollectionViewHeader.swift in Sources */,
 				688CDE2323E2648C00378119 /* App.swift in Sources */,
 				6828450C2384B366009063EC /* BleMessage.swift in Sources */,
 				6828450E2384B3B8009063EC /* Document.swift in Sources */,
@@ -517,6 +528,7 @@
 				686B6C1F23F4EE5A00D2FB6E /* RecordingSessionManager.swift in Sources */,
 				683F8D4523DF853600E89FFA /* AuthenticationUtil.swift in Sources */,
 				685E41BB238ED2CC0036F457 /* BioFrame.swift in Sources */,
+				680190F72406FBFE00B9AF91 /* LogCollectionViewController.swift in Sources */,
 				6850E6FC23EC651F00F7D51A /* BioFrameDebuggerCell.swift in Sources */,
 				686371B323D78B0C00AFF87E /* ListPlayersViewController.swift in Sources */,
 				684C2A5723D804940001A0C1 /* EditPlayerViewController.swift in Sources */,
