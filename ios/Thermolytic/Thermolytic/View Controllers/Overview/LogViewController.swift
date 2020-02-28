@@ -37,6 +37,8 @@ class LogViewController: UIViewController {
     var userQuery: Query? = nil
     var userTokens: ListenerToken? = nil
 
+    
+    let headerIdentifier = "header"
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,8 @@ class LogViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionView.register(UINib(nibName: "LogCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:headerIdentifier)
+
         configureRecordButton()
         sessionManager.delegate = self
         
@@ -191,10 +195,28 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         if let uid = uid, let user = users[uid] {
             let item = logItems[uid]
             cell.configure(user: user, frame: item)
+            cell.delegate = self
         }
         return cell
     }
+//
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        guard kind == UICollectionView.elementKindSectionHeader else {
+//            assert(false, "you fucked up")
+//        }
+//
+//        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! LogCollectionViewHeader
+//        let section = Section(rawValue: indexPath.section)
+//
+//        headerView.title.text = section == .active ? "Active" : "Bench"
+//        return headerView
+//    }
+}
 
+extension LogViewController: LogItemCellDelegate {
+    func didPressDetail(for cell: LogItemCell) {
+        performSegue(withIdentifier: "detail", sender: cell)
+    }
 }
 
 extension LogViewController: RecordingSessionDelegate {

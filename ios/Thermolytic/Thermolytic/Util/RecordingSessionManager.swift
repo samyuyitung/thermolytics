@@ -161,18 +161,19 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
         let imuX = Double(parts[4]) ?? BioFrame.missingDefault
         let imuY = Double(parts[5]) ?? BioFrame.missingDefault
         let ambientTemperature = Double(parts[6])!
-        let ambientHumidity = Double(parts[7])!
+        let ambientHumidity = Double(parts[7])! / 100
         
         let averageSkinTemp = (armTemperature + legTemperature) / 2
-        
-        guard averageSkinTemp >     0 else {
+
+        guard averageSkinTemp > 0 else {
             Utils.log(at: .Error, msg: "Negative temperature for message \(message)")
             return
         }
-        
+//
         if let heartRate = hrManager.getLastHr(),
             let uid = getAthleteBy(deviceId: deviceId),
-            let user = DatabaseUtil.shared.document(withID: uid) {
+            let user = DatabaseUtil.shared.document(withID: uid),
+            let sessionName = sessionName {
             
             let weight = user.double(forKey: Athlete.weight.key)
             let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
@@ -193,7 +194,7 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          ambientTemp: ambientTemperature,
                                          ambientHumidity: ambientHumidity,
                                          predictedCoreTemp: coreTemp,
-                                         session: sessionName!) {
+                                         session: sessionName) {
                 let _ = DatabaseUtil.insert(doc: doc)
             } else {
                 Utils.log(at: .Warning, msg: "Could not create frame for \(message)")

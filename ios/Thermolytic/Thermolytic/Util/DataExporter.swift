@@ -10,8 +10,7 @@ import Foundation
 import CouchbaseLiteSwift
 
 class DataExporter {
-    static func
-        writeFile(named fileName: String, with data: [Result], columns: [String]) -> String? {
+    static func writeFile(named fileName: String, with data: [Result], columns: [String]) -> String? {
         let tempDir = NSTemporaryDirectory()
         let fileUrl = URL(fileURLWithPath: tempDir, isDirectory: true).appendingPathComponent(fileName)
         

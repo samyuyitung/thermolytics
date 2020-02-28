@@ -10,14 +10,24 @@
 import UIKit
 import CouchbaseLiteSwift
 
+
+protocol LogItemCellDelegate {
+    func didPressDetail(for cell: LogItemCell)
+}
+
 class LogItemCell: UICollectionViewCell {
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var number: UILabel!
     @IBOutlet weak var heartRate: UILabel!
     @IBOutlet weak var temperature: UILabel!
+    @IBAction func didPressDetail(_ sender: Any) {
+        delegate?.didPressDetail(for: self)
+    }
     
     var uid: String? = nil
+    var delegate: LogItemCellDelegate? = nil
+    
     
     func configure(user: Result, frame: Result?) {
         uid = user.getId()
