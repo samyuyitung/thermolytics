@@ -13,22 +13,25 @@ import UserNotifications
 
 class LogViewController: UIViewController {
     
-    enum Section: Int {
-        case active = 0
-        case bench = 1
-    }
-    
     //MARK: - Properties
     var sessionManager = RecordingSessionManager.shared
     var users: [String: Result] = [:] {
         didSet {
-            self.collectionView.reloadData()
+            reloadViews()
         }
     }
     
     var logItems: [String: Result] = [:] {
         didSet {
-            self.collectionView.reloadData()
+            reloadViews()
+        }
+    }
+    
+    private func reloadViews() {
+        for view in [activeCollectionView!, benchCollectionView!] {
+            view.reloadData()
+            view.collectionViewLayout.invalidateLayout()
+            view.layoutIfNeeded()
         }
     }
     
@@ -38,17 +41,16 @@ class LogViewController: UIViewController {
     var userTokens: ListenerToken? = nil
 
     
-    let headerIdentifier = "header"
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activeCollectionView: UICollectionView!
+    @IBOutlet weak var benchCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Dashboard"
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        collectionView.register(UINib(nibName: "LogCollectionViewHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier:headerIdentifier)
+        setup(view: activeCollectionView)
+        setup(view: benchCollectionView)
 
         configureRecordButton()
         sessionManager.delegate = self
@@ -56,6 +58,11 @@ class LogViewController: UIViewController {
         setDataSource()
     }
     
+    private func setup(view: UICollectionView) {
+        view.delegate = self
+        view.dataSource = self
+        view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
     
     func configureRecordButton() {
         let button = UIButton()
@@ -89,9 +96,10 @@ class LogViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+        for view in [activeCollectionView!, benchCollectionView!] {
+            let layout = UICollectionViewFlowLayout()
+            layout.estimatedItemSize = CGSize(width: 1, height: 1)
+            view.collectionViewLayout = layout
         }
     }
     
@@ -165,14 +173,14 @@ extension LogViewController {
 
 extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let section = Section(rawValue: section)
-        switch section {
-        case .active: return sessionManager.activePlayers.count
-        case .bench: return sessionManager.benchPlayers.count
+        
+        switch collectionView {
+        case activeCollectionView: return sessionManager.activePlayers.count
+        case benchCollectionView: return sessionManager.benchPlayers.count
         default: return 0
         }
     }
@@ -180,13 +188,12 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "overview_cell", for: indexPath) as! LogItemCell
-        let section = Section(rawValue: indexPath.section)
         
         var uid: String? = nil
-        switch section {
-        case .active:
+        switch collectionView {
+        case activeCollectionView:
             uid = sessionManager.activePlayers[indexPath.row]
-        case .bench:
+        case benchCollectionView:
             uid = sessionManager.benchPlayers[indexPath.row]
         default:
             uid = nil
@@ -199,18 +206,27 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         }
         return cell
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        guard kind == UICollectionView.elementKindSectionHeader else {
-//            assert(false, "you fucked up")
-//        }
-//
-//        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! LogCollectionViewHeader
-//        let section = Section(rawValue: indexPath.section)
-//
-//        headerView.title.text = section == .active ? "Active" : "Bench"
-//        return headerView
-//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! LogItemCell
+        guard let uid = cell.uid else {
+            return
+        }
+
+        if collectionView == activeCollectionView,
+            let _ = sessionManager.activePlayers.drop(where: { id in uid == id }) {
+            sessionManager.benchPlayers.append(uid)
+            reloadViews()
+        } else if collectionView == benchCollectionView {
+            guard sessionManager.activePlayers.count < 4 else {
+                return // Can only have 4 on the court
+            }
+            if let _ = sessionManager.benchPlayers.drop(where: { id in uid == id }) {
+                sessionManager.activePlayers.append(uid)
+                reloadViews()
+            }
+        }
+    }
 }
 
 extension LogViewController: LogItemCellDelegate {
@@ -245,5 +261,15 @@ extension LogViewController: RecordingSessionDelegate {
     func setButtonState(to state: Bool) {
         let button = navigationItem.leftBarButtonItem?.customView as! UIButton
         button.isSelected = state
+    }
+}
+
+
+extension Array {
+    mutating func drop(where predicate: (Element) -> Bool ) -> Element? {
+        if let index = self.firstIndex(where: predicate) {
+            return self.remove(at: index)
+        }
+        return nil
     }
 }

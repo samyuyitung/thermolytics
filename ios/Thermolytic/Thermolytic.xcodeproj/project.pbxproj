@@ -24,7 +24,6 @@
 		682845032384B315009063EC /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845022384B315009063EC /* ScannerViewController.swift */; };
 		682845062384B334009063EC /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845052384B334009063EC /* LogViewController.swift */; };
 		6828450A2384B351009063EC /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845092384B351009063EC /* BluetoothManager.swift */; };
-		6828450C2384B366009063EC /* BleMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6828450B2384B366009063EC /* BleMessage.swift */; };
 		6828450E2384B3B8009063EC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6828450D2384B3B8009063EC /* Document.swift */; };
 		682845142384B3FD009063EC /* ServiceIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845132384B3FD009063EC /* ServiceIdentifiers.swift */; };
 		682845172384B439009063EC /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682845162384B439009063EC /* Util.swift */; };
@@ -96,7 +95,6 @@
 		682845022384B315009063EC /* ScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		682845052384B334009063EC /* LogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogViewController.swift; sourceTree = "<group>"; };
 		682845092384B351009063EC /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		6828450B2384B366009063EC /* BleMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleMessage.swift; sourceTree = "<group>"; };
 		6828450D2384B3B8009063EC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		682845132384B3FD009063EC /* ServiceIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceIdentifiers.swift; path = "../../../../../IOS-nRF-Toolbox/nRF Toolbox/Utilities/ServiceIdentifiers.swift"; sourceTree = "<group>"; };
 		682845162384B439009063EC /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 		6828450F2384B3D5009063EC /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				6828450B2384B366009063EC /* BleMessage.swift */,
 				6828450D2384B3B8009063EC /* Document.swift */,
 				685E41BA238ED2CC0036F457 /* BioFrame.swift */,
 				68EE090B23D40418005DBF35 /* Athlete.swift */,
@@ -500,7 +497,6 @@
 				683F8D4C23DFEED000E89FFA /* CreateNewUserViewController.swift in Sources */,
 				680190F52406F33900B9AF91 /* LogCollectionViewHeader.swift in Sources */,
 				688CDE2323E2648C00378119 /* App.swift in Sources */,
-				6828450C2384B366009063EC /* BleMessage.swift in Sources */,
 				6828450E2384B3B8009063EC /* Document.swift in Sources */,
 				682844FC2384B2B9009063EC /* DatabaseUtil.swift in Sources */,
 				686371B623D78E0700AFF87E /* PlayerTableViewCell.swift in Sources */,

@@ -13,6 +13,9 @@ class PlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var trainingsLabel: UILabel!
+    @IBOutlet weak var gamesLabel: UILabel!
+
         
     var uid: String?
 

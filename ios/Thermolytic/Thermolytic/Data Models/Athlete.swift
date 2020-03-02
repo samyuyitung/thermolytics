@@ -117,8 +117,8 @@ class Athlete : BaseDocument {
     }
     
     static func deleteAllData(for uid: String) {
-        let types = [PlayerNote.TYPE, BioFrame.TYPE, BleMessage.TYPE].map { (type) -> ExpressionProtocol in Expression.string(type) }
-        let uids = [PlayerNote.uid, BioFrame.uid, BleMessage.uid].map { field -> ExpressionProtocol in field.expression }
+        let types = [PlayerNote.TYPE, BioFrame.TYPE].map { (type) -> ExpressionProtocol in Expression.string(type) }
+        let uids = [PlayerNote.uid, BioFrame.uid].map { field -> ExpressionProtocol in field.expression }
         
         let deleteQuery = QueryBuilder.select(BaseDocument.id.selectResult)
             .from(DataSource.database(DatabaseUtil.shared))

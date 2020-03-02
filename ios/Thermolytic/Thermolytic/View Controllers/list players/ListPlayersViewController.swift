@@ -58,19 +58,17 @@ class ListPlayerViewController: TLViewController {
     
     
     func setQuery() {
-        let query = QueryBuilder
+        QueryBuilder
             .select(Athlete.selectAll)
             .from(DataSource.database(DatabaseUtil.shared))
             .where(BaseDocument.type.expression.equalTo(Expression.string(Athlete.TYPE)))
             .orderBy(Ordering.expression(Athlete.number.expression).ascending())
-        
-        query.simpleListener { (results) in
-            self.users = results
-        }
+            .simpleListener { (results) in
+                self.users = results
+            }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier == "detail" {
             let vc = segue.destination as! HistoricalDetailViewController
             let cell = sender as! PlayerTableViewCell
