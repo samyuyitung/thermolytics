@@ -108,7 +108,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-CG-Zbx">
                                 <rect key="frame" x="199" y="20" width="69" height="30"/>
                                 <state key="normal" title="Delete DB">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="didClickDelete:" destination="FmR-Te-QAH" eventType="touchUpInside" id="Ron-ay-gRn"/>
@@ -157,6 +157,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U5r-VW-hjg">
+                                <rect key="frame" x="311" y="20" width="90" height="30"/>
+                                <state key="normal" title="Fake Session"/>
+                                <connections>
+                                    <action selector="fakeSession:" destination="FmR-Te-QAH" eventType="touchUpInside" id="l1r-nZ-toD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -166,7 +173,9 @@
                             <constraint firstItem="Cg4-gf-PlS" firstAttribute="trailing" secondItem="A50-zJ-igd" secondAttribute="trailing" constant="30" id="LMP-gJ-B5Y"/>
                             <constraint firstItem="ZwK-CG-Zbx" firstAttribute="centerY" secondItem="M0Z-KW-nlL" secondAttribute="centerY" id="cdO-Sg-hD1"/>
                             <constraint firstItem="M0Z-KW-nlL" firstAttribute="leading" secondItem="Cg4-gf-PlS" secondAttribute="leading" constant="53" id="jja-D0-kYh"/>
+                            <constraint firstItem="U5r-VW-hjg" firstAttribute="leading" secondItem="ZwK-CG-Zbx" secondAttribute="trailing" constant="43" id="mw2-pq-h4A"/>
                             <constraint firstItem="A50-zJ-igd" firstAttribute="top" secondItem="M0Z-KW-nlL" secondAttribute="top" constant="50" id="uVx-do-B4O"/>
+                            <constraint firstItem="U5r-VW-hjg" firstAttribute="centerY" secondItem="ZwK-CG-Zbx" secondAttribute="centerY" id="wyu-bf-aaH"/>
                             <constraint firstItem="M0Z-KW-nlL" firstAttribute="top" secondItem="Cg4-gf-PlS" secondAttribute="top" constant="20" id="yNM-vv-aXT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cg4-gf-PlS"/>

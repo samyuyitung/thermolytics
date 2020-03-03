@@ -43,8 +43,9 @@ class DebugViewController: UIViewController, MFMailComposeViewControllerDelegate
             let rows = try query.execute()
             
             let columns = [
-                BioFrame.createdAt,
+                Athlete.name,
                 BioFrame.session,
+                BioFrame.createdAt,
                 BioFrame.heartRate,
                 BioFrame.armSkinTemp,
                 BioFrame.legSkinTemp,
@@ -54,7 +55,6 @@ class DebugViewController: UIViewController, MFMailComposeViewControllerDelegate
                 BioFrame.ambientTemp,
                 BioFrame.ambientHumidity,
                 BioFrame.predictedCoreTemp,
-                Athlete.name,
                 Athlete.classification,
                 Athlete.weight,
             ].map { it in it.key }
@@ -66,6 +66,24 @@ class DebugViewController: UIViewController, MFMailComposeViewControllerDelegate
     }
     
     
+    @IBAction func fakeSession(_ sender: Any) {
+        let max = 6
+        do {
+        let rows = try QueryBuilder.select(Athlete.id.selectResult)
+            .from(DataSource.database(DatabaseUtil.shared))
+            .where(BaseDocument.type.expression.equalTo(Expression.string(Athlete.TYPE)))
+            .limit(Expression.int(max))
+            .execute()
+            for (i, row) in rows.allResults().enumerated() {
+                if let id = row.getId() {
+                    RecordingSessionManager.shared.addParticipant(uid: id, deviceId: "\(i)")
+                }
+            }
+        } catch {
+            Utils.log(at: .Error, msg: "FUCK")
+        }
+        
+    }
     
     
     @IBAction func didAddRows(_ sender: Any) {
