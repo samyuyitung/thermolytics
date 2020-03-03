@@ -97,8 +97,8 @@ class LogViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         for view in [activeCollectionView!, benchCollectionView!] {
-            let layout = UICollectionViewFlowLayout()
-            layout.estimatedItemSize = CGSize(width: 1, height: 1)
+            let layout = LeftAlignedCollectionViewFlowLayout()
+            layout.estimatedItemSize = CGSize(width: 1, height: 180)
             view.collectionViewLayout = layout
         }
     }
@@ -271,5 +271,28 @@ extension Array {
             return self.remove(at: index)
         }
         return nil
+    }
+}
+
+
+class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributes = super.layoutAttributesForElements(in: rect)
+
+        var leftMargin = sectionInset.left
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                leftMargin = sectionInset.left
+            }
+
+            layoutAttribute.frame.origin.x = leftMargin
+
+            leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+            maxY = max(layoutAttribute.frame.maxY , maxY)
+        }
+
+        return attributes
     }
 }
