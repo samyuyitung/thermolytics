@@ -180,7 +180,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cg4-gf-PlS"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="QCN-um-10k"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" id="QCN-um-10k">
+                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="wUv-wo-EX7"/>
                     <connections>
                         <outlet property="tableView" destination="A50-zJ-igd" id="Xcy-Wx-I7p"/>
@@ -217,6 +219,7 @@
             <objects>
                 <navigationController id="TMg-v1-Qex" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="All Players" image="players" id="9mX-D0-CC7">
+                        <inset key="imageInsets" minX="1" minY="1" maxX="1" maxY="1"/>
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ttr-h9-VvY">
@@ -240,6 +243,7 @@
             <objects>
                 <navigationController id="XuZ-Nv-yyf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title=" Dashboard" image="realtime" selectedImage="realtime" id="n8S-dN-rOV">
+                        <inset key="imageInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                         <color key="badgeColor" cocoaTouchSystemColor="darkTextColor"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="gKj-sq-NnA">

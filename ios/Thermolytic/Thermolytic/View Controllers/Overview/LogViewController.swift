@@ -33,6 +33,9 @@ class LogViewController: UIViewController {
             view.collectionViewLayout.invalidateLayout()
             view.layoutIfNeeded()
         }
+        let height = activeCollectionView.collectionViewLayout.collectionViewContentSize.height
+        activeViewControllerHeight.constant = height + 20
+
     }
     
     var queries: [Query]? = nil
@@ -43,6 +46,7 @@ class LogViewController: UIViewController {
     
     @IBOutlet weak var activeCollectionView: UICollectionView!
     @IBOutlet weak var benchCollectionView: UICollectionView!
+    @IBOutlet weak var activeViewControllerHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,15 +57,21 @@ class LogViewController: UIViewController {
         setup(view: benchCollectionView)
 
         configureRecordButton()
+        configureConnectionButton()
         sessionManager.delegate = self
         
         setDataSource()
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        reloadViews()
     }
     
     private func setup(view: UICollectionView) {
         view.delegate = self
         view.dataSource = self
         view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        view.collectionViewLayout = LeftAlignedCollectionViewFlowLayout()
     }
     
     func configureRecordButton() {
@@ -81,6 +91,21 @@ class LogViewController: UIViewController {
         navigationItem.leftBarButtonItem = barButton
     }
     
+    func configureConnectionButton() {
+          let button = UIButton()
+          button.frame = CGRect(x:0.0, y:0.0, width: 120, height: 30.0)
+          button.addTarget(self, action: #selector(didPressConnection), for: .touchUpInside)
+          button.setImage(UIImage(named: "connection"), for: .normal)
+          button.imageView?.contentMode = .scaleAspectFit
+          button.contentHorizontalAlignment = .left;
+          button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+          button.setTitle("Connection", for: .normal)
+          button.setTitleColor(.black, for: .normal)
+          
+          let barButton = UIBarButtonItem(customView: button)
+          navigationItem.rightBarButtonItem = barButton
+      }
+      
     @objc func didPressRecord(_ sender: Any?) {
         guard sessionManager.participants.count > 0 else{
             return
@@ -94,15 +119,9 @@ class LogViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        for view in [activeCollectionView!, benchCollectionView!] {
-            let layout = LeftAlignedCollectionViewFlowLayout()
-            layout.estimatedItemSize = CGSize(width: 1, height: 180)
-            view.collectionViewLayout = layout
-        }
+    @objc func didPressConnection(_ sender: Any?) {
+        performSegue(withIdentifier: "connection", sender: nil)
     }
-    
     
     func setDataSource() {
         let allPlayers = Array(sessionManager.participants.keys)
@@ -171,7 +190,35 @@ extension LogViewController {
     }
 }
 
-extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    private func getWidthForOrientation(frame: CGRect, isLandscape: Bool) -> Double {
+        if isLandscape {
+            return Double(frame.width - 50) / LogItemCell.landscapeWidthRatio
+        } else {
+            return Double(frame.width - 30) / LogItemCell.portraitWidthRatio
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let frame = collectionView.frame
+        var width = 0.0
+        
+        switch UIDevice.current.orientation {
+        case .landscapeLeft, .landscapeRight:
+            width = getWidthForOrientation(frame: frame, isLandscape: true)
+        case .portraitUpsideDown, .portrait:
+            width = getWidthForOrientation(frame: frame, isLandscape: false)
+        case .faceUp:
+            let statusBarOrientation = UIApplication.shared.statusBarOrientation
+            let isLandscape = statusBarOrientation == .landscapeRight || statusBarOrientation == .landscapeLeft
+            width = getWidthForOrientation(frame: frame, isLandscape: isLandscape)
+        default: width = 0
+        }
+
+        return CGSize(width: CGFloat(width), height: CGFloat(LogItemCell.height))
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

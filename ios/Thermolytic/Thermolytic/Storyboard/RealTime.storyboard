@@ -92,7 +92,7 @@
                     <connections>
                         <outlet property="devicesTable" destination="Z7G-tL-EMa" id="ygX-Gh-LI7"/>
                         <outlet property="sensorsTable" destination="6cV-NU-VHX" id="0qr-TF-XRl"/>
-                        <segue destination="fU5-KI-Dgm" kind="presentation" identifier="showPlayers" id="gOn-xJ-cxy"/>
+                        <segue destination="fU5-KI-Dgm" kind="presentation" identifier="showPlayers" modalPresentationStyle="overFullScreen" id="gOn-xJ-cxy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91A-FG-3qM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -104,18 +104,18 @@
             <objects>
                 <viewController id="fU5-KI-Dgm" customClass="SelectPlayerViewController" customModule="Thermolytic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lzV-sF-hGw">
-                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JeD-zJ-LxU">
-                                <rect key="frame" x="200" y="300" width="312" height="384"/>
+                                <rect key="frame" x="200" y="300" width="966" height="424"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="57" id="nmx-W0-s5c">
-                                        <rect key="frame" x="0.0" y="28" width="312" height="57"/>
+                                        <rect key="frame" x="0.0" y="28" width="966" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nmx-W0-s5c" id="AcP-sJ-bDh">
-                                            <rect key="frame" x="0.0" y="0.0" width="312" height="57"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="966" height="57"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -718,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pc-Zj-3qm">
-                                <rect key="frame" x="0.0" y="229" width="614.5" height="3"/>
+                                <rect key="frame" x="0.0" y="229" width="612.5" height="3"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="NmF-cg-V8I"/>
@@ -847,15 +847,15 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-7p-cNO">
-                                <rect key="frame" x="751.5" y="229" width="614.5" height="3"/>
+                                <rect key="frame" x="753.5" y="229" width="612.5" height="3"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="y4g-71-iAu"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BENCH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0d7-b8-Em7">
-                                <rect key="frame" x="654.5" y="220" width="57" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="652.5" y="220" width="61" height="20.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -979,7 +979,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.91231516450000005" green="0.91231516450000005" blue="0.91231516450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="fdA-AI-vvH" firstAttribute="trailing" secondItem="MaO-zj-XuO" secondAttribute="trailing" id="0f8-Ng-gdk"/>
                             <constraint firstItem="8pm-hN-3We" firstAttribute="leading" secondItem="fdA-AI-vvH" secondAttribute="leading" id="2tP-Te-0al"/>
@@ -999,18 +999,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fdA-AI-vvH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hi1-Wc-LHq">
-                        <barButtonItem key="rightBarButtonItem" title="Connect" id="4AS-tU-954">
-                            <connections>
-                                <segue destination="Day-ms-bMb" kind="show" identifier="connect" id="F2l-Xf-HgU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hi1-Wc-LHq"/>
                     <connections>
                         <outlet property="activeCollectionView" destination="MaO-zj-XuO" id="SlS-nX-e51"/>
+                        <outlet property="activeViewControllerHeight" destination="y9Q-Bb-tMn" id="DoA-Vv-f3B"/>
                         <outlet property="benchCollectionView" destination="8pm-hN-3We" id="E57-NQ-LbT"/>
                         <segue destination="jTe-zB-1S4" kind="presentation" identifier="startSession" modalPresentationStyle="overFullScreen" id="yxd-tN-1f2"/>
                         <segue destination="zEF-8X-qqk" kind="show" identifier="detail" id="Acq-h2-1Nk"/>
+                        <segue destination="Day-ms-bMb" kind="show" identifier="connection" id="N5f-np-egr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr4-ph-sHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
