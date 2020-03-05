@@ -177,7 +177,8 @@ extension DetailViewController {
     
     func updateCharts() {
         // Only append the new points
-        guard data.count >= coreTempPoints.count else {
+        
+        guard !data.isEmpty, data.count >= coreTempPoints.count else {
             return
         }
         let first = data.first!.int64(forKey: BioFrame.createdAt.key)

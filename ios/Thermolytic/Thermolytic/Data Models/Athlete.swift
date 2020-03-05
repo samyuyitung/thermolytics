@@ -41,6 +41,10 @@ class Athlete : BaseDocument {
             }
             return nil
         }
+        
+        func val() -> Float {
+            return self.rawValue
+        }
     }
     
     static let TYPE = "athlete"

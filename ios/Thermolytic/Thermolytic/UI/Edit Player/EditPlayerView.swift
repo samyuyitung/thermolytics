@@ -109,12 +109,21 @@ class EditPlayerView : UIView {
     
     
     func load(with values: EditPlayerFields) {
-        //        nameField.text = values.name
-        //        numberField.text = String(values.number)
-        //        ageField.text = String(values.age)
-        //        heightField.text = String(values.height)
-        //        weightField.text = String(values.weight)
-        //
+        let nameParts = values.name.components(separatedBy: " ")
+        firstNameField.text = nameParts.first ?? ""
+        lastNameField.text = nameParts.last ?? ""
+        numberField.text = String(values.number)
+        dobField.text = dateFormatter.string(from: values.dob)
+        dobDatePickerView.date = values.dob
+        weightField.text = String(values.weight)
+        
+        let classification = values.classification.val()
+        classificationField.text = String(classification)
+        classificationPickerView.selectRow(Int(classification / 0.5 - 1), inComponent: 0, animated: false)
+        
+        let pos = values.position
+        positionField.text = pos.rawValue
+        positionPickerView.selectRow(pos == .forward ? 0 : 1, inComponent: 0, animated: false)
     }
     
     func getValues() -> EditPlayerFields? {
