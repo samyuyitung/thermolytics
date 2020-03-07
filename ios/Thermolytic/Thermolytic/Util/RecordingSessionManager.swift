@@ -59,13 +59,15 @@ class RecordingSessionManager {
     
     var isRecording = false
     var sessionName: String? = nil
+    var sessionType: BioFrame.SessionType? = nil
     
-    func startSession(named name: String) {
+    func startSession(named name: String, type: BioFrame.SessionType) {
         guard !isRecording else {
             return
         }
         isRecording = true
         sessionName = name
+        sessionType = type
         delegate?.didStartSession(named: name)
     }
     
@@ -173,7 +175,8 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
         if let heartRate = hrManager.getLastHr(),
             let uid = getAthleteBy(deviceId: deviceId),
             let user = DatabaseUtil.shared.document(withID: uid),
-            let sessionName = sessionName {
+            let sessionName = sessionName,
+            let sessionType = sessionType {
             
             let weight = user.double(forKey: Athlete.weight.key)
             let coreTemp = TwoNode.getCoreTemp(mass_body: weight,
@@ -194,7 +197,8 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          ambientTemp: ambientTemperature,
                                          ambientHumidity: ambientHumidity,
                                          predictedCoreTemp: coreTemp,
-                                         session: sessionName) {
+                                         session: sessionName,
+                                         sessionType: sessionType) {
                 let _ = DatabaseUtil.insert(doc: doc)
             } else {
                 Utils.log(at: .Warning, msg: "Could not create frame for \(message)")

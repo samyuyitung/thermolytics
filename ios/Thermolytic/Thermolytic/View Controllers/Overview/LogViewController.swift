@@ -115,6 +115,7 @@ class LogViewController: UIViewController {
         if !button.isSelected {
             performSegue(withIdentifier: "startSession", sender: nil)
         } else {
+            
             sessionManager.stopSession()
         }
     }

@@ -10,15 +10,27 @@ import Foundation
 import CouchbaseLiteSwift
 
 class BioFrame: BaseDocument {
+
+    enum SessionType: String, CaseIterable {
+        case training = "Training"
+        case game = "Game"
+        
+        init?(id: Int) {
+            switch id {
+            case 0: self = .training
+            case 1: self = .game
+            default: return nil
+            }
+        }
+    }
     
     static let missingDefault = -100.0
-    
-    
     static let TYPE = "bio-frame"
     
     static let deviceId = BasicProperty(key: "device-id")
     static let uid = BasicProperty(key: "uid")
     static let session = BasicProperty(key: "session")
+    static let sessionType = BasicProperty(key: "session-type")
     static let heartRate = BasicProperty(key: "heart-rate")
     static let armSkinTemp = BasicProperty(key: "arm-skin-temp")
     static let legSkinTemp = BasicProperty(key: "leg-skin-temp")
@@ -35,6 +47,7 @@ class BioFrame: BaseDocument {
         id,
         uid,
         session,
+        sessionType,
         heartRate,
         armSkinTemp,
         legSkinTemp,
@@ -66,7 +79,8 @@ class BioFrame: BaseDocument {
                        ambientTemp: Double,
                        ambientHumidity: Double,
                        predictedCoreTemp: Double,
-                       session: String) -> MutableDocument? {
+                       session: String,
+                       sessionType: SessionType = .training) -> MutableDocument? {
         
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
@@ -76,6 +90,7 @@ class BioFrame: BaseDocument {
         doc.setValue(deviceId, forKey: self.deviceId.key)
         doc.setValue(uid, forKey: self.uid.key)
         doc.setValue(session, forKey: self.session.key)
+        doc.setValue(sessionType.rawValue, forKey: self.sessionType.key)
         doc.setValue(heartRate, forKey: self.heartRate.key)
         doc.setValue(armSkinTemp, forKey: self.armSkinTemp.key)
         doc.setValue(legSkinTemp, forKey: self.legSkinTemp.key)
