@@ -71,7 +71,7 @@ class DetailViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.contentView.frame.height)
+        self.scrollView.contentSize = CGSize(width: self.contentView.frame.width, height: self.contentView.frame.height)
     }
     
     func setUserQuery() {
@@ -90,12 +90,38 @@ class DetailViewController: UIViewController {
     }
     
     func setDataQuery() {
+        
+        var sessionName = RecordingSessionManager.shared.sessionName
+            
+        if sessionName == nil  {
+            do {
+                let row = try QueryBuilder
+                    .select(BioFrame.session.selectResult)
+                    .from(DataSource.database(DatabaseUtil.shared))
+                    .where(BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
+                        .and(BioFrame.uid.expression.equalTo(Expression.string(uid))))
+                    .orderBy(Ordering.expression(BioFrame.createdAt.expression).ascending())
+                    .limit(Expression.int(1))
+                .execute()
+                
+                sessionName = row.allResults().first?.string(forKey: BioFrame.session.key)
+            } catch {
+                Utils.log(msg: error.localizedDescription)
+            }
+        }
+        
+        guard sessionName != nil else {
+            Utils.log(at: .Error, msg: "Nil session name")
+            return
+        }
+        
         let dataQuery = QueryBuilder
             .select(BioFrame.selectAll)
             .from(DataSource.database(DatabaseUtil.shared))
             .where(
                 BaseDocument.type.expression.equalTo(Expression.string(BioFrame.TYPE))
                     .and(BioFrame.uid.expression.equalTo(Expression.string(uid)))
+                    .and(BioFrame.session.expression.equalTo(Expression.string(sessionName)))
         ).orderBy(Ordering.expression(BioFrame.createdAt.expression).ascending())
         dataQuery.simpleListener({ rows in
             self.data = rows
@@ -130,8 +156,8 @@ extension DetailViewController {
         self.nameLabel.text = athlete.string(forKey: Athlete.name.key) ?? ""
         self.numberPositionLabel.text = "#\(athlete.int(forKey: Athlete.number.key)) \(athlete.string(forKey: Athlete.position.key) ?? "")"
         self.classificationLabel.text = "Classification: \(athlete.float(forKey: Athlete.classification.key))"
-        self.weightLabel.text = "Max HR: \(athlete.float(forKey: Athlete.weight.key))"
-        self.ageLabel.text = "Age: \(Date(timeIntervalSince1970: athlete.double(forKey: Athlete.dob.key)).yearsFromNow)"
+        self.weightLabel.text = "Max HR: \(athlete.int(forKey: Athlete.maxHr.key))"
+        self.ageLabel.text = "Thershold Core: \(athlete.float(forKey: Athlete.thresholdTemp.key))℃"
     }
 }
 
@@ -144,7 +170,15 @@ extension DetailViewController {
     }
     
     func upateMainCard(with latest: Result) {
+        
         self.coreTempLabel.text = "\(latest.float(forKey: BioFrame.predictedCoreTemp.key).print(to: 1))℃"
+        
+        let hr = latest.float(forKey: BioFrame.heartRate.key)
+        let maxHr = latest.float(forKey: Athlete.maxHr.key)
+        
+        let percentHr = hr * 100.0 / (maxHr != 0 ? maxHr : Float(Athlete.maxHrDefault))
+        
+        self.hrPercentLabel.text = "\(Int(percentHr))%"
         self.hrBpmLabel.text = "[ \(latest.int(forKey: BioFrame.heartRate.key)) bpm ]"
     }
 }
@@ -155,6 +189,7 @@ extension DetailViewController {
         let line = LineChartDataSet(entries: entries, label: "")
         line.drawCirclesEnabled = false
         line.drawValuesEnabled = false
+        line.drawFilledEnabled = true
         return line
     }
     
@@ -171,6 +206,7 @@ extension DetailViewController {
         setupChart(for: chart)
         let data = LineChartData()
         data.addDataSet(line)
+        
         chart.data = data
     }
     
@@ -191,7 +227,10 @@ extension DetailViewController {
             
         configureChart(chart: coreTempChart, data: coreTempPoints)
         coreTempChart.leftAxis.addLimitLine(ChartLimitLine(limit: 35.8))
+        coreTempChart.leftAxis.axisMinimum = 34
         coreTempChart.leftAxis.axisMaximum = 36
+        coreTempChart.leftAxis.drawGridLinesEnabled = false
+        
 
         configureChart(chart: heartRateChart, data: heartRatePoints)
         heartRateChart.leftAxis.addLimitLine(ChartLimitLine(limit: 150))

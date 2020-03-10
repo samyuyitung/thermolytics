@@ -147,82 +147,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8N-Wb-0k5">
-                                <rect key="frame" x="0.0" y="0.0" width="712" height="204"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="UY6-wn-c6s">
-                                        <rect key="frame" x="60" y="42" width="120" height="120"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="309-rK-X8X"/>
-                                            <constraint firstAttribute="width" secondItem="UY6-wn-c6s" secondAttribute="height" multiplier="1:1" id="LdN-Im-lTo"/>
-                                        </constraints>
-                                    </imageView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DtR-rp-NYi">
-                                        <rect key="frame" x="210" y="42" width="99" height="120"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Ku-S3-eGb">
-                                                <rect key="frame" x="0.0" y="0.0" width="75" height="53"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="## Position" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZQu-FH-CIB">
-                                                <rect key="frame" x="0.0" y="65" width="91" height="21.5"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Clasification" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVH-Xr-RTm">
-                                                <rect key="frame" x="0.0" y="98.5" width="99" height="21.5"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="dhN-Gc-9R0">
-                                        <rect key="frame" x="420" y="96" width="56" height="66"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqa-kI-UyC">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="43.5"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zaZ-Bp-G3X">
-                                                <rect key="frame" x="0.0" y="44.5" width="32" height="21.5"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.95686274509803915" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstItem="UY6-wn-c6s" firstAttribute="leading" secondItem="O8N-Wb-0k5" secondAttribute="leading" constant="60" id="7TT-he-myt"/>
-                                    <constraint firstItem="UY6-wn-c6s" firstAttribute="centerY" secondItem="O8N-Wb-0k5" secondAttribute="centerY" id="8Go-4G-qA9"/>
-                                    <constraint firstItem="dhN-Gc-9R0" firstAttribute="bottom" secondItem="DtR-rp-NYi" secondAttribute="bottom" id="IX8-Ne-55G"/>
-                                    <constraint firstItem="zaZ-Bp-G3X" firstAttribute="centerY" secondItem="JVH-Xr-RTm" secondAttribute="centerY" id="KzE-bX-pVF"/>
-                                    <constraint firstItem="DtR-rp-NYi" firstAttribute="top" secondItem="UY6-wn-c6s" secondAttribute="top" id="L9v-pA-kOV"/>
-                                    <constraint firstItem="pqa-kI-UyC" firstAttribute="centerY" secondItem="ZQu-FH-CIB" secondAttribute="centerY" id="LdM-q0-D7h"/>
-                                    <constraint firstItem="UY6-wn-c6s" firstAttribute="top" secondItem="O8N-Wb-0k5" secondAttribute="top" constant="42" id="MBF-hn-3Ya"/>
-                                    <constraint firstItem="DtR-rp-NYi" firstAttribute="leading" secondItem="UY6-wn-c6s" secondAttribute="trailing" constant="30" id="TS6-x0-FGI"/>
-                                    <constraint firstItem="dhN-Gc-9R0" firstAttribute="leading" secondItem="DtR-rp-NYi" secondAttribute="trailing" constant="111" id="dst-12-5VP"/>
-                                    <constraint firstItem="JVH-Xr-RTm" firstAttribute="bottom" secondItem="UY6-wn-c6s" secondAttribute="bottom" id="zap-T7-wRP"/>
-                                </constraints>
-                            </view>
                             <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8SB-KV-0gA">
-                                <rect key="frame" x="0.0" y="204" width="712" height="803"/>
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="1007"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7WN-ih-6Xk">
-                                        <rect key="frame" x="0.0" y="0.0" width="712" height="948"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="712" height="1088"/>
                                         <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O8N-Wb-0k5">
+                                                <rect key="frame" x="0.0" y="-20" width="712" height="160"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="UY6-wn-c6s">
+                                                        <rect key="frame" x="60" y="10" width="120" height="120"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="120" id="309-rK-X8X"/>
+                                                            <constraint firstAttribute="width" secondItem="UY6-wn-c6s" secondAttribute="height" multiplier="1:1" id="LdN-Im-lTo"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DtR-rp-NYi">
+                                                        <rect key="frame" x="210" y="10" width="99" height="120"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Ku-S3-eGb">
+                                                                <rect key="frame" x="0.0" y="0.0" width="75" height="53"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="## Position" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZQu-FH-CIB">
+                                                                <rect key="frame" x="0.0" y="65" width="91" height="21.5"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Clasification" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVH-Xr-RTm">
+                                                                <rect key="frame" x="0.0" y="98.5" width="99" height="21.5"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="dhN-Gc-9R0">
+                                                        <rect key="frame" x="359" y="64" width="56" height="66"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Weight" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pqa-kI-UyC">
+                                                                <rect key="frame" x="0.0" y="0.0" width="56" height="43.5"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zaZ-Bp-G3X">
+                                                                <rect key="frame" x="0.0" y="44.5" width="32" height="21.5"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                </accessibility>
+                                                <constraints>
+                                                    <constraint firstItem="UY6-wn-c6s" firstAttribute="leading" secondItem="O8N-Wb-0k5" secondAttribute="leading" constant="60" id="7TT-he-myt"/>
+                                                    <constraint firstItem="dhN-Gc-9R0" firstAttribute="bottom" secondItem="DtR-rp-NYi" secondAttribute="bottom" id="IX8-Ne-55G"/>
+                                                    <constraint firstItem="zaZ-Bp-G3X" firstAttribute="centerY" secondItem="JVH-Xr-RTm" secondAttribute="centerY" id="KzE-bX-pVF"/>
+                                                    <constraint firstItem="DtR-rp-NYi" firstAttribute="top" secondItem="UY6-wn-c6s" secondAttribute="top" id="L9v-pA-kOV"/>
+                                                    <constraint firstItem="pqa-kI-UyC" firstAttribute="centerY" secondItem="ZQu-FH-CIB" secondAttribute="centerY" id="LdM-q0-D7h"/>
+                                                    <constraint firstItem="UY6-wn-c6s" firstAttribute="top" secondItem="O8N-Wb-0k5" secondAttribute="top" constant="10" id="MBF-hn-3Ya"/>
+                                                    <constraint firstItem="DtR-rp-NYi" firstAttribute="leading" secondItem="UY6-wn-c6s" secondAttribute="trailing" constant="30" id="TS6-x0-FGI"/>
+                                                    <constraint firstItem="dhN-Gc-9R0" firstAttribute="leading" secondItem="DtR-rp-NYi" secondAttribute="trailing" constant="50" id="dst-12-5VP"/>
+                                                    <constraint firstAttribute="bottom" secondItem="UY6-wn-c6s" secondAttribute="bottom" constant="30" id="mPh-Kd-rU5"/>
+                                                    <constraint firstItem="JVH-Xr-RTm" firstAttribute="bottom" secondItem="UY6-wn-c6s" secondAttribute="bottom" id="zap-T7-wRP"/>
+                                                </constraints>
+                                            </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzi-VA-DvN" userLabel="Info" customClass="DropShadowView" customModule="Thermolytic" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="20" width="672" height="117.5"/>
+                                                <rect key="frame" x="20" y="160" width="672" height="117.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="VbU-FM-xXt">
                                                         <rect key="frame" x="20" y="20" width="632" height="77.5"/>
@@ -347,7 +346,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="HLk-MT-w2W" userLabel="Row">
-                                                <rect key="frame" x="20" y="157.5" width="672" height="250.5"/>
+                                                <rect key="frame" x="20" y="297.5" width="672" height="250.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1U-Mz-Ne7" userLabel="CoreChart" customClass="DropShadowView" customModule="Thermolytic" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="250.5"/>
@@ -406,7 +405,7 @@
                                                 </constraints>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x35-Hm-YuU">
-                                                <rect key="frame" x="20" y="428" width="672" height="500"/>
+                                                <rect key="frame" x="20" y="568" width="672" height="500"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x8F-yF-rOT">
                                                         <rect key="frame" x="0.0" y="58" width="672" height="442"/>
@@ -479,13 +478,16 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="O8N-Wb-0k5" secondAttribute="trailing" id="7eT-aK-BgY"/>
                                             <constraint firstItem="HLk-MT-w2W" firstAttribute="leading" secondItem="7WN-ih-6Xk" secondAttribute="leading" constant="20" id="Dve-YX-ga4"/>
+                                            <constraint firstItem="O8N-Wb-0k5" firstAttribute="top" secondItem="7WN-ih-6Xk" secondAttribute="top" constant="-20" id="EgT-Oe-QI1"/>
                                             <constraint firstAttribute="bottom" secondItem="x35-Hm-YuU" secondAttribute="bottom" constant="20" id="Fy7-N2-5Zy"/>
                                             <constraint firstItem="rzi-VA-DvN" firstAttribute="leading" secondItem="7WN-ih-6Xk" secondAttribute="leading" constant="20" id="KCQ-oH-ibT"/>
                                             <constraint firstItem="HLk-MT-w2W" firstAttribute="top" secondItem="rzi-VA-DvN" secondAttribute="bottom" constant="20" id="Mvy-3v-sYZ"/>
-                                            <constraint firstItem="rzi-VA-DvN" firstAttribute="top" secondItem="7WN-ih-6Xk" secondAttribute="top" constant="20" id="Od4-8i-Fs6"/>
                                             <constraint firstItem="x35-Hm-YuU" firstAttribute="leading" secondItem="7WN-ih-6Xk" secondAttribute="leading" constant="20" id="P4u-4c-gcq"/>
+                                            <constraint firstItem="O8N-Wb-0k5" firstAttribute="bottom" secondItem="rzi-VA-DvN" secondAttribute="top" constant="-20" id="ZWD-7w-2En"/>
                                             <constraint firstAttribute="trailing" secondItem="rzi-VA-DvN" secondAttribute="trailing" constant="20" id="aSb-ZS-tvG"/>
+                                            <constraint firstItem="O8N-Wb-0k5" firstAttribute="leading" secondItem="7WN-ih-6Xk" secondAttribute="leading" id="mSS-21-cPM"/>
                                             <constraint firstAttribute="trailing" secondItem="HLk-MT-w2W" secondAttribute="trailing" constant="20" id="nZc-VT-ziY"/>
                                             <constraint firstItem="x35-Hm-YuU" firstAttribute="top" secondItem="HLk-MT-w2W" secondAttribute="bottom" constant="20" id="otf-lN-FpI"/>
                                             <constraint firstAttribute="trailing" secondItem="x35-Hm-YuU" secondAttribute="trailing" constant="20" id="qBy-SN-JPk"/>
@@ -496,7 +498,7 @@
                                     <constraint firstAttribute="trailing" secondItem="7WN-ih-6Xk" secondAttribute="trailing" id="320-Xj-3Zg"/>
                                     <constraint firstItem="7WN-ih-6Xk" firstAttribute="leading" secondItem="8SB-KV-0gA" secondAttribute="leading" id="BKo-TV-BYJ"/>
                                     <constraint firstItem="7WN-ih-6Xk" firstAttribute="width" secondItem="8SB-KV-0gA" secondAttribute="width" id="htS-1j-xvI"/>
-                                    <constraint firstItem="7WN-ih-6Xk" firstAttribute="top" secondItem="8SB-KV-0gA" secondAttribute="top" id="wkY-I1-t3Y"/>
+                                    <constraint firstItem="7WN-ih-6Xk" firstAttribute="top" secondItem="8SB-KV-0gA" secondAttribute="top" id="xYU-pY-21A"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="8mf-XQ-WZc"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="W5U-Pd-kqD"/>
@@ -504,13 +506,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.91231516450000005" green="0.91231516450000005" blue="0.91231516450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="O8N-Wb-0k5" firstAttribute="leading" secondItem="szx-kt-keT" secondAttribute="leading" id="BxC-dL-50g"/>
+                            <constraint firstItem="8SB-KV-0gA" firstAttribute="top" secondItem="szx-kt-keT" secondAttribute="top" constant="-20" id="0p1-1y-PbX"/>
                             <constraint firstItem="8SB-KV-0gA" firstAttribute="leading" secondItem="szx-kt-keT" secondAttribute="leading" id="Lg7-RT-GTU"/>
-                            <constraint firstItem="szx-kt-keT" firstAttribute="trailing" secondItem="O8N-Wb-0k5" secondAttribute="trailing" id="McH-gS-ZaZ"/>
                             <constraint firstItem="szx-kt-keT" firstAttribute="trailing" secondItem="8SB-KV-0gA" secondAttribute="trailing" id="QCf-4I-foq"/>
-                            <constraint firstItem="O8N-Wb-0k5" firstAttribute="top" secondItem="szx-kt-keT" secondAttribute="top" id="QYh-V5-Kb6"/>
                             <constraint firstItem="szx-kt-keT" firstAttribute="bottom" secondItem="8SB-KV-0gA" secondAttribute="bottom" id="Qrq-dI-qPV"/>
-                            <constraint firstItem="8SB-KV-0gA" firstAttribute="top" secondItem="O8N-Wb-0k5" secondAttribute="bottom" id="Uvq-fP-vhj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="szx-kt-keT"/>
                     </view>
