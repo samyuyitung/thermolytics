@@ -37,6 +37,9 @@ class BioFrame: BaseDocument {
     static let avgSkinTemp = BasicProperty(key: "avg-skin-temp")
     static let xAcceleration = BasicProperty(key: "accelerationX")
     static let yAcceleration = BasicProperty(key: "accelerationY")
+    static let xVelocity = BasicProperty(key: "velocityX")
+    static let yVelocity = BasicProperty(key: "velocityY")
+    static let distanceTraveled = BasicProperty(key: "distance")
     static let ambientTemp = BasicProperty(key: "ambient-temp")
     static let ambientHumidity = BasicProperty(key: "ambient-humidity")
     static let predictedCoreTemp = BasicProperty(key: "predicted-core-temp")
@@ -56,7 +59,10 @@ class BioFrame: BaseDocument {
         yAcceleration,
         ambientTemp,
         ambientHumidity,
-        predictedCoreTemp
+        predictedCoreTemp,
+        xVelocity,
+        yVelocity,
+        distanceTraveled
     ]
     
     static let selectAll: [SelectResultAs] = {
@@ -74,8 +80,9 @@ class BioFrame: BaseDocument {
                        armSkinTemp: Double,
                        legSkinTemp: Double,
                        avgSkinTemp: Double,
-                       xAcceleration: Double?,
-                       yAcceleration: Double?,
+                       acceleration: Point,
+                       velocity: Point,
+                       distance: Double,
                        ambientTemp: Double,
                        ambientHumidity: Double,
                        predictedCoreTemp: Double,
@@ -96,8 +103,11 @@ class BioFrame: BaseDocument {
         doc.setValue(armSkinTemp, forKey: self.armSkinTemp.key)
         doc.setValue(legSkinTemp, forKey: self.legSkinTemp.key)
         doc.setValue(avgSkinTemp, forKey: self.avgSkinTemp.key)
-        doc.setValue(xAcceleration, forKey: self.xAcceleration.key)
-        doc.setValue(yAcceleration, forKey: self.yAcceleration.key)
+        doc.setValue(acceleration.x, forKey: self.xAcceleration.key)
+        doc.setValue(acceleration.y, forKey: self.yAcceleration.key)
+        doc.setValue(velocity.x, forKey: self.xVelocity.key)
+        doc.setValue(velocity.y, forKey: self.yVelocity.key)
+        doc.setValue(distance, forKey: self.distanceTraveled.key)
         doc.setValue(ambientTemp, forKey: self.ambientTemp.key)
         doc.setValue(ambientHumidity, forKey: self.ambientHumidity.key)
         doc.setValue(predictedCoreTemp, forKey: self.predictedCoreTemp.key)

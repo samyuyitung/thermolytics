@@ -12,7 +12,7 @@ struct Point {
     var x: Double
     var y: Double
     
-    func magnitude(x: Double, y: Double) -> Double {
+    func magnitude() -> Double {
         return sqrt(x*x + y*y)
     }
 }

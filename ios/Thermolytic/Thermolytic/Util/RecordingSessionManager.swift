@@ -169,19 +169,22 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
         let deviceId = parts[1]
         let armTemperature = Double(parts[2]) ?? BioFrame.missingDefault
         let legTemperature = Double(parts[3]) ?? BioFrame.missingDefault
-        let imuX = Double(parts[4]) ?? BioFrame.missingDefault
-        let imuY = Double(parts[5]) ?? BioFrame.missingDefault
+        var imuX = Double(parts[4]) ?? BioFrame.missingDefault
+        var imuY = Double(parts[5]) ?? BioFrame.missingDefault
         let ambientTemperature = Double(parts[6])!
         let ambientHumidity = Double(parts[7])! / 100
         
-        let averageSkinTemp = (armTemperature + legTemperature) / 2
+        let averageSkinTemp = 34.4 // (armTemperature + legTemperature) / 2
 
         guard averageSkinTemp > 0 else {
             Utils.log(at: .Error, msg: "Negative temperature for message \(message)")
             return
         }
+        
+        if abs(imuX) < 1 || abs(imuX) > 30 { imuX = 0 }
+        if abs(imuY) < 1 || abs(imuY) > 30 { imuY = 0 }
 
-        if let heartRate = hrManager.getLastHr(),
+        if let heartRate = Double("80"),//hrManager.getLastHr(),
             let uid = getAthleteBy(deviceId: deviceId),
             let user = DatabaseUtil.shared.document(withID: uid),
             let sessionName = sessionName,
@@ -197,11 +200,23 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
             
             let now = Date().timeIntervalSince1970
             var velocity = Point(x: 0, y: 0)
-            if let prev = velocities[uid] {
-                let a = Point(x: imuX, y: imuY)
-                velocity = ImuUtil.getVelocity(v: prev.velocity, a: a, dt: now - prev.time)
-            }
+            var distance = 0.0
             
+            if let prev = velocities[uid] {
+                let dt = TimeInterval(now - prev.time)
+                let a = Point(x: imuX, y: imuY)
+                velocity = ImuUtil.getVelocity(v: prev.velocity, a: a, dt: dt)
+                distance = velocity.magnitude() * dt
+                Utils.log(at: .Debug, msg: """
+dt: \(dt)
+a: \(a)
+v: \(velocity)
+d: \(distance)
+""")
+                
+            }
+            velocities[uid] = VelocityHelper(time: now, velocity: velocity)
+
             
             if let doc = BioFrame.create(deviceId: deviceId,
                                          uid: uid,
@@ -209,8 +224,9 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          armSkinTemp: armTemperature,
                                          legSkinTemp: legTemperature,
                                          avgSkinTemp: averageSkinTemp,
-                                         xAcceleration: imuX,
-                                         yAcceleration: imuY,
+                                         acceleration: Point(x: imuX, y: imuY),
+                                         velocity: velocity,
+                                         distance: distance,
                                          ambientTemp: ambientTemperature,
                                          ambientHumidity: ambientHumidity,
                                          predictedCoreTemp: coreTemp,
@@ -218,7 +234,7 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          sessionType: sessionType,
                                          createdAt: now) {
                 velocities[uid] = VelocityHelper(time: now, velocity: velocity)
-                let _ = DatabaseUtil.insert(doc: doc)
+//                let _ = DatabaseUtil.insert(doc: doc)
             } else {
                 Utils.log(at: .Warning, msg: "Could not create frame for \(message)")
             }
