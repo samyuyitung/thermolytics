@@ -10,12 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="Ap0-Zj-JsJ" id="KWa-o9-6wq"/>
                 <outlet property="classificationField" destination="566-dd-SYc" id="gaa-hF-aCr"/>
+                <outlet property="closeButton" destination="lNy-Ps-t3m" id="PFu-Jk-9yO"/>
                 <outlet property="dobField" destination="V21-QR-59K" id="YgN-xS-xxD"/>
                 <outlet property="firstNameField" destination="VCV-Ai-8sm" id="Ydb-5l-vZm"/>
+                <outlet property="heightField" destination="6Jq-Fb-xFb" id="sKE-AK-ziz"/>
                 <outlet property="lastNameField" destination="B0Y-6l-Qdd" id="1h1-Lm-B2p"/>
+                <outlet property="maxHrField" destination="Ets-pP-ERc" id="Sdb-qv-Wxj"/>
                 <outlet property="numberField" destination="4TN-1B-TVv" id="Bwe-9I-wtq"/>
                 <outlet property="positionField" destination="7f5-SQ-T8c" id="YfS-ok-Gpc"/>
+                <outlet property="thresholdTempField" destination="Ul3-ze-jWe" id="ONd-aY-a9o"/>
+                <outlet property="title" destination="4Fi-rK-TyA" id="K0X-FF-fme"/>
                 <outlet property="weightField" destination="v7M-RI-bPS" id="pqe-7h-PxG"/>
             </connections>
         </placeholder>
@@ -25,8 +31,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ap0-Zj-JsJ">
-                    <rect key="frame" x="167" y="300.5" width="500" height="40"/>
-                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="167" y="360.5" width="500" height="40"/>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="500" id="F8j-xV-IIo"/>
                         <constraint firstAttribute="height" constant="40" id="pYD-oP-eDm"/>
@@ -39,7 +45,7 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UlF-Tp-FQb">
-                    <rect key="frame" x="167" y="60.5" width="225" height="220"/>
+                    <rect key="frame" x="167" y="60.5" width="225" height="280"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCV-Ai-8sm">
                             <rect key="frame" x="0.0" y="0.0" width="225" height="40"/>
@@ -61,13 +67,18 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max HR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ets-pP-ERc">
+                            <rect key="frame" x="0.0" y="240" width="225" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="220" id="jeB-Qh-yu2"/>
+                        <constraint firstAttribute="height" constant="280" id="jeB-Qh-yu2"/>
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OVX-Tg-jNV">
-                    <rect key="frame" x="442" y="60.5" width="225" height="160"/>
+                    <rect key="frame" x="442" y="60.5" width="225" height="280"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B0Y-6l-Qdd">
                             <rect key="frame" x="0.0" y="0.0" width="225" height="40"/>
@@ -84,9 +95,19 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Height (cm)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-Fb-xFb">
+                            <rect key="frame" x="0.0" y="180" width="225" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Threshold Core Temperature" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ul3-ze-jWe">
+                            <rect key="frame" x="0.0" y="240" width="225" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="160" id="PqG-dO-C2c"/>
+                        <constraint firstAttribute="height" constant="280" id="PqG-dO-C2c"/>
                     </constraints>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fi-rK-TyA">

@@ -47,14 +47,21 @@ class Athlete : BaseDocument {
         }
     }
     
+    static let maxHrDefault = 160
+    static let thresholdTempDefault = 39.4
+    
     static let TYPE = "athlete"
     static let number = BasicProperty(key: "number")
     static let name = BasicProperty(key: "name")
     static let classification = BasicProperty(key: "classification")
     static let weight = BasicProperty(key: "weight")
+    static let height = BasicProperty(key: "height")
     static let dob = BasicProperty(key: "dob")
     static let position = BasicProperty(key: "position")
     static let team = BasicProperty(key: "team")
+    static let maxHr = BasicProperty(key: "max-hr")
+    static let thresholdTemp = BasicProperty(key: "threshold-temp")
+    static let maxSpeed = BasicProperty(key: "max-speed")
     
     static let all = [
          id,
@@ -64,9 +71,13 @@ class Athlete : BaseDocument {
          name,
          classification,
          weight,
+         height,
          dob,
          position,
-         team]
+         team,
+         maxHr,
+         thresholdTemp,
+         maxSpeed]
     
     static let selectAll: [SelectResultAs] = {
         return all.map { it in it.selectResult }
@@ -77,7 +88,7 @@ class Athlete : BaseDocument {
     }
     
     static func create(from values: EditPlayerFields) -> MutableDocument {
-        return create(number: values.number, name: values.name, classification: values.classification, weight: values.weight, dob: values.dob, position: values.position)
+        return create(number: values.number, name: values.name, classification: values.classification, weight: values.weight, dob: values.dob, position: values.position, height: values.height, maxHr: values.maxHr, thresholdTemp: values.thresholdTemp)
     }
     
     static func create(number: Int,
@@ -85,7 +96,11 @@ class Athlete : BaseDocument {
                        classification: Classification,
                        weight: Float,
                        dob: Date,
-                       position: Athlete.Position) -> MutableDocument {
+                       position: Athlete.Position,
+                       height: Float,
+                       maxHr: Int,
+                       thresholdTemp: Float,
+                       maxSpeed: Float = 10.0) -> MutableDocument {
         
         let now = Date().timeIntervalSince1970
         let doc = MutableDocument()
@@ -98,6 +113,10 @@ class Athlete : BaseDocument {
         doc.setFloat(classification.rawValue, forKey: self.classification.key)
         doc.setDouble(dob.timeIntervalSince1970, forKey: self.dob.key)
         doc.setString(position.rawValue, forKey: self.position.key)
+        doc.setFloat(thresholdTemp, forKey: self.thresholdTemp.key)
+        doc.setFloat(height, forKey: self.height.key)
+        doc.setInt(maxHr, forKey: self.maxHr.key)
+        doc.setFloat(maxSpeed, forKey: self.maxSpeed.key)
         
         return doc
     }
@@ -108,7 +127,10 @@ class Athlete : BaseDocument {
                                 dob: Date(timeIntervalSince1970: doc.double(forKey: dob.key)),
                                 classification: Classification(rawValue: doc.float(forKey: classification.key)) ?? .zero_five,
                                 weight: doc.float(forKey: weight.key),
-                                position: Position(rawValue: doc.string(forKey: position.key) ?? "") ?? .forward)
+                                position: Position(rawValue: doc.string(forKey: position.key) ?? "") ?? .forward,
+                                height: doc.float(forKey: height.key),
+                                maxHr: doc.int(forKey: maxHr.key),
+                                thresholdTemp: doc.float(forKey: thresholdTemp.key))
     }
     
     static func update(doc: MutableDocument, with values: EditPlayerFields) {
@@ -118,6 +140,10 @@ class Athlete : BaseDocument {
         doc.setFloat(values.classification.rawValue, forKey: self.classification.key)
         doc.setDouble(values.dob.timeIntervalSince1970, forKey: self.dob.key)
         doc.setString(values.position.rawValue, forKey: self.position.key)
+        doc.setFloat(values.thresholdTemp, forKey: self.thresholdTemp.key)
+        doc.setFloat(values.height, forKey: self.height.key)
+        doc.setInt(values.maxHr, forKey: self.maxHr.key)
+        doc.setFloat(values.maxSpeed, forKey: self.maxSpeed.key)
     }
     
     static func deleteAllData(for uid: String) {

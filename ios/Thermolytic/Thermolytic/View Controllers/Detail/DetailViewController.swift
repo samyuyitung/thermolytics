@@ -26,7 +26,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var timeOnCourtLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var avgSpeedLabel: UILabel!
-    @IBOutlet weak var accelerationLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
     @IBOutlet weak var coreTempChart: LineChartView!
@@ -129,9 +128,9 @@ extension DetailViewController {
             return
         }
         self.nameLabel.text = athlete.string(forKey: Athlete.name.key) ?? ""
-        self.numberPositionLabel.text = "#\(athlete.int(forKey: Athlete.number.key))"
-        self.classificationLabel.text = "Classification: <>"
-        self.weightLabel.text = "Weight: \(athlete.float(forKey: Athlete.weight.key))"
+        self.numberPositionLabel.text = "#\(athlete.int(forKey: Athlete.number.key)) \(athlete.string(forKey: Athlete.position.key) ?? "")"
+        self.classificationLabel.text = "Classification: \(athlete.float(forKey: Athlete.classification.key))"
+        self.weightLabel.text = "Max HR: \(athlete.float(forKey: Athlete.weight.key))"
         self.ageLabel.text = "Age: \(Date(timeIntervalSince1970: athlete.double(forKey: Athlete.dob.key)).yearsFromNow)"
     }
 }

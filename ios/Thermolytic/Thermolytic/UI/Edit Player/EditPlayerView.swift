@@ -14,6 +14,10 @@ struct EditPlayerFields {
     var classification: Athlete.Classification = .one
     var weight: Float = -1
     var position: Athlete.Position = .forward
+    var height: Float = -1
+    var maxHr: Int = 160
+    var thresholdTemp: Float = 39.5
+    var maxSpeed: Float = 10.0
 }
 
 protocol EditPlayerViewDelegate {
@@ -45,6 +49,13 @@ class EditPlayerView : UIView {
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var numberField: UITextField!
     @IBOutlet weak var weightField: UITextField!
+    @IBOutlet weak var heightField: UITextField!
+    @IBOutlet weak var maxHrField: UITextField!
+    @IBOutlet weak var thresholdTempField: UITextField!
+    
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var addButton: UIButton!
     
     let dateFormatter: DateFormatter = {
         let d = DateFormatter()
@@ -95,6 +106,9 @@ class EditPlayerView : UIView {
         dobField.inputView = dobDatePickerView
         classificationField.inputView = classificationPickerView
         positionField.inputView = positionPickerView
+        
+        thresholdTempField.text = "\(Athlete.thresholdTempDefault)"
+        maxHrField.text = "\(Athlete.maxHrDefault)"
     }
     
     func loadViewFromNib() -> UIView? {
@@ -105,6 +119,13 @@ class EditPlayerView : UIView {
     
     @objc func handleDatePicker(sender: UIDatePicker) {
         dobField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    func setupForType(isAdding: Bool) {
+        
+        title.isHidden = !isAdding
+        addButton.isHidden = !isAdding
+        closeButton.isHidden = !isAdding
     }
     
     
@@ -124,6 +145,10 @@ class EditPlayerView : UIView {
         let pos = values.position
         positionField.text = pos.rawValue
         positionPickerView.selectRow(pos == .forward ? 0 : 1, inComponent: 0, animated: false)
+        
+        heightField.text = String(values.height)
+        maxHrField.text = String(values.maxHr)
+        thresholdTempField.text = String(values.thresholdTemp)
     }
     
     func getValues() -> EditPlayerFields? {
@@ -170,6 +195,26 @@ class EditPlayerView : UIView {
         } else {
             hasError = true
         }
+        
+        if let height = heightField.validateFloat() {
+            values.height = height
+        } else {
+            hasError = true
+        }
+        
+        if let maxHr = maxHrField.validateInt() {
+            values.maxHr = maxHr
+        } else {
+            hasError = true
+        }
+        
+        if let temp = thresholdTempField.validateFloat() {
+            values.thresholdTemp = temp
+        } else {
+            hasError = true
+        }
+        
+        
         
         if hasError {
             return nil

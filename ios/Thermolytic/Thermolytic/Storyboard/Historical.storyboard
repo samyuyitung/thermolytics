@@ -139,11 +139,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-WI-ViE" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
-                                <rect key="frame" x="242" y="503" width="540" height="360"/>
+                                <rect key="frame" x="242" y="473" width="540" height="420"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="540" id="UWY-4I-qP8"/>
-                                    <constraint firstAttribute="height" constant="360" id="eVW-Bf-IYN"/>
+                                    <constraint firstAttribute="height" constant="420" id="eVW-Bf-IYN"/>
                                 </constraints>
                             </view>
                         </subviews>

@@ -54,5 +54,6 @@ class EditPlayerViewController: UIViewController {
             let fields = Athlete.toEditFields(from: doc)
             editPlayerView.load(with: fields)
         }
+        editPlayerView.setupForType(isAdding: false)
     }
 }

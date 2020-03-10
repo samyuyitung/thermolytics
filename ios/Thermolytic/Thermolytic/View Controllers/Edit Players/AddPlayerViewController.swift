@@ -13,6 +13,7 @@ class AddPlayerViewController : UIViewController {
     @IBOutlet weak var editPlayerView: EditPlayerView!
     override func viewDidLoad() {
         editPlayerView.delegate = self
+        editPlayerView.setupForType(isAdding: true)
     }
 }
 
