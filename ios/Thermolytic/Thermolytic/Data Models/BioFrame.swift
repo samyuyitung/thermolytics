@@ -80,9 +80,10 @@ class BioFrame: BaseDocument {
                        ambientHumidity: Double,
                        predictedCoreTemp: Double,
                        session: String,
-                       sessionType: SessionType = .training) -> MutableDocument? {
+                       sessionType: SessionType = .training,
+                       createdAt now: TimeInterval = Date().timeIntervalSince1970) -> MutableDocument? {
         
-        let now = Date().timeIntervalSince1970
+        
         let doc = MutableDocument()
         doc.setValue(TYPE, forKey: self.type.key)
         doc.setValue(now, forKey: createdAt.key)

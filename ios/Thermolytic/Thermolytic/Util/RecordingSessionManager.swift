@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import CouchbaseLiteSwift
 
 protocol RecordingSessionDeviceDelegate {
     func didUpdateDevices()
@@ -20,6 +21,11 @@ protocol RecordingSessionDelegate {
 }
 
 class RecordingSessionManager {
+    private struct VelocityHelper {
+        var time: TimeInterval
+        var velocity: Point
+    }
+
     let DEVICE_FILTER_TIME = 30.0
     
     @objc func purge() {
@@ -56,6 +62,9 @@ class RecordingSessionManager {
     
     var activePlayers: [String] = [] // UID
     var benchPlayers: [String] = [] // UID
+    
+    private var velocities: [String : VelocityHelper] = [:] // UID: Most Recent BioFrame
+    
     
     var isRecording = false
     var sessionName: String? = nil
@@ -171,7 +180,7 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
             Utils.log(at: .Error, msg: "Negative temperature for message \(message)")
             return
         }
-//
+
         if let heartRate = hrManager.getLastHr(),
             let uid = getAthleteBy(deviceId: deviceId),
             let user = DatabaseUtil.shared.document(withID: uid),
@@ -186,6 +195,14 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                                rel_humidity: ambientHumidity,
                                                temp_air: ambientTemperature)
             
+            let now = Date().timeIntervalSince1970
+            var velocity = Point(x: 0, y: 0)
+            if let prev = velocities[uid] {
+                let a = Point(x: imuX, y: imuY)
+                velocity = ImuUtil.getVelocity(v: prev.velocity, a: a, dt: now - prev.time)
+            }
+            
+            
             if let doc = BioFrame.create(deviceId: deviceId,
                                          uid: uid,
                                          heartRate: Int(heartRate),
@@ -198,7 +215,9 @@ extension RecordingSessionManager: BluetoothManagerDelegate {
                                          ambientHumidity: ambientHumidity,
                                          predictedCoreTemp: coreTemp,
                                          session: sessionName,
-                                         sessionType: sessionType) {
+                                         sessionType: sessionType,
+                                         createdAt: now) {
+                velocities[uid] = VelocityHelper(time: now, velocity: velocity)
                 let _ = DatabaseUtil.insert(doc: doc)
             } else {
                 Utils.log(at: .Warning, msg: "Could not create frame for \(message)")

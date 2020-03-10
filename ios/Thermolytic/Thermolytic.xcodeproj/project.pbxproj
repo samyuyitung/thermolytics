@@ -52,6 +52,7 @@
 		68AADAC123D768EE0091BC27 /* EditPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AADAC023D768EE0091BC27 /* EditPlayerView.swift */; };
 		68AB5E8E23D69F98007C5E93 /* PlayerNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5E8D23D69F98007C5E93 /* PlayerNote.swift */; };
 		68AB5E9023D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5E8F23D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift */; };
+		68AC2DE92417F27B00D1CE57 /* ImuUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC2DE82417F27B00D1CE57 /* ImuUtil.swift */; };
 		68B0CC7A23D50AF500883677 /* DropShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0CC7923D50AF500883677 /* DropShadowView.swift */; };
 		68BE39B023930787005CAEC4 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE39AF23930787005CAEC4 /* DebugViewController.swift */; };
 		68E703872411DA0000A084AD /* Keyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E703862411DA0000A084AD /* Keyframe.swift */; };
@@ -122,6 +123,7 @@
 		68AADAC023D768EE0091BC27 /* EditPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditPlayerView.swift; path = "/Users/samyuyitung/Workspace/thermolytics/ios/Thermolytic/Thermolytic/UI/Edit Player/EditPlayerView.swift"; sourceTree = "<absolute>"; };
 		68AB5E8D23D69F98007C5E93 /* PlayerNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNote.swift; sourceTree = "<group>"; };
 		68AB5E8F23D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNoteTableViewCell.swift; sourceTree = "<group>"; };
+		68AC2DE82417F27B00D1CE57 /* ImuUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImuUtil.swift; path = "Thermolytic/View Controllers/Detail/ImuUtil.swift"; sourceTree = SOURCE_ROOT; };
 		68B0CC7923D50AF500883677 /* DropShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowView.swift; sourceTree = "<group>"; };
 		68BE39AF23930787005CAEC4 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		68E703862411DA0000A084AD /* Keyframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyframe.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		682845102384B3F0009063EC /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				68AC2DE82417F27B00D1CE57 /* ImuUtil.swift */,
 				682845092384B351009063EC /* BluetoothManager.swift */,
 				682845132384B3FD009063EC /* ServiceIdentifiers.swift */,
 				682845162384B439009063EC /* Util.swift */,
@@ -521,6 +524,7 @@
 				6807810823EA62480046D620 /* PolarHrUtil.swift in Sources */,
 				685AB13224038D4800B987DF /* SelectPlayerViewController.swift in Sources */,
 				68EE090C23D40418005DBF35 /* Athlete.swift in Sources */,
+				68AC2DE92417F27B00D1CE57 /* ImuUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
