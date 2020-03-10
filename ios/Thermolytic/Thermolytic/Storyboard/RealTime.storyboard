@@ -90,7 +90,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select Device" id="UvX-aE-1Eg"/>
                     <connections>
-                        <outlet property="devicesTable" destination="Z7G-tL-EMa" id="ygX-Gh-LI7"/>
                         <outlet property="sensorsTable" destination="6cV-NU-VHX" id="0qr-TF-XRl"/>
                         <segue destination="fU5-KI-Dgm" kind="presentation" identifier="showPlayers" modalPresentationStyle="overFullScreen" id="gOn-xJ-cxy"/>
                     </connections>

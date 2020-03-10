@@ -18,17 +18,9 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     //MARK: - ViewController Properties
     var bluetoothManager : CBCentralManager?
     var filterUUID : CBUUID?
-    var peripherals : [ScannedPeripheral] = [] {
-        didSet {
-            devicesTable.reloadData()
-        }
-    }
-    @IBOutlet weak var devicesTable: UITableView!
-    @IBOutlet weak var sensorsTable: UITableView!
+//    var peripherals : [ScannedPeripheral] = []
     
-    @IBAction func cancelButtonTapped(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    @IBOutlet weak var sensorsTable: UITableView!
     
     func getConnectedPeripherals() -> [CBPeripheral] {
         guard let bluetoothManager = bluetoothManager else {
@@ -77,7 +69,7 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     //MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        for tableView in [devicesTable, sensorsTable] {
+        for tableView in [sensorsTable] {
             tableView?.delegate = self
             tableView?.dataSource = self
         }
@@ -116,47 +108,26 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     
     //MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == devicesTable {
-            return peripherals.count
-        } else if tableView == sensorsTable {
-            return RecordingSessionManager.shared.devices.count
-        }
-        return 0
+        return RecordingSessionManager.shared.devices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let aCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        if tableView == devicesTable {
-            let scannedPeripheral = peripherals[indexPath.row]
-            aCell.textLabel?.text = scannedPeripheral.name()
-        } else if tableView == sensorsTable {
-            let device = RecordingSessionManager.shared.getAllDevices()[indexPath.row]
-            
-            if let uid = RecordingSessionManager.shared.getAthleteBy(deviceId: device),
-                let userDoc = DatabaseUtil.shared.document(withID: uid) {
-                aCell.textLabel?.text = "\(device) -- \(userDoc.string(forKey: Athlete.name.key) ?? "no name?")"
-            } else {
-                aCell.textLabel?.text = "\(device) -- unclaimed"
-            }
-            
-            
-            
+        let device = RecordingSessionManager.shared.getAllDevices()[indexPath.row]
+        
+        if let uid = RecordingSessionManager.shared.getAthleteBy(deviceId: device),
+            let userDoc = DatabaseUtil.shared.document(withID: uid) {
+            aCell.textLabel?.text = "\(device) -- \(userDoc.string(forKey: Athlete.name.key) ?? "no name?")"
+        } else {
+            aCell.textLabel?.text = "\(device) -- unclaimed"
         }
         return aCell
     }
     
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // Call delegate method
-        if tableView == devicesTable {
-            bluetoothManager!.stopScan()
-            let peripheral = peripherals[indexPath.row].peripheral
-            RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
-        } else if tableView == sensorsTable {
-            performSegue(withIdentifier: "showPlayers", sender: tableView.cellForRow(at: indexPath))
-        }
+        performSegue(withIdentifier: "showPlayers", sender: tableView.cellForRow(at: indexPath))
     }
     
     //MARK: - CBCentralManagerDelgate
@@ -166,14 +137,6 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
             return
         }
         
-        let connectedPeripherals = self.getConnectedPeripherals()
-        var newScannedPeripherals: [ScannedPeripheral] = []
-        connectedPeripherals.forEach { (connectedPeripheral) in
-            let connected = connectedPeripheral.state == .connected
-            let scannedPeripheral = ScannedPeripheral(peripheral: connectedPeripheral, isConnected: connected)
-            newScannedPeripherals.append(scannedPeripheral)
-        }
-        peripherals = newScannedPeripherals
         let success = self.scanForPeripherals(true)
         if !success {
             print("Bluetooth is powered off!")
@@ -182,22 +145,23 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         // Only deal with named peripherals
-        guard peripheral.name != nil else {
+        guard peripheral.name == "raspberrypi" else {
             return
         }
+        bluetoothManager!.stopScan()
+        RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
         
         // Scanner uses other queue to send events. We must edit UI in the main queue
-        DispatchQueue.main.async {
-            var sensor = ScannedPeripheral(peripheral: peripheral, RSSI: RSSI.int32Value, isConnected: false)
-            if let index = self.peripherals.firstIndex(where: { existing -> Bool in
-                return existing.peripheral == sensor.peripheral
-            }) {
-                sensor = self.peripherals[index]
-                sensor.RSSI = RSSI.int32Value
-            } else {
-                self.peripherals.append(sensor)
-            }
-        }
+//        DispatchQueue.main.async {
+//            var sensor = ScannedPeripheral(peripheral: peripheral, RSSI: RSSI.int32Value, isConnected: false)
+//            if let index = self.peripherals.firstIndex(where: { existing -> Bool in
+//                return existing.peripheral == sensor.peripheral
+//            }) {
+//                sensor = self.peripherals[index]
+//            } else {
+//                self.peripherals.append(sensor)
+//            }
+//        }
     }
 }
 
