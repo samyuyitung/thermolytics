@@ -100,11 +100,19 @@ class RecordingSessionManager {
     }
     
     func addParticipant(uid: String, deviceId: String) -> Bool {
+        // Only 1 set per participant
         if let _ = participants.first(where: { (key: String, value: String) -> Bool in
-            return key == uid || value == deviceId
+            return key == uid
         }){
             return false
         }
+        // check that device already exists
+        if let index = participants.firstIndex(where: { (key: String, value: String) -> Bool in
+            return value == deviceId
+        }){
+            participants.remove(at: index)
+        }
+        
         participants[uid] = deviceId
         benchPlayers.append(uid)
         return true

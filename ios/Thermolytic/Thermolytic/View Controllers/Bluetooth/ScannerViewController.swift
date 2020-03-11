@@ -88,8 +88,8 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPlayers" {
-            let cell = sender as! UITableViewCell
-            let device = cell.textLabel?.text?.components(separatedBy: " ")[0]
+            let cell = sender as! ScannerDeviceCell
+            let device = cell.deviceId
             
             let vc = segue.destination as! SelectPlayerViewController
             vc.deviceId = device
@@ -112,15 +112,15 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let aCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let aCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ScannerDeviceCell
         
         let device = RecordingSessionManager.shared.getAllDevices()[indexPath.row]
         
         if let uid = RecordingSessionManager.shared.getAthleteBy(deviceId: device),
             let userDoc = DatabaseUtil.shared.document(withID: uid) {
-            aCell.textLabel?.text = "\(device) -- \(userDoc.string(forKey: Athlete.name.key) ?? "no name?")"
+            aCell.configure(deviceName: device, athlete: userDoc)
         } else {
-            aCell.textLabel?.text = "\(device) -- unclaimed"
+            aCell.configure(deviceName: device)
         }
         return aCell
     }
@@ -150,18 +150,6 @@ class ScannerViewController: UIViewController, CBCentralManagerDelegate, UITable
         }
         bluetoothManager!.stopScan()
         RecordingSessionManager.shared.configure(manager: bluetoothManager!, peripheral: peripheral)
-        
-        // Scanner uses other queue to send events. We must edit UI in the main queue
-//        DispatchQueue.main.async {
-//            var sensor = ScannedPeripheral(peripheral: peripheral, RSSI: RSSI.int32Value, isConnected: false)
-//            if let index = self.peripherals.firstIndex(where: { existing -> Bool in
-//                return existing.peripheral == sensor.peripheral
-//            }) {
-//                sensor = self.peripherals[index]
-//            } else {
-//                self.peripherals.append(sensor)
-//            }
-//        }
     }
 }
 

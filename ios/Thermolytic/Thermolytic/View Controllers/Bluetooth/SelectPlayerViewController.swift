@@ -13,6 +13,11 @@ import CouchbaseLiteSwift
 class SelectPlayerViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLabel: UIView!
+    
+    @IBAction func didPressBackground(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     var athletes: [Result] = [] {
         didSet {
@@ -58,11 +63,9 @@ extension SelectPlayerViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        let athlete = athletes[indexPath.row]
-        cell?.textLabel?.text = "\(athlete.int(forKey: Athlete.number.key)) \(athlete.string(forKey: Athlete.name.key) ?? "")"
-        
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! SelectPlayerCell
+        cell.configure(for: athletes[indexPath.row])
+        return cell
         
     }
     

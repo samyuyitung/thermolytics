@@ -53,6 +53,8 @@
 		68AB5E9023D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AB5E8F23D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift */; };
 		68AC2DE92417F27B00D1CE57 /* ImuUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC2DE82417F27B00D1CE57 /* ImuUtil.swift */; };
 		68AC2DEB2418024700D1CE57 /* ServiceIndentifers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC2DEA2418024700D1CE57 /* ServiceIndentifers.swift */; };
+		68AC2DED24184A8D00D1CE57 /* ScannerDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC2DEC24184A8D00D1CE57 /* ScannerDeviceCell.swift */; };
+		68AC2DEF241865B600D1CE57 /* SelectPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AC2DEE241865B600D1CE57 /* SelectPlayerCell.swift */; };
 		68B0CC7A23D50AF500883677 /* DropShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B0CC7923D50AF500883677 /* DropShadowView.swift */; };
 		68BE39B023930787005CAEC4 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BE39AF23930787005CAEC4 /* DebugViewController.swift */; };
 		68E703872411DA0000A084AD /* Keyframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68E703862411DA0000A084AD /* Keyframe.swift */; };
@@ -124,6 +126,8 @@
 		68AB5E8F23D6A1A5007C5E93 /* PlayerNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNoteTableViewCell.swift; sourceTree = "<group>"; };
 		68AC2DE82417F27B00D1CE57 /* ImuUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImuUtil.swift; path = "Thermolytic/View Controllers/Detail/ImuUtil.swift"; sourceTree = SOURCE_ROOT; };
 		68AC2DEA2418024700D1CE57 /* ServiceIndentifers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceIndentifers.swift; sourceTree = "<group>"; };
+		68AC2DEC24184A8D00D1CE57 /* ScannerDeviceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDeviceCell.swift; sourceTree = "<group>"; };
+		68AC2DEE241865B600D1CE57 /* SelectPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPlayerCell.swift; sourceTree = "<group>"; };
 		68B0CC7923D50AF500883677 /* DropShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShadowView.swift; sourceTree = "<group>"; };
 		68BE39AF23930787005CAEC4 /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		68E703862411DA0000A084AD /* Keyframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyframe.swift; sourceTree = "<group>"; };
@@ -180,6 +184,8 @@
 				682844FE2384B307009063EC /* ScannedPeripheral.swift */,
 				682845022384B315009063EC /* ScannerViewController.swift */,
 				685AB13124038D4800B987DF /* SelectPlayerViewController.swift */,
+				68AC2DEC24184A8D00D1CE57 /* ScannerDeviceCell.swift */,
+				68AC2DEE241865B600D1CE57 /* SelectPlayerCell.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -502,6 +508,7 @@
 				682845192384B45C009063EC /* SyncGatewayReplicator.swift in Sources */,
 				682844FF2384B307009063EC /* ScannedPeripheral.swift in Sources */,
 				6849B91C2385872300B00389 /* LogItemCell.swift in Sources */,
+				68AC2DED24184A8D00D1CE57 /* ScannerDeviceCell.swift in Sources */,
 				68AC2DEB2418024700D1CE57 /* ServiceIndentifers.swift in Sources */,
 				682845062384B334009063EC /* LogViewController.swift in Sources */,
 				6825880423862D6700C5F13C /* DetailViewController.swift in Sources */,
@@ -520,6 +527,7 @@
 				686371B323D78B0C00AFF87E /* ListPlayersViewController.swift in Sources */,
 				684C2A5723D804940001A0C1 /* EditPlayerViewController.swift in Sources */,
 				684C2A5523D7F3B50001A0C1 /* HistoricalDetailViewController.swift in Sources */,
+				68AC2DEF241865B600D1CE57 /* SelectPlayerCell.swift in Sources */,
 				6881426F2384B0DB0046C667 /* AppDelegate.swift in Sources */,
 				6807810823EA62480046D620 /* PolarHrUtil.swift in Sources */,
 				685AB13224038D4800B987DF /* SelectPlayerViewController.swift in Sources */,
