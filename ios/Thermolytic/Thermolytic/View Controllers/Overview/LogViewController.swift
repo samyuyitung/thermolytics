@@ -82,7 +82,7 @@ class LogViewController: UIViewController {
         button.setImage(UIImage(named: "record"), for: .selected)
         button.imageView?.contentMode = .scaleAspectFit
         button.contentHorizontalAlignment = .left;
-        button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+        button.imageEdgeInsets = UIEdgeInsets(top: 9, left: 0, bottom: 9, right: 0)
         button.setTitle("Record", for: .normal)
         button.setTitle("Recording", for: .selected)
         button.setTitleColor(.black, for: .normal)
@@ -249,7 +249,7 @@ extension LogViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         
         if let uid = uid, let user = users[uid] {
             let item = logItems[uid]
-            cell.configure(user: user, frame: item)
+            cell.configure(user: user, frame: item, onBench: collectionView == benchCollectionView)
             cell.delegate = self
         }
         return cell

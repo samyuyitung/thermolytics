@@ -109,6 +109,8 @@ class EditPlayerView : UIView {
         
         thresholdTempField.text = "\(Athlete.thresholdTempDefault)"
         maxHrField.text = "\(Athlete.maxHrDefault)"
+        
+        addButton.layer.cornerRadius = 8
     }
     
     func loadViewFromNib() -> UIView? {

@@ -87,7 +87,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAu-3q-846">
                                 <rect key="frame" x="884" y="25" width="119" height="40"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eKv-bu-y6y"/>
                                     <constraint firstAttribute="width" constant="119" id="fwf-ua-GhA"/>
@@ -139,21 +139,21 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IvC-WI-ViE" customClass="EditPlayerView" customModule="Thermolytic" customModuleProvider="target">
-                                <rect key="frame" x="242" y="473" width="540" height="420"/>
+                                <rect key="frame" x="242" y="100" width="540" height="460"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="540" id="UWY-4I-qP8"/>
-                                    <constraint firstAttribute="height" constant="420" id="eVW-Bf-IYN"/>
+                                    <constraint firstAttribute="height" constant="460" id="eVW-Bf-IYN"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="fgm-Bi-Dqj" firstAttribute="top" secondItem="WcC-bQ-rBY" secondAttribute="top" id="Bg6-nh-byf"/>
-                            <constraint firstItem="IvC-WI-ViE" firstAttribute="centerY" secondItem="WcC-bQ-rBY" secondAttribute="centerY" id="EqM-bN-jch"/>
                             <constraint firstItem="fgm-Bi-Dqj" firstAttribute="leading" secondItem="WcC-bQ-rBY" secondAttribute="leading" id="Wmq-cl-pSi"/>
                             <constraint firstItem="IvC-WI-ViE" firstAttribute="centerX" secondItem="WcC-bQ-rBY" secondAttribute="centerX" id="ZxI-ap-BjO"/>
                             <constraint firstItem="WcC-bQ-rBY" firstAttribute="trailing" secondItem="fgm-Bi-Dqj" secondAttribute="trailing" id="gSC-7H-6sU"/>
                             <constraint firstItem="WcC-bQ-rBY" firstAttribute="bottom" secondItem="fgm-Bi-Dqj" secondAttribute="bottom" id="qyR-UF-ZgB"/>
+                            <constraint firstItem="IvC-WI-ViE" firstAttribute="top" secondItem="fgm-Bi-Dqj" secondAttribute="top" constant="100" id="t4B-dw-lh6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WcC-bQ-rBY"/>
                     </view>
@@ -310,7 +310,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNS-Zb-qox">
                                 <rect key="frame" x="310.5" y="877" width="91" height="30"/>
                                 <state key="normal" title="Delete Player">
-                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="pressedDelete:" destination="3mE-Ch-JBL" eventType="touchUpInside" id="wqk-9j-Yvs"/>

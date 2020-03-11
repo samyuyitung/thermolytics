@@ -45,6 +45,7 @@ class DetailViewController: UIViewController {
         didSet {
             updateData()
             updateCharts()
+            overlay?.removeFromSuperview()
         }
     }
     
@@ -58,7 +59,8 @@ class DetailViewController: UIViewController {
     var heartRatePoints: [ChartDataEntry] = []
     
     var uid: String = ""
-    
+    var overlay : UIView? // This should be a class variable
+
     override func viewDidLoad() {
         self.title = "Player"
 
@@ -68,6 +70,13 @@ class DetailViewController: UIViewController {
         setUserQuery()
         setDataQuery()
         setNotesQuery()
+        
+        overlay = UIView(frame: view.frame)
+        overlay!.backgroundColor = .white
+        overlay!.alpha = 1
+
+        view.addSubview(overlay!)
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,6 +124,10 @@ class DetailViewController: UIViewController {
             return
         }
         
+        let agg = [
+            SelectResult.expression(Function.max(BioFrame.predictedCoreTemp.expression)).as("temp_max"),
+            SelectResult.expression(Function.min(BioFrame.predictedCoreTemp.expression)).as("temp_min")
+        ]
         let dataQuery = QueryBuilder
             .select(BioFrame.selectAll)
             .from(DataSource.database(DatabaseUtil.shared))
@@ -156,8 +169,8 @@ extension DetailViewController {
         self.nameLabel.text = athlete.string(forKey: Athlete.name.key) ?? ""
         self.numberPositionLabel.text = "#\(athlete.int(forKey: Athlete.number.key)) \(athlete.string(forKey: Athlete.position.key) ?? "")"
         self.classificationLabel.text = "Classification: \(athlete.float(forKey: Athlete.classification.key))"
-        self.weightLabel.text = "Max HR: \(athlete.int(forKey: Athlete.maxHr.key))"
-        self.ageLabel.text = "Thershold Core: \(athlete.float(forKey: Athlete.thresholdTemp.key))℃"
+        self.weightLabel.text = "Max HR: \(athlete.int(forKey: Athlete.maxHr.key)) bpm"
+        self.ageLabel.text = "Threshold Core: \(athlete.float(forKey: Athlete.thresholdTemp.key))℃"
     }
 }
 
@@ -180,6 +193,18 @@ extension DetailViewController {
         
         self.hrPercentLabel.text = "\(Int(percentHr))%"
         self.hrBpmLabel.text = "[ \(latest.int(forKey: BioFrame.heartRate.key)) bpm ]"
+        
+        timeOnCourtLabel.attributedText = getUnitedAttributeString(value: "10:12", unit: "min")
+        speedLabel.attributedText = getUnitedAttributeString(value: "6.2", unit: "km/h")
+        avgSpeedLabel.attributedText = getUnitedAttributeString(value: "8.6", unit: "km/h")
+        distanceLabel.attributedText = getUnitedAttributeString(value: "1.3", unit: "km")
+    }
+    
+    func getUnitedAttributeString(value: String, unit: String) -> NSAttributedString {
+        let attrs = [NSAttributedString.Key.font : UIFont(name: "HelveticaNeue", size: 12)]
+        var str = NSMutableAttributedString(string: "\(value) ")
+        str.append(NSMutableAttributedString(string: unit, attributes: attrs))
+        return str
     }
 }
 
@@ -199,6 +224,17 @@ extension DetailViewController {
         chart.legend.enabled = false
         chart.xAxis.drawGridLinesEnabled = false
         chart.rightAxis.enabled = false
+        chart.leftAxis.xOffset = 15
+        
+        let yAxis = MyYAxisRenderer(viewPortHandler: chart.viewPortHandler, yAxis: chart.leftAxis, transformer: chart.getTransformer(forAxis: .left))
+        yAxis.title = "Core temperature (℃)"
+        chart.leftYAxisRenderer = yAxis
+        
+        chart.pinchZoomEnabled = false
+        chart.dragEnabled = false
+        chart.scaleXEnabled = false
+        chart.scaleYEnabled = false
+        
     }
     
     func configureChart(chart: LineChartView, data: [ChartDataEntry]) {
@@ -225,17 +261,20 @@ extension DetailViewController {
                                                   y: data[i].double(forKey: BioFrame.heartRate.key)))
         }
             
-        configureChart(chart: coreTempChart, data: coreTempPoints)
-        coreTempChart.leftAxis.addLimitLine(ChartLimitLine(limit: 35.8))
-        coreTempChart.leftAxis.axisMinimum = 34
-        coreTempChart.leftAxis.axisMaximum = 36
-        coreTempChart.leftAxis.drawGridLinesEnabled = false
         
+        let thresholdTemp = athlete?.double(forKey: Athlete.thresholdTemp.key)
+        let maxHr = athlete?.double(forKey: Athlete.maxHr.key)
+        
+        configureChart(chart: coreTempChart, data: coreTempPoints)
+        coreTempChart.leftAxis.addLimitLine(ChartLimitLine(limit: thresholdTemp ?? 38.9))
+    
+        coreTempChart.leftAxis.drawGridLinesEnabled = false
 
         configureChart(chart: heartRateChart, data: heartRatePoints)
-        heartRateChart.leftAxis.addLimitLine(ChartLimitLine(limit: 150))
-        heartRateChart.leftAxis.axisMaximum = 200
+        heartRateChart.leftAxis.addLimitLine(ChartLimitLine(limit: maxHr ?? 150))
     }
+    
+    
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -248,5 +287,44 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerNoteTabelViewCell") as! PlayerNoteTabelViewCell
         cell.configure(for: notes[indexPath.row])
         return cell
+    }
+}
+
+
+class MyYAxisRenderer: YAxisRenderer {
+    var title: String = ""
+    
+    /**
+     Unfortunately iOS Charts has marked many of its methods with internal visibily
+     so they cannot be customized. Instead you often need to re-implement logic from
+     the charting framework.
+    */
+    override func renderAxisLabels(context: CGContext) {
+        // Render the y-labels.
+        super.renderAxisLabels(context: context)
+        // Render the y-axis title using our custom renderer.
+        renderTitle(inContext: context, x: 0)
+    }
+    
+    func renderTitle(inContext context: CGContext, x: CGFloat) {
+        guard let yAxis = self.axis as? YAxis else { return }
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: yAxis.labelFont,
+            .foregroundColor: yAxis.labelTextColor
+        ]
+        
+        // Determine the chart title's y-position.
+        let titleSize = title.size(withAttributes: attributes)
+        let verticalTitleSize = CGSize(width: titleSize.height, height: titleSize.width)
+        let point = CGPoint(x: x, y: (viewPortHandler.chartHeight - verticalTitleSize.height) / 2)
+        
+        // Render the chart title.
+        ChartUtils.drawText(context: context,
+                            text: title,
+                            point: point,
+                            attributes: attributes,
+                            anchor: .zero,
+                            angleRadians: .pi / -2)
     }
 }
